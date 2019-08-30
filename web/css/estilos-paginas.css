@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Cookie');
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
+@import url('https://fonts.googleapis.com/css?family=KoHo');
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Niramit');
+
+*{
+	box-sizing: border-box;
+	padding: 0px;
+	margin:0px;
+}
+.borde{
+	/*border:1px solid black;*/
+}
+body{
+    font-family: 'Niramit', sans-serif;
+	background-color: #81CCC1;
+}
+h1 {
+    -webkit-text-stroke: 1px #79B3AA;
+    text-shadow:
+        3px 3px #79B3AA,
+        -1px -1px 0 #79B3AA,  
+        1px -1px 0 #79B3AA,
+        -1px 1px 0 #79B3AA,
+        1px 1px 0 #79B3AA;
+    -webkit-text-stroke-width: 1px;
+}
+.container {
+    max-width: 100%;
+}
+.texto {
+    padding-top: 280px;
+    text-align: right;
+    color: #FFF6D4;
+}
+.texto p {
+    font-size: 1.5em;
+}
+.imagen {
+    padding-top: 150px;
+    padding-left: 150px;
+}
+.imagen img {
+    height: 420px;
+    width: auto;
+}
