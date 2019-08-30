@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"></meta>
+        <title>FlowersX - Vendedor</title>
+        <link rel="shortcut icon" href="img/icono.png"></link>
+        <link rel="stylesheet" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" href="css/all.min.css"></link>
+        <link rel="stylesheet" href="css/brands.css"></link>
+        <link rel="stylesheet" href="css/estilos-usuarios.css"></link>
+    </h:head>
+    <h:body>
+        <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+            <nav id="navegador" class="navbar navbar-expand-lg navbar-light fixed-top">
+                <a class="navbar-brand js-scroll-trigger" href="#"><img id="inicio" src="img/Logo PSD.png" alt="FlowersX" data-toggle="tooltip" data-placement="bottom" title="(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧"></img></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto"> 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link js-scroll-trigger dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pedidos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="ES/Vendedor/crear-pedido-vendedor.xhtml" target="area-trabajo">Crear pedido</a>                                
+                                <a class="dropdown-item" href="ES/Vendedor/gestionar-pedido-vendedor.xhtml" target="area-trabajo">Gestionar pedidos</a>                                
+                            </div>
+                        </li>                        
+                    </ul>
+                    <ul class="navbar-nav my-2 my-sm-0">
+                        <li class="nav-item active">
+                            <a href="main-es.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
+                                    Salir
+                                </button>  
+                            </a> 
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="col-12">
+                    <iframe name="area-trabajo" class="col iframe-usuarios" src="ES/Vendedor/vendedor-main.xhtml" frameborder="0"></iframe>
+                </div> 
+            </div>
+        </div>    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="text/javascript"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/index-usuarios.js"></script>
+    </h:body>
+</html>
+
