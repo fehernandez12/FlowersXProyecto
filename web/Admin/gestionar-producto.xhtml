@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <title>Gestionar producto</title>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-gestionar-usuarios.css"></link>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet name="../css/bootstrap.css" />
+        <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+            <div class="row asd">
+                <div class="col tabla">
+                    <f:view>
+                        <div class="col">
+                            <h1><h:outputText value="Producto"/></h1>
+                        </div>
+                        <f:view>
+                            <h:form>
+                                <p:dataTable id="tablaPedidos" class="table table-hover table-bordered" value="#{productoControlador.consultarProducto()}" var="item" widgetVar="productoTabla"
+                                             emptyMessage="No se han encontrado los criterios dados." filteredValue="#{productoControlador.consultarProducto()}">
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <h:outputText value="Buscar:" />
+                                                <p:inputText id="globalFilter" onkeyup="PF('productoTabla').filter()" style="width:150px" placeholder=""/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="Producto" />
+                                        </f:facet>
+                                        <h:outputText value="#{item.producto}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="Descripcion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.descripcion}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="precio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.precio}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="estado"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.estado}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="Descipcion Arreglo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.ordenDeProduccionidOrdenDeProduccion.descipcionArreglo}"/>
+                                    </p:column>                                                                        
+                                    <p:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="Tiempo de cultivo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.catalogoidCatalogo.tiempoDeCultivo}"/>
+                                    </p:column>                                                                        
+                                    <p:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="Opciones"/>
+                                        </f:facet>                                     
+                                        <h:commandLink class="opciones-tabla" action="#{productoControlador.preEditarProducto(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen" data-toggle="modal" data-target="#modalEditar"></i></h:commandLink>
+                                        <h:commandLink class="opciones-tabla" action="#{productoControlador.eliminarProducto(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
+                                    </p:column>
+                                </p:dataTable>
+                                <h3>Exportar datos a Microsoft Excel</h3>
+                                <h:commandLink>
+                                    <p:graphicImage name="images/excel.png" style="width:50px"/>
+                                    <p:dataExporter type="xls" target="tablaProducto" fileName="Producto" pageOnly="true"/>
+                                </h:commandLink>
+                            </h:form>
+                        </f:view>
+                        <a href="crear-producto.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
+                                Crear producto
+                            </button>  
+                        </a> 
+                    </f:view>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/popper.min.js"></script>
+        <script src="../../js/jquery.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/admin.js"></script>
+        <script src="../../js/main.js"></script>
+    </h:body>
+</html>

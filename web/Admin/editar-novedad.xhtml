@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Editar Novedad</title>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-crear-usuario.css"></link>
+    </h:head>
+    <h:body>
+        <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+            <div class="titulo row">
+                <div class="col">
+                    <h1>Editar Novedad</h1>
+                    <p>Por favor llena los siguientes datos. Los campos requeridos están marcados con un asterisco (*).</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h:form class="formulario needs-validation">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustomUsername">Descripcion</label>
+                                <div class="input-group">
+                                    <h:inputText value="#{novedadControlador.novedad.descripcion}" id="descripcion" class="form-control"></h:inputText>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustomUsername">Fecha</label>
+                                <div class="input-group">
+                                    <h:inputText value="#{novedadControlador.novedad.fecha}" id="fecha" class="form-control"></h:inputText>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustomUsername">ID Pedido</label>
+                                <div class="input-group">
+                                    <h:inputText value="#{novedadControlador.novedad.pedidoidPedido}" id="pedidoidPedido" class="form-control"></h:inputText>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustomUsername">Usuario ID</label>
+                                <div class="input-group">
+                                    <h:inputText value="#{novedadControlador.novedad.usuarioid}" id="usuarioid" class="form-control"></h:inputText>
+                                </div>
+                            </div>
+                        </div>
+                        <h:commandButton action="#{novedadControlador.crearNovedad()}" class="btn boton-registro" type="submit" value="Editar novedad"></h:commandButton>
+
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/popper.min.js"></script>
+        <script src="../../js/jquery.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/main.js"></script>
+        <script src="../../js/formularios.js"></script>
+    </h:body>
+</html>

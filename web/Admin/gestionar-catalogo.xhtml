@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-gestionar-usuarios.css"></link>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet name="../css/bootstrap.css" />
+        <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+            <div class="row">
+                <div class="col tabla">
+                    <f:view>
+                        <div class="col">
+                            <h1><h:outputText value="Catalogos"/></h1>
+                        </div>
+                        <f:view>
+                            <h:form>
+                                <h:dataTable class="table table-hover table-bordered" value="#{catalogoControlador.consultarCatalogo()}" var="item">
+                                    <h:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="IdCatalogo" />
+                                        </f:facet>
+                                        <h:outputText value="#{item.idCatalogo}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="NombreProducto" />
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombreProducto}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="Descripcion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.descripcion}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="TiempoDeCultivo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.tiempoDeCultivo}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="Opciones"/>
+                                        </f:facet>
+                                        <h:commandLink class="opciones-tabla" action="#{catalogoControlador.preEditarCatalogo(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen" data-toggle="modal" data-target="#modalEditar"></i></h:commandLink>
+                                        <h:commandLink class="opciones-tabla" action="#{catalogoControlador.eliminarCatalogo(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </f:view>
+                        <a href="crear-catalogo.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
+                                Crear catalogo
+                            </button>  
+                        </a> 
+                    </f:view>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/popper.min.js"></script>
+        <script src="../../js/jquery.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/admin.js"></script>
+        <script src="../../js/main.js"></script>
+    </h:body>
+</html>
+

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <title>Crear Producto</title>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-crear-usuario.css"></link>
+    </h:head>
+    <h:body>
+        <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+            <div class="titulo row">
+                <div class="col">
+                    <h1>Crear Producto</h1>
+                    <p>Por favor llena los siguientes datos.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h:form class="formulario needs-validation">
+                        <div class="form-row">                           
+                            <div class="col-md-4 mb-4">
+                                <label for="validationCustom01">producto</label>
+                                <h:inputText value="#{productoControlador.producto.producto}" id="producto" class="form-control"></h:inputText>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom02">descripcion</label>
+                                <h:inputText value="#{productoControlador.producto.descripcion}" id="descripcion" class="form-control"></h:inputText>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="validationCustomUsername">precio</label>
+                                <div class="input-group">
+                                    <h:inputText value="#{productoControlador.producto.precio}" id="precio" class="form-control"></h:inputText>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="validationCustomUsername">estado</label>
+                                <div class="input-group">
+                                    <h:inputText value="#{productoControlador.producto.estado}" id="estado" class="form-control"></h:inputText>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">                            
+                            <div class="dropdown col-md-3 mb-3">
+                                <label for="validationCustom03">descipcion Arreglo</label>
+                                <br />
+                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{productoControlador.ordenProduccion.idOrdenDeProduccion}">
+                                    <f:selectItems class="dropdown-item" value="#{ordenProduccionControlador.consultarOrdenProduccion()}" var="ordenProduccion" itemValue="#{ordenProduccion.idOrdenDeProduccion}" itemLabel="#{ordenProduccion.descipcionArreglo}"/>
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="dropdown col-md-3 mb-3">
+                                <label for="validationCustom03">tiempo de cultivo</label>
+                                <br />
+                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{productoControlador.catalogo.idCatalogo}">
+                                    <f:selectItems class="dropdown-item" value="#{catalogoControlador.consultarCatalogo()}" var="catalogo" itemValue="#{catalogo.idCatalogo}" itemLabel="#{catalogo.tiempoDeCultivo}"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        <h:commandButton action="#{productoControlador.editarProducto()}" class="btn boton-registro" type="submit" value="Editar producto"></h:commandButton>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/popper.min.js"></script>
+        <script src="../../js/jquery.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/main.js"></script>
+        <script src="../../js/formularios.js"></script>
+    </h:body>
+</html>
+

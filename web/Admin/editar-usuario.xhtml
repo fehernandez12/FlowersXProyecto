@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <title>Editar Usuario</title>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-crear-usuario.css"></link>
+    </h:head>
+    <h:body>
+        <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+            <div class="titulo row">
+                <div class="col">
+                    <h1>Editar Usuario</h1>
+                    <p>Por favor llena los siguientes datos.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h:form class="formulario needs-validation">
+                        <div class="form-row">
+                            <div class="col-md-1 mb-1">
+                                <label for="validationCustom01">ID</label>
+                                <h:inputText value="#{usuarioControlador.usuario.id}" id="idUsuario" class="form-control"></h:inputText>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="validationCustom01">Nombre del titular</label>
+                                <h:inputText value="#{usuarioControlador.usuario.titular}" id="nombreTitular" class="form-control"></h:inputText>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom02">Razón Social</label>
+                                <h:inputText value="#{usuarioControlador.usuario.razonSocial}" id="razonSocial" class="form-control"></h:inputText>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="validationCustomUsername">Dirección de e-mail</label>
+                                <div class="input-group">
+                                    <h:inputText value="#{usuarioControlador.usuario.email}" id="email" class="form-control"></h:inputText>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom03">País</label>
+                                <h:inputText value="#{usuarioControlador.usuario.pais}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom04">Ciudad</label>
+                                <h:inputText value="#{usuarioControlador.usuario.ciudad}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom04">Password</label>
+                                <h:inputText value="#{usuarioControlador.usuario.password}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="dropdown col-md-3 mb-3">
+                                <label for="validationCustom03">Cargo</label>
+                                <br />
+                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{usuarioControlador.rol.idRol}">
+                                    <f:selectItems class="dropdown-item" value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        <h:commandButton action="#{usuarioControlador.editarUsuario()}" class="btn boton-registro" type="submit" value="Editar usuario"></h:commandButton>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/popper.min.js"></script>
+        <script src="../../js/jquery.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/main.js"></script>
+        <script src="../../js/formularios.js"></script>
+    </h:body>
+</html>
+
+
+
