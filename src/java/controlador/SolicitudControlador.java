@@ -268,7 +268,7 @@ public class SolicitudControlador implements Serializable {
         this.nombre2 = nombre2;
     }
 
-    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
 
     public static String randomAlphaNumeric(int count) {
         StringBuilder builder = new StringBuilder();

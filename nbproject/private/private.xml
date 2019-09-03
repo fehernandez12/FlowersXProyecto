@@ -3,30 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/PagoFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/Admin/gestionar-solicitudes.xhtml</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/menu.xhtml</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/CiudadFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/RolFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/css/primefaces-omega.css</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/css/primeicons.css</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/OrdenproduccionFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/ProductoFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/SolicitudFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/UsuarioFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/main-es.xhtml</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/AbstractFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/PedidoFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/controlador/PedidoControlador.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/Admin/gestionar-usuarios.xhtml</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/index.xhtml</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/controlador/ProductoControlador.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/NovedadFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/controlador/UsuarioControlador.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/PaisFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/web/main-en.xhtml</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersX/src/java/facade/PermisoFacade.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/controlador/SolicitudControlador.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/controlador/UploadControler.java</file>
         </group>
     </open-files>
 </project-private>

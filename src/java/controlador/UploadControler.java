@@ -72,11 +72,10 @@ public class UploadControler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return "Cargado";
     }
 
-    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
 
     public static String randomAlphaNumeric(int count) {
         StringBuilder builder = new StringBuilder();
