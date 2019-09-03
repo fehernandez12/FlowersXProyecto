@@ -6,12 +6,12 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="../css/bootstrap.css"></link>
         <link rel="stylesheet" href="../css/all.min.css"></link>
         <link rel="stylesheet" href="../css/brands.css"></link>
         <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
         <link rel="stylesheet" href="../css/estilos-gestionar-usuarios.css"></link>
+        <link href="../css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <h:outputStylesheet name="../css/bootstrap.css" />
@@ -23,44 +23,72 @@
                             <h1><h:outputText value="Catalogos"/></h1>
                         </div>
                         <f:view>
+                            <style type="text/css">
+                                .ui-datatable .ui-datatable-header {
+                                    text-align: right !important;
+                                }
+
+                                .ui-button-text-only .ui-button-text {
+                                    padding: 0.3em 0.4em;
+                                }
+
+                                .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                                    visibility: hidden;
+                                }
+
+                                .ui-filter-column .ui-column-customfilter .custom-filter {
+                                    width: 100%;
+                                    box-sizing: border-box;
+                                }
+                            </style>
                             <h:form>
-                                <h:dataTable class="table table-hover table-bordered" value="#{catalogoControlador.consultarCatalogo()}" var="item">
-                                    <h:column>
-                                        <f:facet class="header" name="header">
-                                            <h:outputText value="IdCatalogo" />
+                                <p:dataTable id="tablaProducto" var="producto" value="#{productoControlador.listar()}" widgetVar="tablaProducto" 
+                                             emptyMessage="No se han encontrado productos con los criterios dados." filteredValue="#{productoControlador.listaProductos}" 
+                                             resizableColumns="true" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15" style="margin-bottom:20px">
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+                                            <h:outputText value="Buscar todos los campos: " />
+                                            <p:inputText id="globalFilter" onkeyup="PF('tablaProducto').filter()" style="width:200px" placeholder="Palabra clave..."/>
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column filterBy="#{producto.idProducto}" headerText="Id" filterMatchMode="contains">
+                                        <h:outputText value="#{producto.idProducto}" />
+                                    </p:column>
+                                    <p:column filterBy="#{producto.nombreProducto}" headerText="Nombre de producto" filterMatchMode="exact">
+                                        <f:facet name="filter">
+                                            <p:selectOneMenu onchange="PF('tablaProducto').filter()">
+                                                <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
+                                                <f:selectItems value="#{productoControlador.listar()}" var="producto" itemValue="#{producto.nombreProducto}" itemLabel="#{producto.nombreProducto}" />
+                                            </p:selectOneMenu>
                                         </f:facet>
-                                        <h:outputText value="#{item.idCatalogo}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet class="header" name="header">
-                                            <h:outputText value="NombreProducto" />
-                                        </f:facet>
-                                        <h:outputText value="#{item.nombreProducto}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet class="header" name="header">
-                                            <h:outputText value="Descripcion"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.descripcion}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet class="header" name="header">
-                                            <h:outputText value="TiempoDeCultivo"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.tiempoDeCultivo}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet class="header" name="header">
-                                            <h:outputText value="Opciones"/>
-                                        </f:facet>
-                                        <h:commandLink class="opciones-tabla" action="#{catalogoControlador.preEditarCatalogo(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen" data-toggle="modal" data-target="#modalEditar"></i></h:commandLink>
-                                        <h:commandLink class="opciones-tabla" action="#{catalogoControlador.eliminarCatalogo(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
-                                    </h:column>
-                                </h:dataTable>
+                                        <h:outputText value="#{producto.nombreProducto}" />
+                                    </p:column>
+                                    <p:column filterBy="#{producto.tiempoDeCultivo}" headerText="Tiempo de Cultivo" filterMatchMode="contains">
+                                        <h:outputText value="#{producto.tiempoDeCultivo}" />
+                                    </p:column>
+                                    <p:column filterBy="#{producto.existencias}" headerText="Existencias" filterMatchMode="contains">
+                                        <h:outputText value="#{producto.existencias}" />
+                                    </p:column>
+                                    <p:column filterBy="#{producto.precio}" headerText="Precio" filterMatchMode="contains">
+                                        <h:outputText value="#{producto.precio}">
+                                            <f:convertNumber type="currency" currencySymbol="$" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <h:commandLink class="opciones-tabla" action="#{productoControlador.preEditarProducto(producto)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen"></i></h:commandLink>
+                                        <h:commandLink class="opciones-tabla" action="#{productoControlador.preEditarProducto(producto)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
+                                    </p:column>
+                                </p:dataTable>
+                                <h3>Exportar datos a Microsoft Excel</h3>
+                                <h:commandLink>
+                                    <p:graphicImage name="images/excel.png" style="width:50px"/>
+                                    <p:dataExporter type="xls" target="tablaProducto" fileName="Producto" pageOnly="true"/>
+                                </h:commandLink>
                             </h:form>
                         </f:view>
                         <a href="crear-catalogo.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
-                                Crear catalogo
+                                Registrar producto
                             </button>  
                         </a> 
                     </f:view>
