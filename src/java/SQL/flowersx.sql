@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-08-2019 a las 14:03:29
+-- Tiempo de generación: 04-09-2019 a las 19:04:52
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -210,7 +210,10 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `nombreProducto`, `foto`, `descripcion`, `tiempoDeCultivo`, `existencias`, `precio`) VALUES
-(1, 'Rosas', '/FlowersX/Archivos/rosas.jpg', 'Varios colores disponibles', '3 meses', 0, 300);
+(1, 'Rosas', '/FlowersXProyecto/Archivos/rosas.jpg', 'Varios colores disponibles', '3 meses', 50000, 300),
+(2, 'Orquídeas', '/FlowersXProyecto/Archivos/orchid.jpg', 'Varios colores disponibles', '6 meses', 20000, 200),
+(3, 'Girasoles', '/FlowersXProyecto/Archivos/sunflower.jpg', 'Varios colores disponibles', '3 meses', 80000, 150),
+(4, 'Tulipanes', '/FlowersXProyecto/Archivos/tulip.jpg', 'Varios colores disponibles', '4 meses', 0, 250);
 
 -- --------------------------------------------------------
 
@@ -492,7 +495,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idProducto` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
