@@ -43,21 +43,21 @@ public class Permiso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "idpermisos")
     private Integer idpermisos;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 45)
+    //@Size(max = 45)
     @Column(name = "nombre_en")
     private String nombreEn;
-    @Size(max = 45)
+    //@Size(max = 45)
     @Column(name = "url")
     private String url;
-    @Size(max = 45)
+    //@Size(max = 45)
     @Column(name = "icon")
     private String icon;
     @ManyToMany(mappedBy = "permisoList", fetch = FetchType.EAGER)

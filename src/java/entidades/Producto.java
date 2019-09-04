@@ -48,32 +48,32 @@ public class Producto implements Serializable {
     @Column(name = "idProducto")
     private Integer idProducto;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "nombreProducto")
     private String nombreProducto;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    //@Size(min = 1, max = 65535)
     @Column(name = "foto")
     private String foto;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "descripcion")
     private String descripcion;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "tiempoDeCultivo")
     private String tiempoDeCultivo;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "existencias")
     private int existencias;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "precio")
     private int precio;
     @ManyToMany(mappedBy = "productoList", fetch = FetchType.EAGER)

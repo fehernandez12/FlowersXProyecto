@@ -47,27 +47,27 @@ public class Solicitud implements Serializable {
     @Column(name = "idSolicitud")
     private Integer idSolicitud;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "destinatario")
     private String destinatario;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    //@Size(min = 1, max = 65535)
     @Column(name = "soporte1")
     private String soporte1;
     @Lob
-    @Size(max = 65535)
+    //@Size(max = 65535)
     @Column(name = "soporte2")
     private String soporte2;
     @Lob
-    @Size(max = 65535)
+    //@Size(max = 65535)
     @Column(name = "soporte3")
     private String soporte3;
     @JoinColumn(name = "Pedido_idPedido", referencedColumnName = "idPedido")

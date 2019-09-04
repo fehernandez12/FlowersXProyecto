@@ -46,8 +46,8 @@ public class Ciudad implements Serializable {
     @Column(name = "idciudad")
     private Integer idciudad;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
     @JoinColumn(name = "idPais", referencedColumnName = "idpais")

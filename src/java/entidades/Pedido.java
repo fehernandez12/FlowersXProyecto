@@ -54,12 +54,12 @@ public class Pedido implements Serializable {
     @Column(name = "idPedido")
     private Integer idPedido;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "fechaDeCreacion")
     @Temporal(TemporalType.DATE)
     private Date fechaDeCreacion;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "fechaDeEntrega")
     @Temporal(TemporalType.DATE)
     private Date fechaDeEntrega;

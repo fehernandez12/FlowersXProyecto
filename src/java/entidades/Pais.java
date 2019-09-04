@@ -45,13 +45,13 @@ public class Pais implements Serializable {
     @Column(name = "idpais")
     private Integer idpais;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "nombre_ingles")
     private String nombreIngles;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPais", fetch = FetchType.EAGER)

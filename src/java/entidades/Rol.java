@@ -48,13 +48,13 @@ public class Rol implements Serializable {
     @Column(name = "idRol")
     private Integer idRol;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
     @JoinTable(name = "rol_has_permisos", joinColumns = {

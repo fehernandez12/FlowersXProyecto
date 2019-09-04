@@ -45,12 +45,12 @@ public class Ordenproduccion implements Serializable {
     @Column(name = "idOrdenProduccion")
     private Integer idOrdenProduccion;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "fechainicio")
     @Temporal(TemporalType.DATE)
     private Date fechainicio;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "fechaFin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;

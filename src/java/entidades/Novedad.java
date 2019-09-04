@@ -50,13 +50,13 @@ public class Novedad implements Serializable {
     @Column(name = "idNovedad")
     private Integer idNovedad;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    //@Size(min = 1, max = 65535)
     @Column(name = "descripcion")
     private String descripcion;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
