@@ -49,9 +49,8 @@
                         <h:form class="formulario" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="col-2 md-1 mb-1">
-                                    <p:outputLabel value="Id de la Solicitud:" for="idSolicitud" />
-                                    <p:inputText class="form-control" pt:placeholder="Id de la Solicitud" id="idSolicitud" value="#{solicitudControlador.solicitud.idSolicitud}" title="IdSolicitud" required="true" requiredMessage="The IdSolicitud field is required."/>
-                                    <p:outputLabel for="@previous" value="Id" />
+                                    <h:outputLabel value="Id de la Solicitud:" for="idSolicitud" />
+                                    <h:inputText class="form-control" pt:placeholder="Id de la Solicitud" id="idSolicitud" value="#{solicitudControlador.solicitud.idSolicitud}" title="IdSolicitud" required="true" requiredMessage="The IdSolicitud field is required."/>
                                 </div>
                                 <script type="text/javascript">
                                     PrimeFaces.locales['es'] = {
@@ -87,8 +86,8 @@
                                     }
                                 </style>
                                 <div class="col-3 md-3 mb-3">
-                                    <p:outputLabel value="Fecha:" for="fecha" />
-                                    <p:calendar id="button" value="#{solicitudControlador.solicitud.fecha}" locale="es" pattern="yyyy-MM-dd" showOn="button" />
+                                    <p:outputLabel value="Fecha:" /><br />
+                                    <p:calendar id="button" value="#{solicitudControlador.solicitud.fecha}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" showOn="button" />
                                 </div>
                             </div>
                             <div class="form-row">

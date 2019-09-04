@@ -14,6 +14,7 @@ import facade.UsuarioFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 
@@ -40,6 +41,7 @@ public class PedidoControlador implements Serializable {
     @EJB
     ProductoFacade productoFacade;
     Producto producto = new Producto();
+    List<Producto> listaProductos = new ArrayList();
 
     public PedidoFacade getPedidoFacade() {
         return pedidoFacade;
@@ -96,9 +98,21 @@ public class PedidoControlador implements Serializable {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+
+    public List<Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(List<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
     
     public List<Pedido> listar() {
         return pedidoFacade.findAll();
+    }
+    
+    public void agregarAlCarrito(Producto p) {
+        listaProductos.add(p);
     }
     
     public String crearPedido() {

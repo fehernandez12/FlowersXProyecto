@@ -59,6 +59,33 @@ body{
 #regresar:active {
 	background-color: #555;
 }
+/*Botón de checkout*/
+#checkout {
+	background-color: #81CCC1;
+	width: 50px;
+	height: 35px;
+	text-align: center;
+	border: 1px rgba(0,0,0,0.3);
+	border-radius: 4px;
+	margin-bottom: 30px;
+        margin-right: 100px;
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	transition: background-color .3s;
+	z-index: 1000;
+	padding-bottom: 8px;
+}
+#checkout span{
+	color: #FFFFFF;
+}
+#checkout:hover {
+	cursor: pointer;
+	background-color: #81AAC1;
+}
+#checkout:active {
+	background-color: #8188C1;
+}
 /*Botones del menú*/
 .navbar {
 	background-color: #FFF;

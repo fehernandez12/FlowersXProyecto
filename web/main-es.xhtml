@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta charset="UTF-8"></meta>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"></meta>
@@ -15,16 +16,22 @@
         <link rel="stylesheet" href="css/brands.css"></link>
         <link rel="stylesheet" href="css/estilos.css"></link>
         <link rel="stylesheet" href="css/flags/flags.min.css"></link>
+        <link href="css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <!-- Regresar arriba -->
         <a id="regresar" href="#" class="btn btn-primary back-to-top" role="button" title="Regresar arriba" data-toggle="tooltip" data-placement="left">
             <span class="fa fa-arrow-up"></span>
         </a>
+        <f:view rendered="#{!(empty pedidoControlador.listaProductos)}">
+            <a id="checkout" href="#" class="btn btn-primary back-to-top" role="button" title="Comprar carrito" data-toggle="tooltip" data-placement="left">
+                <span class="fas fa-shopping-cart"></span>
+            </a>
+        </f:view>
         <!-- Navegador -->
         <div data-spy="scroll" data-target="#navegador" data-offset="0" class="container">
             <nav id="navegador" class="navbar navbar-expand-lg navbar-light fixed-top">
-                <a class="navbar-brand js-scroll-trigger" href="#"><img src="img/sm-logo.png" alt="Santa Marta Flowers S.A.S."></img></a>
+                <a class="navbar-brand js-scroll-trigger" id="logo" href="#"><img src="img/sm-logo.png" alt="Santa Marta Flowers S.A.S."></img></a>
                 <a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </a>
@@ -209,23 +216,39 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <c:forEach items="#{productoControlador.listaProductos}" var="p">
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row no-gutters">
-                                    <div class="col-md-4">
-                                        <img src="#{p.foto}" class="card-img" alt="..."></img>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">#{p.nombreProducto}</h5>
-                                            <p class="card-text">#{p.descripcion}</p>
-                                            <p class="card-text"><small class="text-muted">#{p.tiempoDeCultivo}</small></p>
-                                            <a href="#" class="btn boton-ingreso"><i class="fas fa-cart-plus"></i> Agregar al carrito</a>
+                        <h:form>
+                            <c:forEach items="#{productoControlador.listar()}" var="p">
+                                <div class="card mb-2" style="max-width: 540px; max-height: 12rem; display: inline-block; overflow: hidden; margin-right: 0.6rem;" >
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <img src="#{p.foto}" class="card-img" style="overflow: hidden; object-fit: cover;" height="100%" alt="..." />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">#{p.nombreProducto}</h5>
+                                                <p class="card-text">#{p.descripcion}</p>
+                                                <c:if test="#{!(p.existencias eq 0)}">
+                                                    <p class="card-text">
+                                                        <small class="text-muted">
+                                                            Disponible
+                                                        </small>
+                                                    </p>
+                                                    <h:commandLink action="#{pedidoControlador.agregarAlCarrito(p)}" class="btn boton-ingreso"><i class="fas fa-cart-plus"></i> Agregar al carrito</h:commandLink>
+                                                </c:if>
+                                                <c:if test="#{p.existencias eq 0}">
+                                                    <p class="card-text">
+                                                        <small class="text-muted">
+                                                            Agotada
+                                                        </small>
+                                                    </p>
+                                                    <button class="btn boton-ingreso" disabled="true"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
+                                                </c:if>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                        </h:form>
                     </div>
                 </div>
             </div>
