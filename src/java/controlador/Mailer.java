@@ -54,11 +54,11 @@ public class Mailer {
 
     public void enviarMensaje(String destinatario, String asunto, String mensaje) throws UnsupportedEncodingException {
         //Estructura del mensaje en HTML
-        String nuevoMensaje = "<h1 style=\"font-size: 20px; color:#0C0; font-weight: bold; text-transform: uppercase ; \">FlowersX - Mensaje del administrador" + "</h1>" + "<img src=\"https://i.imgur.com/2seKBWE.png\"/ style=\"float: left;\"><p>" + mensaje + "<br>\n"
-                + "<p style=\"text-align: center; color: #222222\">\n"
+        String nuevoMensaje = "<h1 style=\"font-size: 20px; color:#79B3AA; font-weight: bold; text-transform: uppercase ; \">FlowersX - Mensaje del administrador" + "</h1>" + "<img src=\"https://i.imgur.com/2seKBWE.png\"/ style=\"float: left;\"><p>" + mensaje + "<br>\n"
+                + "<p style=\"text-align: center;\">\n"
                 + "</p> \n"
                 + "<br>\n"
-                + "<p style=\"color:#0C0;font-weight: bold;\" > Gracias por creer en nosotros. </p> ";
+                + "<p style=\"color:#79B3AA;font-weight: bold;\" > Gracias por creer en nosotros. </p> ";
          try {
             //Configurar mensaje
             BodyPart texto = new MimeBodyPart();

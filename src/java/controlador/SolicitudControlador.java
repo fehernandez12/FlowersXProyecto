@@ -100,7 +100,7 @@ public class SolicitudControlador implements Serializable {
         path = path.substring(0, path.indexOf("\\build"));
         path = path + "\\web\\Archivos\\";
         try {
-            this.nombre = SolicitudControlador.randomAlphaNumeric(15);
+            this.nombre = file.getSubmittedFileName();
             pathReal = "/FlowersX/Archivos/" + nombre;
             path = path + this.nombre;
             InputStream in = file.getInputStream();
@@ -119,7 +119,7 @@ public class SolicitudControlador implements Serializable {
             path1 = path1.substring(0, path1.indexOf("\\build"));
             path1 = path1 + "\\web\\Archivos\\";
             try {
-                this.nombre1 = SolicitudControlador.randomAlphaNumeric(15);
+                this.nombre1 = file1.getSubmittedFileName();
                 pathReal1 = "/FlowersX/Archivos/" + nombre1;
                 path1 = path1 + this.nombre1;
                 InputStream in = file.getInputStream();
@@ -140,7 +140,7 @@ public class SolicitudControlador implements Serializable {
             path2 = path2.substring(0, path2.indexOf("\\build"));
             path2 = path2 + "\\web\\Archivos\\";
             try {
-                this.nombre2 = SolicitudControlador.randomAlphaNumeric(15);
+                this.nombre2 = file2.getSubmittedFileName();
                 pathReal2 = "/FlowersX/Archivos/" + nombre2;
                 path2 = path2 + this.nombre2;
                 InputStream in = file.getInputStream();

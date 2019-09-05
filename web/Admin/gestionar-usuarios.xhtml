@@ -65,19 +65,16 @@
                                 <p:column filterBy="#{user.titular}" headerText="Nombre del titular" filterMatchMode="contains">
                                     <h:outputText value="#{user.titular}" />
                                 </p:column>
-                                <p:column filterBy="#{user.razonSocial}" headerText="Razón Social" filterMatchMode="lte">
-                                    <f:facet name="filter">
-                                        <p:spinner onchange="PF('tablaUsuarios').filter()" styleClass="year-spinner custom-filter"/>
-                                    </f:facet>
+                                <p:column filterBy="#{user.razonSocial}" headerText="Razón Social" filterMatchMode="contains">
                                     <h:outputText value="#{user.razonSocial}" />
                                 </p:column>
-                                <p:column filterBy="#{user.email}" headerText="Nombre del titular" filterMatchMode="contains">
+                                <p:column filterBy="#{user.email}" headerText="E-mail" filterMatchMode="contains">
                                     <h:outputText value="#{user.email}" />
                                 </p:column>
                                 <p:column filterBy="#{user.paisIdpais.nombre}" headerText="País" filterMatchMode="exact">
                                     <f:facet name="filter">
                                         <p:selectOneMenu onchange="PF('tablaUsuarios').filter()" styleClass="custom-filter">
-                                            <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="Selecciona uno..." itemValue="#{null}" noSelectionOption="true" />
                                             <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}" />
                                         </p:selectOneMenu>
                                     </f:facet>
@@ -86,11 +83,11 @@
                                 <p:column filterBy="#{user.ciudadIdciudad.nombre}" headerText="Ciudad" filterMatchMode="exact">
                                     <f:facet name="filter">
                                         <p:selectOneMenu onchange="PF('tablaUsuarios').filter()" styleClass="custom-filter">
-                                            <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="Selecciona uno..." itemValue="#{null}" noSelectionOption="true" />
                                             <f:selectItems value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}" />
                                         </p:selectOneMenu>
                                     </f:facet>
-                                    <h:outputText value="#{user.paisIdpais.nombre}" />
+                                    <h:outputText value="#{user.ciudadIdciudad.nombre}" />
                                 </p:column>
                                 <p:column filterBy="#{user.rolidRol.nombre}" headerText="Rol" filterMatchMode="in">
                                     <f:facet name="filter">

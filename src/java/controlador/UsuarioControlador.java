@@ -114,6 +114,7 @@ public class UsuarioControlador implements Serializable {
         usuario.setRolidRol(rolFacade.find(rol.getIdRol()));
         usuario.setPaisIdpais(paisFacade.find(pais.getIdpais()));
         usuario.setCiudadIdciudad(ciudadFacade.find(ciudad.getIdciudad()));
+        usuario.setPassword(SolicitudControlador.randomAlphaNumeric(10));
         String mensaje = "Ha sido registrado en FlowersX exitosamente.\nSus credenciales de acceso son:\nCorreo: " + usuario.getEmail() + "\nPassword: " + usuario.getPassword();
         usuarioFacade.create(usuario);
         mailer.configurar();
@@ -139,7 +140,7 @@ public class UsuarioControlador implements Serializable {
         //return "Lista";
     }
 
-    public String validarLogin() {
+    public String validarLogin(String redireccion) {
         String redireccionar = "";
         try {
             usuarioLogueado = usuarioFacade.login(usuario);
@@ -153,7 +154,7 @@ public class UsuarioControlador implements Serializable {
                 }); */
                 System.out.println("Usuario Logueado: " + usuarioLogueado.getTitular());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sesionLogin", usuarioLogueado);
-                redireccionar = "menu.xhtml";
+                redireccionar = redireccion;
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -167,6 +168,17 @@ public class UsuarioControlador implements Serializable {
 
     public void setListaSolicitudes(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
+    }
+    
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+
+    public static String randomAlphaNumeric(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+            int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
+            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+        }
+        return builder.toString();
     }
 
 }

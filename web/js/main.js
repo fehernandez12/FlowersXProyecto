@@ -56,3 +56,6 @@ $(".link-scroll").click(function (e) {
     var aid = $(this).attr("href");
     $('html,body').animate({scrollTop: $(aid).offset().top}, 'slow');
 });
+function botonCarrito() {
+    document.getElementById("checkout").style.display = "block";
+}

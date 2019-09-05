@@ -23,11 +23,13 @@
         <a id="regresar" href="#" class="btn btn-primary back-to-top" role="button" title="Regresar arriba" data-toggle="tooltip" data-placement="left">
             <span class="fa fa-arrow-up"></span>
         </a>
-        <f:view rendered="#{!(empty pedidoControlador.listaProductos)}">
+
+        <span data-toggle="modal" data-target="#modalLogin">
             <a id="checkout" href="#" class="btn btn-primary back-to-top" role="button" title="Comprar carrito" data-toggle="tooltip" data-placement="left">
                 <span class="fas fa-shopping-cart"></span>
             </a>
-        </f:view>
+        </span>
+
         <!-- Navegador -->
         <div data-spy="scroll" data-target="#navegador" data-offset="0" class="container">
             <nav id="navegador" class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -63,7 +65,7 @@
                                 <f:view>
                                     <h:inputText class="form-control mr-sm-2" pt:placeholder="Dirección de e-mail" id="txtCorreo" value="#{usuarioControlador.usuario.email}"></h:inputText>
                                     <h:inputText pt:type="password" class="form-control mr-sm-2" pt:placeholder="Password" id="txtPassword" value="#{usuarioControlador.usuario.password}"></h:inputText>                      
-                                    <h:commandButton action="#{usuarioControlador.validarLogin()}" class="btn boton-ingreso" value="Ingresar"></h:commandButton>
+                                    <h:commandButton action="#{usuarioControlador.validarLogin("main-es.xhtml")}" class="btn boton-ingreso" value="Ingresar"></h:commandButton>
                                 </f:view>
                             </h:form>
                         </li>
@@ -206,6 +208,7 @@
                 <p>2019 ©iframework. Todos los derechos reservados.</p>
             </div>
         </div>
+        <!-- Modal del catálogo -->
         <div class="modal fade modal-catalogo" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
@@ -233,7 +236,10 @@
                                                             Disponible
                                                         </small>
                                                     </p>
-                                                    <h:commandLink action="#{pedidoControlador.agregarAlCarrito(p)}" class="btn boton-ingreso"><i class="fas fa-cart-plus"></i> Agregar al carrito</h:commandLink>
+                                                    <h:commandLink onclick="botonCarrito()" action="#{pedidoControlador.agregarAlCarrito(p)}" class="btn boton-ingreso">
+                                                        <f:ajax execute="@form" render="@none" />
+                                                        <i class="fas fa-cart-plus"></i> Agregar al carrito
+                                                    </h:commandLink>
                                                 </c:if>
                                                 <c:if test="#{p.existencias eq 0}">
                                                     <p class="card-text">
@@ -250,6 +256,37 @@
                             </c:forEach>
                         </h:form>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal del login -->
+        <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form>
+                        <f:view>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <h:outputLabel value="E-mail" />
+                                    <h:inputText class="form-control mr-sm-2" pt:placeholder="Dirección de e-mail" id="txtCorreo" value="#{usuarioControlador.usuario.email}" />
+                                </div>
+                                <br />
+                                <div class="form-row">
+                                    <h:outputLabel value="Password" />
+                                    <h:inputText pt:type="password" class="form-control mr-sm-2" pt:placeholder="Password" id="txtPassword" value="#{usuarioControlador.usuario.password}" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <h:commandButton action="#{usuarioControlador.validarLogin("menu-es.xhtml")}" class="btn boton-ingreso" value="Iniciar sesión" />
+                            </div>  
+                        </f:view>
+                    </h:form>
                 </div>
             </div>
         </div>

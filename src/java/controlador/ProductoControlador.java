@@ -7,13 +7,21 @@ package controlador;
 
 import entidades.Pedido;
 import entidades.Producto;
+import entidades.Usuario;
 import facade.PedidoFacade;
 import facade.ProductoFacade;
+import facade.UsuarioFacade;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -28,16 +36,58 @@ public class ProductoControlador implements Serializable {
      */
     public ProductoControlador() {
     }
-    
+
     @EJB
     ProductoFacade productoFacade;
     Producto producto = new Producto();
     List<Producto> listaProductos;
-    
+
     @EJB
     PedidoFacade pedidoFacade;
     Pedido pedido = new Pedido();
     List<Pedido> listaPedidos;
+
+    @EJB
+    UsuarioFacade usuarioFacade;
+    Usuario usuario = new Usuario();
+    List<Usuario> listaUsuarios;
+
+    Mailer mailer = new Mailer();
+    private Part file;
+    private String nombre;
+    private String pathReal;
+
+    public Mailer getMailer() {
+        return mailer;
+    }
+
+    public void setMailer(Mailer mailer) {
+        this.mailer = mailer;
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPathReal() {
+        return pathReal;
+    }
+
+    public void setPathReal(String pathReal) {
+        this.pathReal = pathReal;
+    }
 
     public ProductoFacade getProductoFacade() {
         return productoFacade;
@@ -86,29 +136,81 @@ public class ProductoControlador implements Serializable {
     public void setListaPedidos(List<Pedido> listaPedidos) {
         this.listaPedidos = listaPedidos;
     }
-    
-    public String crearProducto() {
+
+    public UsuarioFacade getUsuarioFacade() {
+        return usuarioFacade;
+    }
+
+    public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
+        this.usuarioFacade = usuarioFacade;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
+    }
+
+    public String crearProducto() throws UnsupportedEncodingException {
+        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("Archivos");
+        path = path.substring(0, path.indexOf("\\build"));
+        path = path + "\\web\\Archivos\\";
+        try {
+            this.nombre = file.getSubmittedFileName();
+            pathReal = "/FlowersXProyecto/Archivos/" + nombre;
+            path = path + this.nombre;
+            InputStream in = file.getInputStream();
+            byte[] data = new byte[in.available()];
+            in.read(data);
+            FileOutputStream out = new FileOutputStream(new File(path));
+            out.write(data);
+            in.close();
+            out.close();
+            path.replace("\\", "\\\\");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        producto.setFoto(pathReal);
         productoFacade.create(producto);
+        String mensaje = "Hemos añadido " + producto.getNombreProducto() + " a nuestro catálogo.\n"
+                + "Para conocer más, visita nuestro sitio web.";
+        mailer.configurar();
+        listaUsuarios = usuarioFacade.findAll();
+        for (Usuario usuario : listaUsuarios) {
+            if (usuario.getRolidRol().getIdRol() == 5) {
+                mailer.enviarMensajeConUnAdjunto(usuario.getEmail(), "¡Hemos añadido nuevos productos a nuestro catálogo!", mensaje, path, nombre);
+            }
+        }
         producto = new Producto();
         return "gestionar-catalogo";
     }
-    
+
     public String editarProducto() {
         productoFacade.edit(producto);
         producto = new Producto();
         return "gestionar-catalogo";
     }
-    
+
     public String preEditarProducto(Producto producto) {
         this.producto = producto;
         return "editar-catalogo";
     }
-    
+
     public void eliminarPedido(Pedido pedido) {
         pedidoFacade.remove(pedido);
         //return "Lista";
     }
-    
+
     public List<Producto> listar() {
         return productoFacade.findAll();
     }
