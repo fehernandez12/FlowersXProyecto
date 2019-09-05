@@ -65,7 +65,7 @@
                                 <f:view>
                                     <h:inputText class="form-control mr-sm-2" pt:placeholder="Dirección de e-mail" id="txtCorreo" value="#{usuarioControlador.usuario.email}"></h:inputText>
                                     <h:inputText pt:type="password" class="form-control mr-sm-2" pt:placeholder="Password" id="txtPassword" value="#{usuarioControlador.usuario.password}"></h:inputText>                      
-                                    <h:commandButton action="#{usuarioControlador.validarLogin("main-es.xhtml")}" class="btn boton-ingreso" value="Ingresar"></h:commandButton>
+                                    <h:commandButton action="#{usuarioControlador.validarLogin()}" class="btn boton-ingreso" value="Ingresar" />
                                 </f:view>
                             </h:form>
                         </li>
@@ -283,7 +283,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <h:commandButton action="#{usuarioControlador.validarLogin("menu-es.xhtml")}" class="btn boton-ingreso" value="Iniciar sesión" />
+                                <h:commandButton action="#{usuarioControlador.validarLogin()}" class="btn boton-ingreso" value="Iniciar sesión" />
                             </div>  
                         </f:view>
                     </h:form>
