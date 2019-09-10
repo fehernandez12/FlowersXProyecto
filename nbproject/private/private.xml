@@ -2,6 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/crear-novedad.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/facade/OrdenproduccionFacade.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/facade/UsuarioFacade.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/controlador/UsuarioControlador.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/menu.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Cliente/crear-pedido.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/controlador/ProductoControlador.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/controlador/PedidoControlador.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/crear-solicitud.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/editar-usuario.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/css/estilos.css</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/css/primefaces-omega.css</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/editar-catalogo.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/main-es.xhtml</file>
+        </group>
     </open-files>
 </project-private>

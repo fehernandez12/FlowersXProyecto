@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +28,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -42,7 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pedido.findByIdPedido", query = "SELECT p FROM Pedido p WHERE p.idPedido = :idPedido")
     , @NamedQuery(name = "Pedido.findByFechaDeCreacion", query = "SELECT p FROM Pedido p WHERE p.fechaDeCreacion = :fechaDeCreacion")
     , @NamedQuery(name = "Pedido.findByFechaDeEntrega", query = "SELECT p FROM Pedido p WHERE p.fechaDeEntrega = :fechaDeEntrega")
-    , @NamedQuery(name = "Pedido.findByCantidadProducto", query = "SELECT p FROM Pedido p WHERE p.cantidadProducto = :cantidadProducto")
     , @NamedQuery(name = "Pedido.findBySubTotal", query = "SELECT p FROM Pedido p WHERE p.subTotal = :subTotal")
     , @NamedQuery(name = "Pedido.findByTotal", query = "SELECT p FROM Pedido p WHERE p.total = :total")})
 public class Pedido implements Serializable {
@@ -54,17 +53,15 @@ public class Pedido implements Serializable {
     @Column(name = "idPedido")
     private Integer idPedido;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "fechaDeCreacion")
     @Temporal(TemporalType.DATE)
     private Date fechaDeCreacion;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "fechaDeEntrega")
     @Temporal(TemporalType.DATE)
     private Date fechaDeEntrega;
-    @Column(name = "cantidadProducto")
-    private Integer cantidadProducto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "subTotal")
     private Double subTotal;
@@ -73,18 +70,18 @@ public class Pedido implements Serializable {
     @JoinTable(name = "producto_has_pedido", joinColumns = {
         @JoinColumn(name = "pedido_idPedido", referencedColumnName = "idPedido")}, inverseJoinColumns = {
         @JoinColumn(name = "producto_idProducto", referencedColumnName = "idProducto")})
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Producto> productoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido")
     private List<Ordenproduccion> ordenproduccionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido")
     private List<Novedad> novedadList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido")
     private List<Solicitud> solicitudList;
     @JoinColumn(name = "Usuario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Usuario usuarioid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido")
     private List<Pago> pagoList;
 
     public Pedido() {
@@ -124,14 +121,6 @@ public class Pedido implements Serializable {
         this.fechaDeEntrega = fechaDeEntrega;
     }
 
-    public Integer getCantidadProducto() {
-        return cantidadProducto;
-    }
-
-    public void setCantidadProducto(Integer cantidadProducto) {
-        this.cantidadProducto = cantidadProducto;
-    }
-
     public Double getSubTotal() {
         return subTotal;
     }
@@ -149,6 +138,7 @@ public class Pedido implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Producto> getProductoList() {
         return productoList;
     }
@@ -158,6 +148,7 @@ public class Pedido implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Ordenproduccion> getOrdenproduccionList() {
         return ordenproduccionList;
     }
@@ -167,6 +158,7 @@ public class Pedido implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Novedad> getNovedadList() {
         return novedadList;
     }
@@ -176,6 +168,7 @@ public class Pedido implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Solicitud> getSolicitudList() {
         return solicitudList;
     }
@@ -193,6 +186,7 @@ public class Pedido implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Pago> getPagoList() {
         return pagoList;
     }

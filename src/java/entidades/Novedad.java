@@ -7,12 +7,9 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,14 +18,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -50,24 +45,22 @@ public class Novedad implements Serializable {
     @Column(name = "idNovedad")
     private Integer idNovedad;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Lob
-    //@Size(min = 1, max = 65535)
+    @Size(min = 1, max = 65535)
     @Column(name = "descripcion")
     private String descripcion;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @JoinColumn(name = "Pedido_idPedido", referencedColumnName = "idPedido")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Pedido pedidoidPedido;
     @JoinColumn(name = "Usuario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Usuario usuarioid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "novedadidNovedad", fetch = FetchType.EAGER)
-    private List<Pago> pagoList;
 
     public Novedad() {
     }
@@ -120,15 +113,6 @@ public class Novedad implements Serializable {
 
     public void setUsuarioid(Usuario usuarioid) {
         this.usuarioid = usuarioid;
-    }
-
-    @XmlTransient
-    public List<Pago> getPagoList() {
-        return pagoList;
-    }
-
-    public void setPagoList(List<Pago> pagoList) {
-        this.pagoList = pagoList;
     }
 
     @Override

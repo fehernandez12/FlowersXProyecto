@@ -3,15 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="UTF-8"></meta>
         <title>Crear Pedido</title>
-        <link rel="stylesheet" href="../../css/bootstrap.css"></link>
-        <link rel="stylesheet" href="../../css/all.min.css"></link>
-        <link rel="stylesheet" href="../../css/brands.css"></link>
-        <link rel="stylesheet" href="../../css/estilos-paginas.css"></link>
-        <link rel="stylesheet" href="../../css/estilos-crear-usuario.css"></link>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-crear-usuario.css"></link>
+        <link href="../css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
@@ -23,49 +26,200 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h:form class="formulario needs-validation">
-                        <div class="form-row">
-                            
-                            <div class="col-md-3 mb-3">
-                                <label for="validationCustom01">Fecha de creación</label>
-                                <h:inputText pt:type="date" value="#{pedidoControlador.pedido.fechaDeCreacion}" id="fechaDeCreacion" class="form-control">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:inputText>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="validationCustom01">Fecha de envio</label>
-                                <h:inputText pt:type="date" value="#{pedidoControlador.pedido.fechaDeEnvio}" id="fechaDeEnvio" class="form-control">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:inputText>
-                            </div>
-                            <div class="col-md-8 mb-8">
-                                <label for="validationCustomUsername">Dirección de envio</label>
-                                <div class="input-group">
-                                    <h:inputText value="#{pedidoControlador.pedido.direccionDeEnvio}" id="direccionDeEnvio" class="form-control"></h:inputText>
+                    <f:view>
+                        <style type="text/css">
+                            .ui-datalist .ui-datalist-content {
+                                border:0 none
+                            }
+
+                            .ui-datalist ul {
+                                padding: 0px 10px 0 20px;
+                                margin: 5px 0;
+                            }
+
+                            .value {
+                                font-weight: bold;
+                            }
+
+                            .ui-autocomplete-itemtip {
+                                -moz-box-sizing: content-box;
+                                -webkit-box-sizing: content-box;
+                                box-sizing: content-box;
+                            }
+                        </style>
+                        <h:form enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="col-2 md-2 mb-2">
+                                    <h:outputLabel value="Id del pedido:" for="idSolicitud" />
+                                    <h:inputText class="form-control" pt:placeholder="Id del pedido" id="idPedido" value="#{pedidoControlador.pedido.idPedido}" title="IdPedido" required="true" requiredMessage="Este campo es obligatorio."/>
+                                </div>
+                                <script type="text/javascript">
+                                    PrimeFaces.locales['es'] = {
+                                        closeText: 'Cerrar',
+                                        prevText: 'Anterior',
+                                        nextText: 'Siguiente',
+                                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                                        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                                        weekHeader: 'Semana',
+                                        firstDayOfWeek: 1,
+                                        isRTL: false,
+                                        showMonthAfterYear: false,
+                                        yearSuffix: '',
+                                        timeOnlyTitle: 'Sólo hora',
+                                        timeText: 'Tiempo',
+                                        hourText: 'Hora',
+                                        minuteText: 'Minuto',
+                                        secondText: 'Segundo',
+                                        currentText: 'Fecha actual',
+                                        ampm: false,
+                                        month: 'Mes',
+                                        week: 'Semana',
+                                        day: 'Día',
+                                        allDayText: 'Todo el día'
+                                    };
+                                </script>
+                                <style type="text/css">
+                                    .value {
+                                        font-weight: bold;
+                                    }
+                                </style>
+                                <div class="col-2 md-2 mb-2">
+                                    <p:outputLabel value="Fecha de creación:" /><br/>
+                                    <p:calendar id="button" value="#{pedidoControlador.pedido.fechaDeCreacion}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" showOn="button" />
+                                </div>
+                                <div class="col-2 md-2 mb-2">
+                                    <p:outputLabel for="date" value="Fecha de envío: " /><br/>
+                                    <p:inputMask id="date" value="#{pedidoControlador.pedido.fechaDeEntrega}" mask="99/99/9999"/>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            
-                            
-                             <div class="dropdown col-md-3 mb-3">
-                                <label for="validationCustom03">Razón Social</label>
-                                <br />
-                                
-                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{pedidoControlador.usuario.id}">
-                                    <f:selectItems class="dropdown-item" value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.razonSocial}"/>
-                                </h:selectOneMenu>
+                            <br/>
+                            <div class="form-row">
+                                <div class="col-4 md-4 mb-4">
+                                    <p:outputLabel value="Productos: " /><br/>
+                                    <button type="button" class="btn boton-registro" data-toggle="modal" data-target=".modal-productos">
+                                        Agregar productos
+                                    </button>
+                                </div>
                             </div>
+                            <div class="form-row">
+                                <div class="col-4 md-4 mb-4">
+                                    <p:outputLabel value="Subtotal: " />
+                                    <h:inputText class="form-control" id="subtotal" value="#{pedidoControlador.pedido.subTotal}" title="Usuarioid" readonly="true" />
+                                </div>
+                                <div class="col-4 md-4 mb-4">
+                                    <p:outputLabel value="Impuestos: " />
+                                    <h:inputText class="form-control" id="impuestos" value="#{pedidoControlador.impuestos}" title="Usuarioid" readonly="true" />
+                                </div>
+                                <div class="col-4 md-4 mb-4">
+                                    <p:outputLabel  value="Total: " />
+                                    <h:inputText class="form-control" id="total" value="#{pedidoControlador.pedido.total}" title="Usuarioid" readonly="true" />
+                                </div>
+                            </div>
+                        </h:form>
+                    </f:view>
+                </div>
+            </div>
+        </div>
+        <!-- Modal del catálogo -->
+        <div class="modal fade modal-productos" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable" style="margin-top: 100px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle">Nuestro catálogo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form>
+                        <div class="modal-body">
+                            <h:form>
+                                <c:forEach items="#{productoControlador.listar()}" var="p">
+                                    <div class="card mb-2" style="max-width: 540px; height: 13rem; display: inline-block; overflow: hidden; margin-right: 0.6rem;" >
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="#{p.foto}" class="card-img" style="overflow: hidden; object-fit: cover;" height="150%" alt="..." />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">#{p.nombreProducto}</h5>
+                                                    <c:if test="#{!(p.existencias eq 0)}">
+                                                        <p class="card-text">
+                                                            <small class="text-muted">
+                                                                Disponible
+                                                            </small>
+                                                        </p>
+                                                        <h:inputText value="#{pedidoControlador.cantidadCamas}" class="form-control form-control-sm" id="carritoCantidad" pt:type="number" pt:placeholder="Ingresa la cantidad deseada." validatorMessage="Cantidad máxima: #{(p.existencias)/100}">
+                                                            <f:validateDoubleRange minimum="1" maximum="#{(p.existencias)/100}" for="carritoCantidad"/>
+                                                        </h:inputText>
+                                                        <br/>
+                                                        <h:commandLink onclick="botonCarrito()" action="#{pedidoControlador.agregarAlCarrito(p)}" class="btn boton-ingreso btn-sm">
+                                                            <f:ajax execute="@form" render="@none" />
+                                                            <i class="fas fa-cart-plus"></i> Agregar al carrito
+                                                        </h:commandLink>
+                                                    </c:if>
+                                                    <c:if test="#{p.existencias eq 0}">
+                                                        <p class="card-text">
+                                                            <small class="text-muted">
+                                                                Agotada
+                                                            </small>
+                                                        </p>
+                                                        <button class="btn boton-ingreso btn-sm" disabled="true"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
+                                                    </c:if>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </h:form>
                         </div>
-                        <h:commandButton action="#{pedidoControlador.crearPedido()}" class="btn boton-registro" type="submit" value="Crear pedido"></h:commandButton>
+                        <div class="modal-footer">
+                            <h:commandLink type="button" pt:data-toggle="modal" pt:data-target=".modal-pago" class="btn btn-secondary btn-sm" action="#{pedidoControlador.crearPedido()}"><i class="far fa-credit-card"></i> Proceder al pago</h:commandLink>
+                        </div>
                     </h:form>
                 </div>
             </div>
         </div>
-        <script src="../../js/popper.min.js"></script>
-        <script src="../../js/jquery.min.js"></script>
-        <script src="../../js/bootstrap.min.js"></script>
+        <!-- Modal del pago -->
+        <div class="modal fade modal-pago" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Procesar pago</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <f:view>
+                        <h:form>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <h:outputText>Número de la tarjeta</h:outputText>
+                                    <p:inputMask id="tarjeta" value="#{pagoControlador.pago.numero}" mask="9999-9999-9999-9999"/>
+                                </div>
+                                <div class="form-row">
+                                    
+                                </div>
+                                <div class="form-row">
+                                    
+                                </div>
+                                <div class="form-row">
+                                    
+                                </div>
+                            </div>
+                        </h:form>
+                    </f:view>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="text/javascript"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="../../js/main.js"></script>
         <script src="../../js/formularios.js"></script>
     </h:body>

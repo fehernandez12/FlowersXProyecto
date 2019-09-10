@@ -140,7 +140,7 @@ public class UsuarioControlador implements Serializable {
         //return "Lista";
     }
 
-    public String validarLogin(String redireccion) {
+    public String validarLogin() {
         String redireccionar = "";
         try {
             usuarioLogueado = usuarioFacade.login(usuario);
@@ -154,7 +154,7 @@ public class UsuarioControlador implements Serializable {
                 }); */
                 System.out.println("Usuario Logueado: " + usuarioLogueado.getTitular());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sesionLogin", usuarioLogueado);
-                redireccionar = redireccion;
+                redireccionar = "menu.xhtml";
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

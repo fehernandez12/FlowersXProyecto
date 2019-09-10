@@ -42,6 +42,8 @@ public class PedidoControlador implements Serializable {
     ProductoFacade productoFacade;
     Producto producto = new Producto();
     List<Producto> listaProductos = new ArrayList();
+    private int cantidadCamas;
+    private double impuestos = 0;
 
     public PedidoFacade getPedidoFacade() {
         return pedidoFacade;
@@ -110,9 +112,27 @@ public class PedidoControlador implements Serializable {
     public List<Pedido> listar() {
         return pedidoFacade.findAll();
     }
+
+    public int getCantidadCamas() {
+        return cantidadCamas;
+    }
+
+    public void setCantidadCamas(int cantidadCamas) {
+        this.cantidadCamas = cantidadCamas;
+    }
+
+    public double getImpuestos() {
+        return impuestos;
+    }
+
+    public void setImpuestos(double impuestos) {
+        this.impuestos = impuestos;
+    }
     
     public void agregarAlCarrito(Producto p) {
-        listaProductos.add(p);
+        for (int i = 0; i < this.cantidadCamas; i++) {
+            listaProductos.add(p);
+        }
     }
     
     public String crearPedido() {
@@ -137,6 +157,24 @@ public class PedidoControlador implements Serializable {
     public void eliminarPedido(Pedido pedido) {
         pedidoFacade.remove(pedido);
         //return "Lista";
+    }
+    
+    public double calcularSubTotal() {
+        double subTotal = 0;
+        for (Producto producto : listaProductos) {
+            pedido.setSubTotal(subTotal + producto.getPrecio());
+        }
+        return subTotal;
+    }
+    
+    public double calcularImpuestos() {
+        this.impuestos = (pedido.getSubTotal() / 100) * 18;
+        return this.impuestos;
+    }
+    
+    public double calcularTotal() {
+        pedido.setTotal(pedido.getSubTotal() + ((pedido.getSubTotal()/100) * 18));
+        return pedido.getTotal();
     }
     
 }

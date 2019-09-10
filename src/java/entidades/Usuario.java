@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -50,46 +50,46 @@ public class Usuario implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "titular")
     private String titular;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "razonSocial")
     private String razonSocial;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Correo electrónico no válido")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "estado")
     private int estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid")
     private List<Ordenproduccion> ordenproduccionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid")
     private List<Novedad> novedadList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid")
     private List<Solicitud> solicitudList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid")
     private List<Pedido> pedidoList;
     @JoinColumn(name = "Rol_idRol", referencedColumnName = "idRol")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Rol rolidRol;
     @JoinColumn(name = "ciudad_idciudad", referencedColumnName = "idciudad")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Ciudad ciudadIdciudad;
     @JoinColumn(name = "pais_idpais", referencedColumnName = "idpais")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Pais paisIdpais;
 
     public Usuario() {
@@ -157,6 +157,7 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Ordenproduccion> getOrdenproduccionList() {
         return ordenproduccionList;
     }
@@ -166,6 +167,7 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Novedad> getNovedadList() {
         return novedadList;
     }
@@ -175,6 +177,7 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Solicitud> getSolicitudList() {
         return solicitudList;
     }
@@ -184,6 +187,7 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Pedido> getPedidoList() {
         return pedidoList;
     }

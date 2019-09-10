@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -46,14 +46,14 @@ public class Ciudad implements Serializable {
     @Column(name = "idciudad")
     private Integer idciudad;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
     @JoinColumn(name = "idPais", referencedColumnName = "idpais")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Pais idPais;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadIdciudad", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadIdciudad")
     private List<Usuario> usuarioList;
 
     public Ciudad() {
@@ -93,6 +93,7 @@ public class Ciudad implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Usuario> getUsuarioList() {
         return usuarioList;
     }

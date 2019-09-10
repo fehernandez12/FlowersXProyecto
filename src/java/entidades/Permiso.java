@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -23,6 +22,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -43,29 +43,29 @@ public class Permiso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "idpermisos")
     private Integer idpermisos;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
-    //@Size(max = 45)
+    @Size(max = 45)
     @Column(name = "nombre_en")
     private String nombreEn;
-    //@Size(max = 45)
+    @Size(max = 45)
     @Column(name = "url")
     private String url;
-    //@Size(max = 45)
+    @Size(max = 45)
     @Column(name = "icon")
     private String icon;
-    @ManyToMany(mappedBy = "permisoList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "permisoList")
     private List<Rol> rolList;
-    @OneToMany(mappedBy = "permisoPadre", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "permisoPadre")
     private List<Permiso> permisoList;
     @JoinColumn(name = "permiso_padre", referencedColumnName = "idpermisos")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Permiso permisoPadre;
 
     public Permiso() {
@@ -121,6 +121,7 @@ public class Permiso implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Rol> getRolList() {
         return rolList;
     }
@@ -130,6 +131,7 @@ public class Permiso implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Permiso> getPermisoList() {
         return permisoList;
     }

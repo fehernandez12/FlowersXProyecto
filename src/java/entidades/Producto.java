@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +22,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -48,35 +48,34 @@ public class Producto implements Serializable {
     @Column(name = "idProducto")
     private Integer idProducto;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nombreProducto")
     private String nombreProducto;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Lob
-    //@Size(min = 1, max = 65535)
+    @Size(min = 1, max = 65535)
     @Column(name = "foto")
     private String foto;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "descripcion")
     private String descripcion;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
     @Column(name = "tiempoDeCultivo")
-    private String tiempoDeCultivo;
+    private int tiempoDeCultivo;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "existencias")
     private int existencias;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "precio")
     private int precio;
-    @ManyToMany(mappedBy = "productoList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "productoList")
     private List<Pedido> pedidoList;
 
     public Producto() {
@@ -86,7 +85,7 @@ public class Producto implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public Producto(Integer idProducto, String nombreProducto, String foto, String descripcion, String tiempoDeCultivo, int existencias, int precio) {
+    public Producto(Integer idProducto, String nombreProducto, String foto, String descripcion, int tiempoDeCultivo, int existencias, int precio) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.foto = foto;
@@ -128,11 +127,11 @@ public class Producto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getTiempoDeCultivo() {
+    public int getTiempoDeCultivo() {
         return tiempoDeCultivo;
     }
 
-    public void setTiempoDeCultivo(String tiempoDeCultivo) {
+    public void setTiempoDeCultivo(int tiempoDeCultivo) {
         this.tiempoDeCultivo = tiempoDeCultivo;
     }
 
@@ -153,6 +152,7 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Pedido> getPedidoList() {
         return pedidoList;
     }

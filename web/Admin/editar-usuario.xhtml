@@ -6,7 +6,7 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta charset="UTF-8"></meta>
-        <title>Editar Usuario</title>
+        <title>Crear Usuario</title>
         <link rel="stylesheet" href="../css/bootstrap.css"></link>
         <link rel="stylesheet" href="../css/all.min.css"></link>
         <link rel="stylesheet" href="../css/brands.css"></link>
@@ -27,45 +27,45 @@
                         <div class="form-row">
                             <div class="col-md-1 mb-1">
                                 <label for="validationCustom01">ID</label>
-                                <h:inputText value="#{usuarioControlador.usuario.id}" id="idUsuario" class="form-control"></h:inputText>
+                                <h:inputText pt:placeholder="ID" value="#{usuarioControlador.usuario.id}" id="idUsuario" class="form-control"></h:inputText>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <label for="validationCustom01">Nombre del titular</label>
-                                <h:inputText value="#{usuarioControlador.usuario.titular}" id="nombreTitular" class="form-control"></h:inputText>
+                                <h:inputText pt:placeholder="John Doe" value="#{usuarioControlador.usuario.titular}" id="nombreTitular" class="form-control"></h:inputText>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom02">Razón Social</label>
-                                <h:inputText value="#{usuarioControlador.usuario.razonSocial}" id="razonSocial" class="form-control"></h:inputText>
+                                <h:inputText pt:placeholder="Empresa Inc." value="#{usuarioControlador.usuario.razonSocial}" id="razonSocial" class="form-control"></h:inputText>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <label for="validationCustomUsername">Dirección de e-mail</label>
                                 <div class="input-group">
-                                    <h:inputText value="#{usuarioControlador.usuario.email}" id="email" class="form-control"></h:inputText>
+                                    <h:inputText pt:placeholder="ejemplo@ejemplo.com" value="#{usuarioControlador.usuario.email}" id="email" class="form-control"></h:inputText>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom03">País</label>
-                                <h:inputText value="#{usuarioControlador.usuario.pais}" class="form-control"></h:inputText>
+                                <h:selectOneMenu class="select form-control dropdown-toggle" pt:placeholder="País" value="#{usuarioControlador.pais.idpais}">
+                                    <f:selectItems class="dropdown-item" value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}"/>
+                                </h:selectOneMenu>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom04">Ciudad</label>
-                                <h:inputText value="#{usuarioControlador.usuario.ciudad}" class="form-control"></h:inputText>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="validationCustom04">Password</label>
-                                <h:inputText value="#{usuarioControlador.usuario.password}" class="form-control"></h:inputText>
+                                <h:selectOneMenu class="select form-control dropdown-toggle" pt:placeholder="Ciudad" value="#{usuarioControlador.ciudad.idciudad}">
+                                    <f:selectItems class="dropdown-item" value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}"/>
+                                </h:selectOneMenu>
                             </div>
                             <div class="dropdown col-md-3 mb-3">
                                 <label for="validationCustom03">Cargo</label>
                                 <br />
-                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{usuarioControlador.rol.idRol}">
+                                <h:selectOneMenu class="select form-control dropdown-toggle" value="#{usuarioControlador.rol.idRol}">
                                     <f:selectItems class="dropdown-item" value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
                                 </h:selectOneMenu>
                             </div>
                         </div>
-                        <h:commandButton action="#{usuarioControlador.editarUsuario()}" class="btn boton-registro" type="submit" value="Editar usuario"></h:commandButton>
+                        <h:commandButton action="#{usuarioControlador.editarUsuario()}" class="btn boton-registro" type="submit" value="Crear usuario"></h:commandButton>
                     </h:form>
                 </div>
             </div>
@@ -77,6 +77,4 @@
         <script src="../../js/formularios.js"></script>
     </h:body>
 </html>
-
-
 

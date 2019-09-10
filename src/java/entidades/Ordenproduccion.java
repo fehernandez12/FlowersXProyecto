@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,20 +44,20 @@ public class Ordenproduccion implements Serializable {
     @Column(name = "idOrdenProduccion")
     private Integer idOrdenProduccion;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "fechainicio")
     @Temporal(TemporalType.DATE)
     private Date fechainicio;
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "fechaFin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     @JoinColumn(name = "Pedido_idPedido", referencedColumnName = "idPedido")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Pedido pedidoidPedido;
     @JoinColumn(name = "Usuario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Usuario usuarioid;
 
     public Ordenproduccion() {
