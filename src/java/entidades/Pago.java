@@ -6,7 +6,6 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,7 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Pago.findByIdPago", query = "SELECT p FROM Pago p WHERE p.idPago = :idPago")
     , @NamedQuery(name = "Pago.findByNumero", query = "SELECT p FROM Pago p WHERE p.numero = :numero")
     , @NamedQuery(name = "Pago.findByCodigoDeSeguridad", query = "SELECT p FROM Pago p WHERE p.codigoDeSeguridad = :codigoDeSeguridad")
-    , @NamedQuery(name = "Pago.findByFechaDeVencimiento", query = "SELECT p FROM Pago p WHERE p.fechaDeVencimiento = :fechaDeVencimiento")})
+    , @NamedQuery(name = "Pago.findByFechaDeVencimiento", query = "SELECT p FROM Pago p WHERE p.fechaDeVencimiento = :fechaDeVencimiento")
+    , @NamedQuery(name = "Pago.findByNombre", query = "SELECT p FROM Pago p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "Pago.findByDireccion", query = "SELECT p FROM Pago p WHERE p.direccion = :direccion")})
 public class Pago implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,9 +56,19 @@ public class Pago implements Serializable {
     private String codigoDeSeguridad;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
     @Column(name = "fechaDeVencimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechaDeVencimiento;
+    private String fechaDeVencimiento;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "nombre")
+    private String nombre;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "direccion")
+    private String direccion;
     @JoinColumn(name = "Pedido_idPedido", referencedColumnName = "idPedido")
     @ManyToOne(optional = false)
     private Pedido pedidoidPedido;
@@ -71,11 +80,13 @@ public class Pago implements Serializable {
         this.idPago = idPago;
     }
 
-    public Pago(Integer idPago, String numero, String codigoDeSeguridad, Date fechaDeVencimiento) {
+    public Pago(Integer idPago, String numero, String codigoDeSeguridad, String fechaDeVencimiento, String nombre, String direccion) {
         this.idPago = idPago;
         this.numero = numero;
         this.codigoDeSeguridad = codigoDeSeguridad;
         this.fechaDeVencimiento = fechaDeVencimiento;
+        this.nombre = nombre;
+        this.direccion = direccion;
     }
 
     public Integer getIdPago() {
@@ -102,12 +113,28 @@ public class Pago implements Serializable {
         this.codigoDeSeguridad = codigoDeSeguridad;
     }
 
-    public Date getFechaDeVencimiento() {
+    public String getFechaDeVencimiento() {
         return fechaDeVencimiento;
     }
 
-    public void setFechaDeVencimiento(Date fechaDeVencimiento) {
+    public void setFechaDeVencimiento(String fechaDeVencimiento) {
         this.fechaDeVencimiento = fechaDeVencimiento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public Pedido getPedidoidPedido() {

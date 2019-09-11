@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta charset="UTF-8"></meta>
         <title>Crear Usuario</title>
@@ -12,6 +13,7 @@
         <link rel="stylesheet" href="../css/brands.css"></link>
         <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
         <link rel="stylesheet" href="../css/estilos-crear-usuario.css"></link>
+        <link href="../css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
@@ -27,42 +29,43 @@
                         <div class="form-row">
                             <div class="col-md-1 mb-1">
                                 <label for="validationCustom01">ID</label>
-                                <h:inputText pt:placeholder="ID" value="#{usuarioControlador.usuario.id}" id="idUsuario" class="form-control"></h:inputText>
+                                <p:inputText pt:placeholder="ID" value="#{usuarioControlador.usuario.id}" id="idUsuario" class="form-control"></p:inputText>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <label for="validationCustom01">Nombre del titular</label>
-                                <h:inputText pt:placeholder="John Doe" value="#{usuarioControlador.usuario.titular}" id="nombreTitular" class="form-control"></h:inputText>
+                                <p:inputText pt:placeholder="John Doe" value="#{usuarioControlador.usuario.titular}" id="nombreTitular" class="form-control"></p:inputText>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom02">Razón Social</label>
-                                <h:inputText pt:placeholder="Empresa Inc." value="#{usuarioControlador.usuario.razonSocial}" id="razonSocial" class="form-control"></h:inputText>
+                                <p:inputText pt:placeholder="Empresa Inc." value="#{usuarioControlador.usuario.razonSocial}" id="razonSocial" class="form-control"></p:inputText>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <label for="validationCustomUsername">Dirección de e-mail</label>
                                 <div class="input-group">
-                                    <h:inputText pt:placeholder="ejemplo@ejemplo.com" value="#{usuarioControlador.usuario.email}" id="email" class="form-control"></h:inputText>
+                                    <p:inputText pt:placeholder="ejemplo@ejemplo.com" value="#{usuarioControlador.usuario.email}" id="email" class="form-control"></p:inputText>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
-                                <label for="validationCustom03">País</label>
-                                <h:selectOneMenu class="select form-control dropdown-toggle" pt:placeholder="País" value="#{usuarioControlador.pais.idpais}">
-                                    <f:selectItems class="dropdown-item" value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}"/>
-                                </h:selectOneMenu>
+                                <label for="validationCustom03">País</label><br/>
+                                <p:selectOneMenu id="pais" value="#{usuarioControlador.pais.idpais}" style="width:200px">
+                                    <f:ajax event="change" listener="#{ciudadControlador.listar()}"/>
+                                    <f:selectItem itemLabel="Seleccione uno..." itemValue="" />
+                                    <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}"/>
+                                </p:selectOneMenu>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="validationCustom04">Ciudad</label>
-                                <h:selectOneMenu class="select form-control dropdown-toggle" pt:placeholder="Ciudad" value="#{usuarioControlador.ciudad.idciudad}">
-                                    <f:selectItems class="dropdown-item" value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}"/>
-                                </h:selectOneMenu>
+                                <label for="validationCustom04">Ciudad</label><br/>
+                                <p:selectOneMenu id="ciudad" value="#{usuarioControlador.ciudad.idciudad}" style="width: 250px">
+                                    <f:selectItems value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}"/>
+                                </p:selectOneMenu>
                             </div>
                             <div class="dropdown col-md-3 mb-3">
-                                <label for="validationCustom03">Cargo</label>
-                                <br />
-                                <h:selectOneMenu class="select form-control dropdown-toggle" value="#{usuarioControlador.rol.idRol}">
-                                    <f:selectItems class="dropdown-item" value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
-                                </h:selectOneMenu>
+                                <label for="validationCustom03">Cargo</label><br/>
+                                <p:selectOneMenu id="rol" value="#{usuarioControlador.rol.idRol}" style="width: 200px">
+                                    <f:selectItems value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
+                                </p:selectOneMenu>
                             </div>
                         </div>
                         <h:commandButton action="#{usuarioControlador.crearUsuario()}" class="btn boton-registro" type="submit" value="Crear usuario"></h:commandButton>

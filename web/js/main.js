@@ -26,7 +26,7 @@ function scrollFunction() {
         target: '#navegador',
         offset: 100
     });
-    
+
     var btn1 = $('#logo');
 
     btn1.on('click', function (a) {
@@ -59,3 +59,6 @@ $(".link-scroll").click(function (e) {
 function botonCarrito() {
     document.getElementById("checkout").style.display = "block";
 }
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip('enable');
+});

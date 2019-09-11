@@ -18,10 +18,13 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -51,9 +54,9 @@ public class UsuarioControlador implements Serializable {
     @EJB
     CiudadFacade ciudadFacade;
     Ciudad ciudad = new Ciudad();
-    
+
     private Part file;
-    
+
     Mailer mailer = new Mailer();
 
     public Part getFile() {
@@ -103,19 +106,24 @@ public class UsuarioControlador implements Serializable {
     public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
-    
-    
 
     public List<Usuario> consultarUsuario() {
         return usuarioFacade.findAll();
     }
 
-    public String crearUsuario() throws UnsupportedEncodingException {
+    public String crearUsuario() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         usuario.setRolidRol(rolFacade.find(rol.getIdRol()));
         usuario.setPaisIdpais(paisFacade.find(pais.getIdpais()));
         usuario.setCiudadIdciudad(ciudadFacade.find(ciudad.getIdciudad()));
-        usuario.setPassword(SolicitudControlador.randomAlphaNumeric(10));
-        String mensaje = "Ha sido registrado en FlowersX exitosamente.\nSus credenciales de acceso son:\nCorreo: " + usuario.getEmail() + "\nPassword: " + usuario.getPassword();
+        MessageDigest m = MessageDigest.getInstance("MD5");
+        String password = UsuarioControlador.randomAlphaNumeric(10);
+        m.reset();
+        m.update(password.getBytes());
+        byte[] digest = m.digest();
+        BigInteger bigInt = new BigInteger(1, digest);
+        String hashtext = bigInt.toString(16);
+        usuario.setPassword(hashtext);
+        String mensaje = "Ha sido registrado en FlowersX exitosamente.<br>Sus credenciales de acceso son:<br>Correo: " + usuario.getEmail() + "<br>Password: " + password;
         usuarioFacade.create(usuario);
         mailer.configurar();
         mailer.enviarMensaje(usuario.getEmail(), "Registro en FlowersX - Santa Marta Flowers S.A.S.", mensaje);
@@ -144,6 +152,7 @@ public class UsuarioControlador implements Serializable {
         String redireccionar = "";
         try {
             usuarioLogueado = usuarioFacade.login(usuario);
+            usuarioLogueado = usuarioFacade.find(usuarioLogueado.getId());
             if (usuarioLogueado != null) {
                 rol = usuarioLogueado.getRolidRol();
                 for (/*  */Permiso permiso : usuarioLogueado.getRolidRol().getPermisoList()) {
@@ -169,7 +178,7 @@ public class UsuarioControlador implements Serializable {
     public void setListaSolicitudes(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
-    
+
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
 
     public static String randomAlphaNumeric(int count) {

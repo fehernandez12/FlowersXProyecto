@@ -6,9 +6,13 @@
 package facade;
 
 import entidades.Ciudad;
+import entidades.Pais;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +32,16 @@ public class CiudadFacade extends AbstractFacade<Ciudad> {
     public CiudadFacade() {
         super(Ciudad.class);
     }
-    
+
+    public List<Ciudad> consultarCiudades(Pais pais) {
+        List<Ciudad> list = new ArrayList();
+        try {
+            Query query = em.createQuery("SELECT c FROM Ciudad c WHERE c.idPais=:idPais");
+            query.setParameter("idPais", pais.getIdpais());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return list;
+    }
+
 }

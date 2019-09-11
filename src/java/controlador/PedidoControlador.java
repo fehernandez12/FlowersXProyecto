@@ -137,6 +137,7 @@ public class PedidoControlador implements Serializable {
     
     public String crearPedido() {
         pedido.setUsuarioid(usuarioFacade.find(usuario.getId()));
+        pedido.setIdPedido(1);
         pedidoFacade.create(pedido);
         pedido = new Pedido();
         return "gestionar-pedido";

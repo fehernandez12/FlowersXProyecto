@@ -36,8 +36,12 @@ public class CiudadControlador implements Serializable {
     PaisFacade paisFacade;
     Pais pais = new Pais();
     
-    public List<Ciudad> listar() {
-        return ciudadFacade.findAll();
-    }
+    List<Ciudad> listaCiudades;
     
+    public List<Ciudad> listar() {
+        for (Ciudad ciudad : ciudadFacade.consultarCiudades(pais)) {
+            listaCiudades.add(ciudad);
+        }
+        return listaCiudades;
+    }
 }

@@ -78,3 +78,6 @@ h1 {
 	color: #FFF;
 	background-color: rgba(129,204,193,0.7);
 }
+.accordion {
+    width: 100%;
+}
