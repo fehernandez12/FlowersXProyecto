@@ -6,73 +6,47 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta charset="UTF-8"></meta>
-        <title>Crear Orden produccion</title>
-        <link rel="stylesheet" href="../../css/bootstrap.css"></link>
-        <link rel="stylesheet" href="../../css/all.min.css"></link>
-        <link rel="stylesheet" href="../../css/brands.css"></link>
-        <link rel="stylesheet" href="../../css/estilos-paginas.css"></link>
-        <link rel="stylesheet" href="../../css/estilos-crear-usuario.css"></link>
+        <title>Crear Usuario</title>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-crear-usuario.css"></link>
     </h:head>
     <h:body>
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
             <div class="titulo row">
                 <div class="col">
-                    <h1>Crear Orden Produccion</h1>
+                    <h1>Crear Orden Producción</h1>
                     <p>Por favor llena los siguientes datos.</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <h:form class="formulario needs-validation">
+                        
                         <div class="form-row">
-                            <div class="col-md-8 mb-8">
-                                <label for="validationCustomUsername">descipcion Arreglo</label>
-                                <div class="input-group">
-                                    <h:inputText value="#{ordenProduccionControlador.ordenProduccion.descipcionArreglo}" id="descipcionArreglo" class="form-control"></h:inputText>
-                                </div>
-                            </div>                            
-                            <div class="col-md-8 mb-8">
-                                <label for="validationCustomUsername">cantidad</label>
-                                <div class="input-group">
-                                    <h:inputText value="#{ordenProduccionControlador.ordenProduccion.cantidad}" id="cantidad" class="form-control"></h:inputText>
-                                </div>                                
-                            </div>
-                            <div class="col-md-8 mb-8">
-                                <label for="validationCustomUsername">estado</label>
-                                <div class="input-group">
-                                    <h:inputText value="#{ordenProduccionControlador.ordenProduccion.estado}" id="estado" class="form-control"></h:inputText>
-                                </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom03">País</label>
+                                <h:selectOneMenu class="select form-control dropdown-toggle" pt:placeholder="País" value="#{usuarioControlador.pais.idpais}">
+                                    <f:selectItems class="dropdown-item" value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}"/>
+                                </h:selectOneMenu>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="validationCustom01">fecha inicio</label>
-                                <h:inputText pt:type="date" value="#{ordenProduccionControlador.ordenProduccion.fechainicio}" id="fechainicio" class="form-control">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:inputText>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="validationCustom01">fecha Fin</label>
-                                <h:inputText pt:type="date" value="#{ordenProduccionControlador.ordenProduccion.fechaFin}" id="fechaFin" class="form-control">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:inputText>
-                            </div>
-                             <div class="dropdown col-md-3 mb-3">
-                                <label for="validationCustom03">direccionDeEnvio</label>
-                                <br />                                
-                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{ordenProduccionControlador.pedido.idPedido}">
-                                    <f:selectItems class="dropdown-item" value="#{pedidoControlador.consultarPedido()}" var="pedido" itemValue="#{pedido.idPedido}" itemLabel="#{pedido.direccionDeEnvio}"/>
+                                <label for="validationCustom04">Ciudad</label>
+                                <h:selectOneMenu class="select form-control dropdown-toggle" pt:placeholder="Ciudad" value="#{usuarioControlador.ciudad.idciudad}">
+                                    <f:selectItems class="dropdown-item" value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}"/>
                                 </h:selectOneMenu>
-                            </div>                       
-                        </div>  
-                         <div class="form-row">                          
-                             <div class="dropdown col-md-3 mb-3">
-                                <label for="validationCustom03">Razón Social</label>
-                                <br />                                
-                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{ordenProduccionControlador.usuario.id}">
-                                    <f:selectItems class="dropdown-item" value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.razonSocial}"/>
+                            </div>
+                            <div class="dropdown col-md-3 mb-3">
+                                <label for="validationCustom03">Cargo</label>
+                                <br />
+                                <h:selectOneMenu class="select form-control dropdown-toggle" value="#{usuarioControlador.rol.idRol}">
+                                    <f:selectItems class="dropdown-item" value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
                                 </h:selectOneMenu>
-                            </div>                             
+                            </div>
                         </div>
-                        <h:commandButton action="#{ordenProduccionControlador.crearOrdenProduccion()}" class="btn boton-registro" type="submit" value="ordenProduccionControlador"></h:commandButton>
+                        <h:commandButton action="#{usuarioControlador.crearUsuario()}" class="btn boton-registro" type="submit" value="Crear usuario"></h:commandButton>
                     </h:form>
                 </div>
             </div>
