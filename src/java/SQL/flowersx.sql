@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-09-2019 a las 19:04:52
+-- Tiempo de generación: 11-09-2019 a las 18:37:44
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -78,12 +78,11 @@ CREATE TABLE `ordenproduccion` (
 
 CREATE TABLE `pago` (
   `idPago` int(5) NOT NULL,
-  `medioDePago` varchar(45) NOT NULL,
   `numero` varchar(45) NOT NULL,
   `codigoDeSeguridad` varchar(45) NOT NULL,
-  `fechaDeVencimiento` date NOT NULL,
-  `numeroDeruta` varchar(45) NOT NULL,
-  `Novedad_idNovedad` int(5) NOT NULL,
+  `fechaDeVencimiento` varchar(5) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `direccion` varchar(45) NOT NULL,
   `Pedido_idPedido` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -137,7 +136,6 @@ CREATE TABLE `pedido` (
   `idPedido` int(5) NOT NULL,
   `fechaDeCreacion` date NOT NULL,
   `fechaDeEntrega` date NOT NULL,
-  `cantidadProducto` int(11) DEFAULT NULL,
   `subTotal` double DEFAULT NULL,
   `total` double DEFAULT NULL,
   `Usuario_id` int(5) NOT NULL
@@ -200,7 +198,7 @@ CREATE TABLE `producto` (
   `nombreProducto` varchar(45) NOT NULL,
   `foto` text NOT NULL,
   `descripcion` varchar(45) NOT NULL,
-  `tiempoDeCultivo` varchar(45) NOT NULL,
+  `tiempoDeCultivo` int(11) NOT NULL,
   `existencias` int(10) NOT NULL,
   `precio` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -210,10 +208,12 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `nombreProducto`, `foto`, `descripcion`, `tiempoDeCultivo`, `existencias`, `precio`) VALUES
-(1, 'Rosas', '/FlowersXProyecto/Archivos/rosas.jpg', 'Varios colores disponibles', '3 meses', 50000, 300),
-(2, 'Orquídeas', '/FlowersXProyecto/Archivos/orchid.jpg', 'Varios colores disponibles', '6 meses', 20000, 200),
-(3, 'Girasoles', '/FlowersXProyecto/Archivos/sunflower.jpg', 'Varios colores disponibles', '3 meses', 80000, 150),
-(4, 'Tulipanes', '/FlowersXProyecto/Archivos/tulip.jpg', 'Varios colores disponibles', '4 meses', 0, 250);
+(1, 'Rosas', '/FlowersXProyecto/Archivos/rosas.jpg', 'Varios colores disponibles', 3, 50000, 300),
+(2, 'Orquídeas', '/FlowersXProyecto/Archivos/orchid.jpg', 'Varios colores disponibles', 6, 20000, 200),
+(3, 'Girasoles', '/FlowersXProyecto/Archivos/sunflower.jpg', 'Varios colores disponibles', 3, 80000, 150),
+(4, 'Tulipanes', '/FlowersXProyecto/Archivos/tulip.jpg', 'Varios colores disponibles', 4, 0, 250),
+(5, 'Azucenas', '/FlowersXProyecto/Archivos/azucena.jpg', 'Varios colores disponibles.', 4, 500, 300),
+(6, 'Violetas', '/FlowersXProyecto/Archivos/violeta.jpg', 'Disponible en un solo color.', 2, 0, 250);
 
 -- --------------------------------------------------------
 
@@ -349,7 +349,17 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `titular`, `razonSocial`, `email`, `password`, `estado`, `Rol_idRol`, `pais_idpais`, `ciudad_idciudad`) VALUES
-(1, 'Felipe Hernández', 'FlowersX', 'feehernandezba@gmail.com', '123456789', 1, 1, 8, 1);
+(1, 'Felipe Hernández', 'FlowersX', 'feehernandezba@gmail.com', '25f9e794323b453885f5181f1b624d0b', 1, 1, 8, 1),
+(2, 'Shirley Bernal', 'SENA', 'stbernal0@misena.edu.co', 'zpRv7BHhkK', 0, 5, 8, 1),
+(3, 'Santiago Ruiz', 'SENA', 'sruiz8864@misena.edu.co', 'XRO31ZLzk9', 0, 5, 8, 1),
+(4, 'Sergio Quintero', 'SENA', 'saquintero074@misena.edu.co', '7qLhDRZEye', 0, 5, 8, 1),
+(5, 'Jonathan Patiño', 'SENA', 'japatino967@misena.edu.co', 'ge4lyDur5H', 0, 5, 8, 1),
+(6, 'Santiago Reyes', 'SENA', 'sreyes98@misena.edu.co', '123456789', 0, 5, 8, 1),
+(7, 'Santiago Salinas', 'SENA', 'dssalinas5@misena.edu.co', 'gv27tbNduB', 0, 5, 8, 1),
+(8, 'Diego Arenas', 'SENA', 'daarenas83@misena.edu.co', 'Ec1x6m4Sjv', 0, 5, 8, 1),
+(9, 'Valentina Marín', 'SENA', 'dvmarin3@misena.edu.co', 'SGnCP5rBgf', 0, 5, 8, 1),
+(10, 'Juan Pablo Rodríguez', 'FlowersX', 'jprodriguez744@misena.edu.co', 'bFMCp709KN', 0, 2, 8, 1),
+(11, 'Jerson Chitán', 'FlowersX', 'jachitan@misena.edu.co', 'lqhmMRr0UT', 0, 3, 8, 1);
 
 --
 -- Índices para tablas volcadas
@@ -383,7 +393,6 @@ ALTER TABLE `ordenproduccion`
 --
 ALTER TABLE `pago`
   ADD PRIMARY KEY (`idPago`),
-  ADD KEY `fk_Pago_Novedad1_idx` (`Novedad_idNovedad`),
   ADD KEY `fk_Pago_Pedido1_idx` (`Pedido_idPedido`);
 
 --
@@ -495,7 +504,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idProducto` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -513,7 +522,7 @@ ALTER TABLE `solicitud`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
@@ -543,7 +552,6 @@ ALTER TABLE `ordenproduccion`
 -- Filtros para la tabla `pago`
 --
 ALTER TABLE `pago`
-  ADD CONSTRAINT `fk_Pago_Novedad1` FOREIGN KEY (`Novedad_idNovedad`) REFERENCES `novedad` (`idNovedad`),
   ADD CONSTRAINT `fk_Pago_Pedido1` FOREIGN KEY (`Pedido_idPedido`) REFERENCES `pedido` (`idPedido`);
 
 --

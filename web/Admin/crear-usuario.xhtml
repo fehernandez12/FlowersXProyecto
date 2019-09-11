@@ -50,7 +50,7 @@
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom03">País</label><br/>
                                 <p:selectOneMenu id="pais" value="#{usuarioControlador.pais.idpais}" style="width:200px">
-                                    <f:ajax event="change" listener="#{ciudadControlador.listar()}"/>
+                                    <f:ajax event="change" listener="#{usuarioControlador.listarCiudades()}" render="ciudad"/>
                                     <f:selectItem itemLabel="Seleccione uno..." itemValue="" />
                                     <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}"/>
                                 </p:selectOneMenu>

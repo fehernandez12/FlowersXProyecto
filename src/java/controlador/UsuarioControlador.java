@@ -54,6 +54,7 @@ public class UsuarioControlador implements Serializable {
     @EJB
     CiudadFacade ciudadFacade;
     Ciudad ciudad = new Ciudad();
+    private List<Ciudad> listaCiudades;
 
     private Part file;
 
@@ -189,5 +190,13 @@ public class UsuarioControlador implements Serializable {
         }
         return builder.toString();
     }
+    
+    public List<Ciudad> listarCiudades() {
+        for (Ciudad ciudad : ciudadFacade.consultarCiudades(pais)) {
+            listaCiudades.add(ciudad);
+        }
+        return listaCiudades;
+    }
+    
 
 }
