@@ -16,109 +16,115 @@
         <link href="../css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        <h:outputStylesheet name="../css/bootstrap.css" />
-        <div data-spy="scroll" data-target="#" data-offset="0" class="container">
-            <div class="row">
-                <div class="col">
-                    <style type="text/css">
-                        .ui-datatable .ui-datatable-header {
-                            text-align: right !important;
-                        }
-
-                        .ui-button-text-only .ui-button-text {
-                            padding: 0.3em 0.4em;
-                        }
-
-                        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
-                            visibility: hidden;
-                        }
-
-                        .ui-filter-column .ui-column-customfilter .custom-filter {
-                            width: 100%;
-                            box-sizing: border-box;
-                        }
-
-                        .year-spinner input {
-                            width: 100%;
-                            box-sizing: border-box;
-                        }
-                    </style>
+        <f:view locale="#{sessionController.idiomaSeleccionado}">
+            <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+                <div class="row">
                     <div class="col">
-                        <h1><h:outputText value="Usuarios"/></h1>
-                    </div>
-                    <f:view>
-                        <h:form>
-                            <p:dataTable var="user" value="#{usuarioControlador.consultarUsuario()}" widgetVar="tablaUsuarios"
-                                         emptyMessage="No se han encontrado usuarios con los criterios dados." filteredValue="#{usuarioControlador.listaUsuarios}" rows="10"
-                                         paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         rowsPerPageTemplate="5,10,15" resizableColumns="true">
-                                <f:facet name="header">
-                                    <p:outputPanel>
-                                        <h:outputText value="Buscar todos los campos:" />
-                                        <p:inputText id="globalFilter" onkeyup="PF('tablaUsuarios').filter()" style="width:150px" placeholder="Ingrese una palabra clave..."/>
-                                    </p:outputPanel>
-                                </f:facet>
+                        <style type="text/css">
+                            .ui-datatable .ui-datatable-header {
+                                text-align: right !important;
+                            }
 
-                                <p:column filterBy="#{user.id}" headerText="ID" filterMatchMode="contains">
-                                    <h:outputText value="#{user.id}" />
-                                </p:column>
-                                <p:column filterBy="#{user.titular}" headerText="Nombre del titular" filterMatchMode="contains">
-                                    <h:outputText value="#{user.titular}" />
-                                </p:column>
-                                <p:column filterBy="#{user.razonSocial}" headerText="Razón Social" filterMatchMode="contains">
-                                    <h:outputText value="#{user.razonSocial}" />
-                                </p:column>
-                                <p:column filterBy="#{user.email}" headerText="E-mail" filterMatchMode="contains">
-                                    <h:outputText value="#{user.email}" />
-                                </p:column>
-                                <p:column filterBy="#{user.paisIdpais.nombre}" headerText="País" filterMatchMode="exact">
-                                    <f:facet name="filter">
-                                        <p:selectOneMenu onchange="PF('tablaUsuarios').filter()" styleClass="custom-filter">
-                                            <f:selectItem itemLabel="Selecciona uno..." itemValue="#{null}" noSelectionOption="true" />
-                                            <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}" />
-                                        </p:selectOneMenu>
+                            .ui-button-text-only .ui-button-text {
+                                padding: 0.3em 0.4em;
+                            }
+
+                            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                                visibility: hidden;
+                            }
+
+                            .ui-filter-column .ui-column-customfilter .custom-filter {
+                                width: 100%;
+                                box-sizing: border-box;
+                            }
+
+                            .year-spinner input {
+                                width: 100%;
+                                box-sizing: border-box;
+                            }
+                        </style>
+                        <div class="col">
+                            <h1><h:outputText value="#{msjGestionarUsuarios.usuarios}"/></h1>
+                            <div class="mr-auto">
+                                <a class="mr-auto" href="crear-usuario.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
+                                        #{msjCrearUsuario.botonCrearUsuario}
+                                    </button>  
+                                </a> 
+                            </div>
+                        </div>
+                        <f:view>
+                            <h:form>
+                                <p:dataTable var="user" value="#{usuarioControlador.consultarUsuario()}" widgetVar="tablaUsuarios"
+                                             emptyMessage="#{msjGestionarUsuarios.mensajeVacio}" filteredValue="#{usuarioControlador.listaUsuarios}" rows="10"
+                                             paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15" resizableColumns="true">
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+                                            <h:outputText value="#{msjGestionarUsuarios.todosLosCampos}" />
+                                            <p:inputText id="globalFilter" onkeyup="PF('tablaUsuarios').filter()" style="width:150px" placeholder="#{msjGestionarUsuarios.palabraClave}"/>
+                                        </p:outputPanel>
                                     </f:facet>
-                                    <h:outputText value="#{user.paisIdpais.nombre}" />
-                                </p:column>
-                                <p:column filterBy="#{user.ciudadIdciudad.nombre}" headerText="Ciudad" filterMatchMode="exact">
-                                    <f:facet name="filter">
-                                        <p:selectOneMenu onchange="PF('tablaUsuarios').filter()" styleClass="custom-filter">
-                                            <f:selectItem itemLabel="Selecciona uno..." itemValue="#{null}" noSelectionOption="true" />
-                                            <f:selectItems value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}" />
-                                        </p:selectOneMenu>
-                                    </f:facet>
-                                    <h:outputText value="#{user.ciudadIdciudad.nombre}" />
-                                </p:column>
-                                <p:column filterBy="#{user.rolidRol.nombre}" headerText="Rol" filterMatchMode="in">
-                                    <f:facet name="filter">
-                                        <p:selectCheckboxMenu label="Roles" onchange="PF('tablaUsuarios').filter()" scrollHeight="150" styleClass="custom-filter">
-                                            <f:selectItems value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}" />
-                                        </p:selectCheckboxMenu>
-                                    </f:facet>
-                                    <h:outputText value="#{user.rolidRol.nombre}" />
-                                </p:column>
-                                <p:column>
-                                    <f:facet class="header" name="header">
-                                        <h:outputText value="Opciones"/>
-                                    </f:facet>
-                                    <h:commandLink class="opciones-tabla" action="#{usuarioControlador.preEditarUsuario(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen" data-toggle="modal" data-target="#modalEditar"></i></h:commandLink>
-                                    <h:commandLink class="opciones-tabla" action="#{usuarioControlador.eliminarUsuario(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
-                                </p:column>
-                            </p:dataTable>
-                            <h5>Exportar datos a Microsoft Excel</h5>
-                            <h:commandLink>
-                                <p:graphicImage name="images/excel.png" style="width:50px"/>
-                                <p:dataExporter type="xls" target="tablaUsuarios" fileName="Usuarios" pageOnly="true"/>
-                            </h:commandLink>
-                        </h:form>
-                    </f:view>
-                    <a href="crear-usuario.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
-                            Crear usuario
-                        </button>  
-                    </a> 
+
+                                    <p:column filterBy="#{user.id}" headerText="ID" filterMatchMode="contains">
+                                        <h:outputText value="#{user.id}" />
+                                    </p:column>
+                                    <p:column filterBy="#{user.titular}" headerText="#{msjCrearUsuario.nombreTitular}" filterMatchMode="contains">
+                                        <h:outputText value="#{user.titular}" />
+                                    </p:column>
+                                    <p:column filterBy="#{user.razonSocial}" headerText="#{msjCrearUsuario.razonSocial}" filterMatchMode="contains">
+                                        <h:outputText value="#{user.razonSocial}" />
+                                    </p:column>
+                                    <p:column filterBy="#{user.email}" headerText="#{msjCrearUsuario.email}" filterMatchMode="contains">
+                                        <h:outputText value="#{user.email}" />
+                                    </p:column>
+                                    <p:column filterBy="#{user.paisIdpais.nombre}" headerText="#{msjCrearUsuario.pais}" filterMatchMode="exact">
+                                        <f:facet name="filter">
+                                            <p:selectOneMenu onchange="PF('tablaUsuarios').filter()" styleClass="custom-filter">
+                                                <f:selectItem itemLabel="#{msjCrearUsuario.lblPais}" itemValue="#{null}" noSelectionOption="true" />
+                                                <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}" />
+                                            </p:selectOneMenu>
+                                        </f:facet>
+                                        <h:outputText value="#{user.paisIdpais.nombre}" />
+                                    </p:column>
+                                    <p:column filterBy="#{user.ciudadIdciudad.nombre}" headerText="#{msjCrearUsuario.ciudad}" filterMatchMode="exact">
+                                        <f:facet name="filter">
+                                            <p:selectOneMenu onchange="PF('tablaUsuarios').filter()" styleClass="custom-filter">
+                                                <f:selectItem itemLabel="#{msjCrearUsuario.lblCiudad}" itemValue="#{null}" noSelectionOption="true" />
+                                                <f:selectItems value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}" />
+                                            </p:selectOneMenu>
+                                        </f:facet>
+                                        <h:outputText value="#{user.ciudadIdciudad.nombre}" />
+                                    </p:column>
+                                    <p:column filterBy="#{user.rolidRol.nombre}" headerText="#{msjCrearUsuario.cargo}" filterMatchMode="in">
+                                        <f:facet name="filter">
+                                            <p:selectCheckboxMenu label="Roles" onchange="PF('tablaUsuarios').filter()" scrollHeight="150" styleClass="custom-filter">
+                                                <f:selectItems value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}" />
+                                            </p:selectCheckboxMenu>
+                                        </f:facet>
+                                        <h:outputText value="#{user.rolidRol.nombre}" />
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="#{msjGestionarUsuarios.opciones}"/>
+                                        </f:facet>
+                                        <h:commandLink class="opciones-tabla" action="#{usuarioControlador.preEditarUsuario(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen" data-toggle="modal" data-target="#modalEditar"></i></h:commandLink>
+                                        <h:commandLink class="opciones-tabla" action="#{usuarioControlador.eliminarUsuario(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
+                                    </p:column>
+                                </p:dataTable>
+                                <br/>
+                                <h5>#{msjGestionarUsuarios.excel}</h5>
+                                <h:commandLink>
+                                    <img src="../Archivos/excel.png" style="width:50px" alt="Excel"/>
+                                    <p:dataExporter type="xls" target="tablaUsuarios" fileName="Usuarios" pageOnly="true"/>
+                                </h:commandLink>
+                            </h:form>
+                        </f:view>
+                        <br/>
+                    </div>
                 </div>
             </div>
-        </div>
+        </f:view>
+
         <script src="../../js/popper.min.js"></script>
         <script src="../../js/jquery.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>

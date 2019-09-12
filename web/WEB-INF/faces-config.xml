@@ -4,6 +4,11 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
     <application>
+        <locale-config>
+            <default-locale>es</default-locale>
+            <supported-locale>es</supported-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
         <resource-bundle>
             <base-name>idiomas.App</base-name>
             <var>msjApp</var>
@@ -13,8 +18,24 @@
             <var>msjLogin</var>
         </resource-bundle>
         <resource-bundle>
-            <base-name>idiomas.Menu</base-name>
+            <base-name>idiomas.App</base-name>
             <var>msjMenu</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.Index</base-name>
+            <var>msjIndex</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.MainUsuario</base-name>
+            <var>msjMainUsuario</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.CrearUsuario</base-name>
+            <var>msjCrearUsuario</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.GestionarUsuarios</base-name>
+            <var>msjGestionarUsuarios</var>
         </resource-bundle>
     </application>
 </faces-config>

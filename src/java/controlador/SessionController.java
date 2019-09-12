@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
@@ -24,51 +23,39 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class SessionController implements Serializable {
     
-    private Locale selectedLanguage = new Locale("es");
+    private Locale idiomaSeleccionado;
+    private List<Locale> idiomasSoportados;
 
-    /**
-     * Creates a new instance of SessionController
-     */
+    @PostConstruct
+    public void init() {
+        //Obtengo la instancia actual y asigno es como valor predeterminado
+        FacesContext fc = FacesContext.getCurrentInstance();
+        idiomaSeleccionado = new Locale("es");
+        //Creo un arraylist de idiomas soportados segun la instancia del contexto acual
+        idiomasSoportados = new ArrayList<>();
+        Iterator<Locale> it = fc.getApplication().getSupportedLocales();
+        //Recorro el arraylist con un iterador y los guardo en la lista de idiomas soportados
+        while (it.hasNext()) {
+            idiomasSoportados.add(it.next());
+        }
+//        idiomasSoportados.add(new Locale("es"));
+//        idiomasSoportados.add(new Locale("en"));
+    }
+
     public SessionController() {
     }
-    
-    @PostConstruct
-    public void init () {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        ExternalContext ec = fc.getExternalContext();
-        Locale idiomaUsuario = ec.getRequestLocale();
-        boolean support = false;
-        for (Locale l : getSupportLanguages()) {
-            if(l.getLanguage().equals(idiomaUsuario.getLanguage())){
-                support = true; break;
-            }
-        }
-        selectedLanguage = (support) ? idiomaUsuario: new Locale("es");
-    }
-    
-    public Locale getSelectedLanguage() {
-        return selectedLanguage;
+
+    public Locale getIdiomaSeleccionado() {
+        return idiomaSeleccionado;
     }
 
-    public void setSelectedLanguage(Locale selectedLanguage) {
-        this.selectedLanguage = selectedLanguage;
+    public List<Locale> getIdiomasSoportados() {
+        return idiomasSoportados;
     }
-    
-    public List<Locale> getSupportLanguages(){
-        List<Locale> idiomas = new ArrayList<>();
-        Iterator<Locale> it = FacesContext.getCurrentInstance().getApplication().getSupportedLocales();
-        while(it.hasNext()){
-            idiomas.add(it.next());
-        }
-        return idiomas;
-    }
-    
-    public String cambiarIdioma(Locale idioma){
-        if(idioma != null){
-            this.selectedLanguage = idioma;
-            FacesContext.getCurrentInstance().getViewRoot().setLocale(selectedLanguage);
-        }
-        return "";
+
+    public void cambiarIdioma(Locale nuevoIdioma) {
+        this.idiomaSeleccionado = nuevoIdioma;
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(nuevoIdioma);
     }
     
 }

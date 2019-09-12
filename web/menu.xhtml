@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/estilos-usuarios.css"></link>
     </h:head>
     <h:body>
-        <f:view locale="#{sessionController.selectedLanguage}">
+        <f:view locale="#{sessionController.idiomaSeleccionado}">
             <div data-spy="scroll" data-target="#" data-offset="0" class="container">
                 <nav id="navegador" class="navbar navbar-expand-lg navbar-light fixed-top">
                     <a class="navbar-brand js-scroll-trigger" href="#"><img id="inicio" src="img/Logo PSD.png" alt="FlowersX" data-toggle="tooltip" data-placement="bottom" title="(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧"></img></a>
@@ -43,20 +43,23 @@
                                     </c:if>
                                 </li>
                             </c:forEach>
-                        </ul>  
+                        </ul>
+                        <ul class="navbar-nav my-2 my-sm-0" style="padding-right: 1rem">
+                            <li class="nav-item active mr-auto">
+                                <h:form id="form-logout" prependId="false">
+                                    <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    #{msjApp[sessionController.idiomaSeleccionado.language]}
+                                </button> -->
+                                    <c:forEach items="#{sessionController.idiomasSoportados}" var="idioma">
+                                        <h:commandLink style="padding-right: 1rem" actionListener="#{sessionController.cambiarIdioma(idioma)}"><img src="Archivos/#{msjApp[idioma.language]}.png"  width="18px"/></h:commandLink>
+                                    </c:forEach>
+                                </h:form>
+                            </li>
+                        </ul>
                         <ul class="navbar-nav my-2 my-sm-0">
-                            <c:forEach items="#{sessionController.supportLanguages}" var="l">
-                                <li>
-                                    <a class="nav-item active">
-                                        <h:commandLink value="#{msjApp[l.displayLanguage]}" action="#{sessionController.cambiarIdioma(l)}">
-                                            <img src="#{request.contextPath}/resources/images/#{l.language}.png" width="25px" alt="#{msjApp[l.displayLanguage]}"/>
-                                        </h:commandLink>
-                                    </a>
-                                </li>
-                            </c:forEach>
                             <li class="nav-item active">
                                 <a href="index.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
-                                        Salir
+                                        #{msjMainUsuario.salirBoton}
                                     </button>  
                                 </a> 
                             </li>
