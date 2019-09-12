@@ -81,19 +81,19 @@ public class OrdenProduccionControlador implements Serializable {
         return ordenproduccionFacade.findAll();
     }
 
-     public String crearPedido() {
+     public String crearOrdenProduccion() {
         ordenproduccion.setUsuarioid(usuarioFacade.find(usuario.getId()));
         ordenproduccion.setPedidoidPedido(pedidoFacade.find(pedido.getIdPedido()));
         ordenproduccionFacade.create(ordenproduccion);
         ordenproduccion = new Ordenproduccion();
         return "gestionar-ordenProduccion";
     }
-    public String preEditarOrdenproduccion(Ordenproduccion ordenproduccion) {
+    public String preEditarOrdenProduccion(Ordenproduccion ordenproduccion) {
         this.ordenproduccion = ordenproduccion;
         return "editar-ordenProduccion";
     }
 
-    public String editarOrdenproduccion() {
+    public String editarOrdenProduccion() {
         ordenproduccion.setUsuarioid(usuarioFacade.find(usuario.getId()));
         ordenproduccion.setPedidoidPedido(pedidoFacade.find(pedido.getIdPedido()));
         ordenproduccionFacade.edit(ordenproduccion);
@@ -101,7 +101,7 @@ public class OrdenProduccionControlador implements Serializable {
         return "gestionar-ordenProduccion";
     }
 
-    public void eliminarOrdenproduccion(Ordenproduccion ordenproduccion) {
+    public void eliminarOrdenProduccion(Ordenproduccion ordenproduccion) {
         ordenproduccionFacade.remove(ordenproduccion);
         //return "Lista";
     }

@@ -72,18 +72,18 @@
                                     <h:outputText value="#{ordenProduccion.usuarioid.titular}" />
                                 </p:column>
                                 <p:column>
-                                    <h:commandLink class="opciones-tabla" action="#{ordenProduccionControlador.preEditarOrdenproduccion(ordenproduccion)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen"></i></h:commandLink>
-                                    <h:commandLink class="opciones-tabla" action="#{ordenProduccionControlador.eliminarOrdenproduccion(ordenproduccion)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
+                                    <h:commandLink class="opciones-tabla" action="#{ordenProduccionControlador.preEditarOrdenProduccion(ordenproduccion)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen"></i></h:commandLink>
+                                    <h:commandLink class="opciones-tabla" action="#{ordenProduccionControlador.eliminarOrdenProduccion(ordenproduccion)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
                                 </p:column>
                             </p:dataTable>
                             <h3>Exportar datos a Microsoft Excel</h3>
                             <h:commandLink>
                                 <p:graphicImage name="images/excel.png" style="width:50px"/>
-                                <p:dataExporter type="xls" target="tablaOrdenProduccion" fileName="Solicitudes" pageOnly="true"/>
+                                <p:dataExporter type="xls" target="tablaOrdenProducción" fileName="Orden Producción" pageOnly="true"/>
                             </h:commandLink>
                         </h:form>
-                        <a href="crear-solicitud.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom">
-                                Crear solicitud
+                        <a href="crear-orddenProducción.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom">
+                                Crear Orden Prodrución
                             </button>  
                         </a> 
                     </f:view>

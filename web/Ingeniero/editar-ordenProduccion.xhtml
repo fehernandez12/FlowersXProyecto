@@ -3,85 +3,120 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="UTF-8"></meta>
-        <title>Crear Orden produccion</title>
-        <link rel="stylesheet" href="../../css/bootstrap.css"></link>
-        <link rel="stylesheet" href="../../css/all.min.css"></link>
-        <link rel="stylesheet" href="../../css/brands.css"></link>
-        <link rel="stylesheet" href="../../css/estilos-paginas.css"></link>
-        <link rel="stylesheet" href="../../css/estilos-crear-usuario.css"></link>
+        <title>Editar Orden Producción</title>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-crear-usuario.css"></link>
+        <link href="../css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
             <div class="titulo row">
                 <div class="col">
-                    <h1>Crear Orden Produccion</h1>
+                    <h1>Editar Orden Producción</h1>
                     <p>Por favor llena los siguientes datos.</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h:form class="formulario needs-validation">
-                        <div class="form-row">
-                            <div class="col-md-8 mb-8">
-                                <label for="validationCustomUsername">descipcion Arreglo</label>
-                                <div class="input-group">
-                                    <h:inputText value="#{ordenProduccionControlador.ordenProduccion.descipcionArreglo}" id="descipcionArreglo" class="form-control"></h:inputText>
+                    <f:view>
+                        <style type="text/css">
+                            .ui-datalist .ui-datalist-content {
+                                border:0 none
+                            }
+
+                            .ui-datalist ul {
+                                padding: 0px 10px 0 20px;
+                                margin: 5px 0;
+                            }
+
+                            .value {
+                                font-weight: bold;
+                            }
+
+                            .ui-autocomplete-itemtip {
+                                -moz-box-sizing: content-box;
+                                -webkit-box-sizing: content-box;
+                                box-sizing: content-box;
+                            }
+                        </style>
+                        <h:form enctype="multipart/form-data">
+                            <div class="form-row">
+                                <script type="text/javascript">
+                                    PrimeFaces.locales['es'] = {
+                                        closeText: 'Cerrar',
+                                        prevText: 'Anterior',
+                                        nextText: 'Siguiente',
+                                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                                        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                                        weekHeader: 'Semana',
+                                        firstDayOfWeek: 1,
+                                        isRTL: false,
+                                        showMonthAfterYear: false,
+                                        yearSuffix: '',
+                                        timeOnlyTitle: 'Sólo hora',
+                                        timeText: 'Tiempo',
+                                        hourText: 'Hora',
+                                        minuteText: 'Minuto',
+                                        secondText: 'Segundo',
+                                        currentText: 'Fecha actual',
+                                        ampm: false,
+                                        month: 'Mes',
+                                        week: 'Semana',
+                                        day: 'Día',
+                                        allDayText: 'Todo el día'
+                                    };
+                                </script>
+                                <style type="text/css">
+                                    .value {
+                                        font-weight: bold;
+                                    }
+                                </style>
+                                <div class="col-2 md-2 mb-2">
+                                    <p:outputLabel value="Fecha de comienso de producción:" /><br/>
+                                    <p:calendar id="button" value="#{ordenProduccionControlador.ordenproduccion.fechainicio}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" showOn="button" />
                                 </div>
-                            </div>                            
-                            <div class="col-md-8 mb-8">
-                                <label for="validationCustomUsername">cantidad</label>
-                                <div class="input-group">
-                                    <h:inputText value="#{ordenProduccionControlador.ordenProduccion.cantidad}" id="cantidad" class="form-control"></h:inputText>
-                                </div>                                
-                            </div>
-                            <div class="col-md-8 mb-8">
-                                <label for="validationCustomUsername">estado</label>
-                                <div class="input-group">
-                                    <h:inputText value="#{ordenProduccionControlador.ordenProduccion.estado}" id="estado" class="form-control"></h:inputText>
+                                <div class="col-2 md-2 mb-2">
+                                    <p:outputLabel for="date" value="Fecha de culminación de la producción: " /><br/>
+                                    <p:inputMask id="date" value="#{ordenProduccionControlador.ordenproduccion.fechaFin}" mask="99/99/9999"/>
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="validationCustom01">fecha inicio</label>
-                                <h:inputText pt:type="date" value="#{ordenProduccionControlador.ordenProduccion.fechainicio}" id="fechainicio" class="form-control">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:inputText>
+                            <br/>
+                            <div class="form-row">
+                                <div class="dropdown col-md-3 mb-3">
+                                    <label for="validationCustom03">Id Pedido</label><br/>
+                                    <p:selectOneMenu id="rol" value="#{ordenProduccionControlador.pedido.idPedido}" style="width: 200px">
+                                        <f:selectItems value="#{pedidoControlador.listar()}" var="pedido" itemValue="#{pedido.idPedido}" itemLabel="#{pedido.idPedido}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                                <div class="dropdown col-md-3 mb-3">
+                                    <label for="validationCustom03">Solicitante</label><br/>
+                                    <p:selectOneMenu id="rol" value="#{ordenProduccionControlador.usuario.id}" style="width: 200px">
+                                        <f:selectItems value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.razonSocial}"/>
+                                    </p:selectOneMenu>
+                                </div>
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="validationCustom01">fecha Fin</label>
-                                <h:inputText pt:type="date" value="#{ordenProduccionControlador.ordenProduccion.fechaFin}" id="fechaFin" class="form-control">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:inputText>
-                            </div>
-                             <div class="dropdown col-md-3 mb-3">
-                                <label for="validationCustom03">monto</label>
-                                <br />                                
-                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{ordenProduccionControlador.pedido.idPedido}">
-                                    <f:selectItems class="dropdown-item" value="#{pedidoControlador.consultarPedido()}" var="pedido" itemValue="#{pedido.idPedido}" itemLabel="#{pedido.direccionDeEnvio}"/>
-                                </h:selectOneMenu>
-                            </div>                       
-                        </div>  
-                         <div class="form-row">                          
-                             <div class="dropdown col-md-3 mb-3">
-                                <label for="validationCustom03">Razón Social</label>
-                                <br />                                
-                                <h:selectOneMenu class="btn btn-secondary dropdown-toggle" value="#{ordenProduccionControlador.usuario.id}">
-                                    <f:selectItems class="dropdown-item" value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.razonSocial}"/>
-                                </h:selectOneMenu>
-                            </div>                             
-                        </div>
-                        <h:commandButton action="#{ordenProduccionControlador.editarOrdenProduccion()}" class="btn boton-registro" type="submit" value="Editar ordenProduccion"></h:commandButton>
-                    </h:form>
+                            <h:commandButton action="#{ordenProduccionControlador.editarOrdenProduccion()}" class="btn boton-registro" type="submit" value="Editar Orden Producción"></h:commandButton>
+                        </h:form>
+                    </f:view>
                 </div>
             </div>
         </div>
-        <script src="../../js/popper.min.js"></script>
-        <script src="../../js/jquery.min.js"></script>
-        <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/main.js"></script>
-        <script src="../../js/formularios.js"></script>
+        <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="text/javascript"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../js/main.js" type="text/javascript"></script>
+        <script src="../js/formularios.js" type="text/javascript"></script>
     </h:body>
 </html>
 
