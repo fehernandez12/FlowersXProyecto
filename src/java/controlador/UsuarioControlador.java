@@ -25,6 +25,9 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.faces.component.UIInput;
+import javax.faces.component.UIViewRoot;
+import javax.faces.event.ValueChangeEvent;
 
 /**
  *
@@ -51,12 +54,15 @@ public class UsuarioControlador implements Serializable {
     @EJB
     PaisFacade paisFacade;
     Pais pais = new Pais();
+    private List<Pais> listaPaises;
     @EJB
     CiudadFacade ciudadFacade;
     Ciudad ciudad = new Ciudad();
     private List<Ciudad> listaCiudades;
 
     private Part file;
+    private String paisNombre;
+    private String ciudadNombre;
 
     Mailer mailer = new Mailer();
 
@@ -68,6 +74,22 @@ public class UsuarioControlador implements Serializable {
         this.file = file;
     }
 
+    public String getPaisNombre() {
+        return paisNombre;
+    }
+
+    public void setPaisNombre(String paisNombre) {
+        this.paisNombre = paisNombre;
+    }
+
+    public String getCiudadNombre() {
+        return ciudadNombre;
+    }
+
+    public void setCiudadNombre(String ciudadNombre) {
+        this.ciudadNombre = ciudadNombre;
+    }
+    
     public Usuario getUsuarioLogueado() {
         return usuarioLogueado;
     }
@@ -191,11 +213,18 @@ public class UsuarioControlador implements Serializable {
         return builder.toString();
     }
     
-    public List<Ciudad> listarCiudades() {
-        for (Ciudad ciudad : ciudadFacade.consultarCiudades(pais)) {
-            listaCiudades.add(ciudad);
+    public void ciudadListener(ValueChangeEvent valueChangeEvent) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        UIViewRoot uiViewRoot = facesContext.getViewRoot();
+        String newPais = (String) valueChangeEvent.getNewValue();
+        UIInput ciudadInputText = (UIInput) uiViewRoot.findComponent("crearUsuario:ciudad");
+        for (Pais pais : listaPaises) {
+            if (pais.getNombre().equals(newPais)) {
+                listaCiudades = ciudadFacade.consultarCiudades(pais);
+            }
         }
-        return listaCiudades;
+        ciudadInputText.setValue(listaCiudades);
+        facesContext.renderResponse();
     }
     
 

@@ -26,7 +26,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h:form class="formulario needs-validation">
+                        <h:form class="formulario needs-validation" id="crearUsuario">
                             <div class="form-row">
                                 <div class="col-md-1 mb-1">
                                     <label for="validationCustom01">ID</label>
@@ -50,15 +50,14 @@
                             <div class="form-row">
                                 <div class="col-md-3 mb-3">
                                     <label for="validationCustom03">#{msjCrearUsuario.pais}</label><br/>
-                                    <p:selectOneMenu id="pais" value="#{usuarioControlador.pais.idpais}" style="width:200px">
-                                        <f:ajax event="change" listener="#{usuarioControlador.listarCiudades()}" render="ciudad"/>
+                                    <p:selectOneMenu id="pais" immediate="true" required="true" valueChangeListener="#{usuarioControlador.paisListener}" value="#{usuarioControlador.pais.idpais}" style="width:200px">
                                         <f:selectItem itemLabel="#{msjCrearUsuario.lblPais}" itemValue="" />
                                         <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}"/>
                                     </p:selectOneMenu>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="validationCustom04">#{msjCrearUsuario.ciudad}</label><br/>
-                                    <p:selectOneMenu id="ciudad" value="#{usuarioControlador.ciudad.idciudad}" style="width: 250px">
+                                    <p:selectOneMenu id="ciudad" required="true" value="#{usuarioControlador.ciudad.idciudad}" style="width: 250px">
                                         <f:selectItem itemLabel="#{msjCrearUsuario.lblCiudad}" itemValue="" />
                                         <f:selectItems value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}"/>
                                     </p:selectOneMenu>
