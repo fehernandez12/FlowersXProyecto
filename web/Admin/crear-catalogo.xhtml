@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Crear catalogo</title>
         <link rel="stylesheet" href="../css/bootstrap.css"></link>
@@ -11,6 +12,7 @@
         <link rel="stylesheet" href="../css/brands.css"></link>
         <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
         <link rel="stylesheet" href="../css/estilos-crear-usuario.css"></link>
+        <link href="../css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
@@ -27,11 +29,11 @@
                             <div class="form-row">
                                 <div class="col-md-2 mb-2">
                                     <h:outputLabel value="Id de Producto:" for="idProducto" />
-                                    <h:inputText class="form-control" id="idProducto" value="#{productoControlador.producto.idProducto}" pt:placeholder="ID" title="IdProducto" required="true" requiredMessage="The IdProducto field is required."/>
+                                    <p:inputText class="form-control" id="idProducto" value="#{productoControlador.producto.idProducto}" pt:placeholder="ID" title="IdProducto" required="true" requiredMessage="The IdProducto field is required."/>
                                 </div>
                                 <div class="col-md-5 mb-5">
                                     <h:outputLabel value="Nombre del Producto:" for="nombreProducto" />
-                                    <h:inputText class="form-control" id="nombreProducto" value="#{productoControlador.producto.nombreProducto}" pt:placeholder="Nombre" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
+                                    <p:inputText class="form-control" id="nombreProducto" value="#{productoControlador.producto.nombreProducto}" pt:placeholder="Nombre" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
                                 </div>
                                 <div class="col-md-5 mb-5">
                                     <h:outputLabel value="Foto:" for="foto"/>
@@ -41,21 +43,21 @@
                             <div class="form-row">
                                 <div class="col">
                                     <h:outputLabel value="Descripción:" for="descripcion" />
-                                    <h:inputTextarea class="form-control" pt:placeholder="Descripción..." rows="4" cols="30" id="descripcion" value="#{productoControlador.producto.descripcion}" title="Foto" required="true" requiredMessage="The Foto field is required."/>
+                                    <p:inputTextarea class="form-control" pt:placeholder="Descripción..." rows="4" cols="30" id="descripcion" value="#{productoControlador.producto.descripcion}" title="Foto" required="true" requiredMessage="The Foto field is required."/>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-4 mb-4">
                                     <h:outputLabel value="TiempoDeCultivo:" for="tiempoDeCultivo" />
-                                    <h:inputText class="form-control" pt:placeholder="Tiempo" id="tiempoDeCultivo" value="#{productoControlador.producto.tiempoDeCultivo}" title="TiempoDeCultivo" required="true" requiredMessage="The TiempoDeCultivo field is required."/>
+                                    <p:inputText class="form-control" pt:placeholder="Tiempo" id="tiempoDeCultivo" value="#{productoControlador.producto.tiempoDeCultivo}" title="TiempoDeCultivo" required="true" requiredMessage="The TiempoDeCultivo field is required."/>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <h:outputLabel value="Existencias:" for="existencias" />
-                                    <h:inputText class="form-control" pt:placeholder="Existencias" id="existencias" value="#{productoControlador.producto.existencias}" title="Existencias" required="true" requiredMessage="The Existencias field is required."/>
+                                    <p:inputText class="form-control" pt:placeholder="Existencias" id="existencias" value="#{productoControlador.producto.existencias}" title="Existencias" required="true" requiredMessage="The Existencias field is required."/>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <h:outputLabel value="Precio:" for="precio" />
-                                    <h:inputText class="form-control" pt:placeholder="Precio" id="precio" value="#{productoControlador.producto.precio}" title="Precio" required="true" requiredMessage="The Precio field is required."/>
+                                    <p:inputText class="form-control" pt:placeholder="Precio" id="precio" value="#{productoControlador.producto.precio}" title="Precio" required="true" requiredMessage="The Precio field is required."/>
                                 </div>
                             </div>
                             <h:commandButton action="#{productoControlador.crearProducto()}" class="btn boton-registro" type="submit" value="Registrar producto"></h:commandButton>

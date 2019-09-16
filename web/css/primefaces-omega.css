@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @import url("#{resource['primefaces:primeicons/primeicons.css']}");
+@import url('https://fonts.googleapis.com/css?family=Niramit');
 
 /* Nova-Light */
 :root {
@@ -10,30 +11,30 @@
 
 /* open-sans-300 - latin */
 @font-face {
-    font-family: 'Open Sans';
+    font-family: 'Niramit';
     font-style: normal;
     font-weight: 300;
     src: url("#{resource['primefaces:fonts/open-sans-v13-latin-300.eot']}");
     /* IE9 Compat Modes */
-    src: local("Open Sans Light"), local("OpenSans-Light"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.eot']}#iefix") format("embedded-opentype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.woff2']}") format("woff2"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.woff']}") format("woff"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.ttf']}") format("truetype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.svg']}#OpenSans") format("svg");
+    src: local("Niramit Light"), local("OpenSans-Light"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.eot']}#iefix") format("embedded-opentype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.woff2']}") format("woff2"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.woff']}") format("woff"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.ttf']}") format("truetype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-300.svg']}#OpenSans") format("svg");
     /* Legacy iOS */ }
 /* open-sans-regular - latin */
 @font-face {
-    font-family: 'Open Sans';
+    font-family: 'Niramit';
     font-style: normal;
     font-weight: 400;
     src: url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.eot']}");
     /* IE9 Compat Modes */
-    src: local("Open Sans"), local("OpenSans"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.eot']}#iefix") format("embedded-opentype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.woff2']}") format("woff2"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.woff']}") format("woff"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.ttf']}") format("truetype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.svg']}#OpenSans") format("svg");
+    src: local("Niramit"), local("OpenSans"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.eot']}#iefix") format("embedded-opentype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.woff2']}") format("woff2"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.woff']}") format("woff"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.ttf']}") format("truetype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-regular.svg']}#OpenSans") format("svg");
     /* Legacy iOS */ }
 /* open-sans-700 - latin */
 @font-face {
-    font-family: 'Open Sans';
+    font-family: 'Niramit';
     font-style: normal;
     font-weight: 700;
     src: url("#{resource['primefaces:fonts/open-sans-v13-latin-700.eot']}");
     /* IE9 Compat Modes */
-    src: local("Open Sans Bold"), local("OpenSans-Bold"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.eot']}#iefix") format("embedded-opentype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.woff2']}") format("woff2"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.woff']}") format("woff"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.ttf']}") format("truetype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.svg']}#OpenSans") format("svg");
+    src: local("Niramit Bold"), local("OpenSans-Bold"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.eot']}#iefix") format("embedded-opentype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.woff2']}") format("woff2"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.woff']}") format("woff"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.ttf']}") format("truetype"), url("#{resource['primefaces:fonts/open-sans-v13-latin-700.svg']}#OpenSans") format("svg");
     /* Legacy iOS */ }
 @font-face {
     font-family: 'PrimeIcons';
@@ -56,7 +57,7 @@ body .ui-widget .ui-widget {
     text-decoration: none; }
 body .ui-widget:not(.pi),
 body .ui-widget .ui-widget:not(.pi) {
-    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: "Niramit", "Helvetica Neue", sans-serif;
     font-size: 14px; }
 body .ui-icon {
     height: 0.7em;
@@ -224,7 +225,7 @@ body .ui-autocomplete .ui-autocomplete-multiple-container .ui-autocomplete-input
     margin: 0;
     padding: 0.2145em 0; }
 body .ui-autocomplete .ui-autocomplete-multiple-container .ui-autocomplete-input-token input {
-    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: "Niramit", "Helvetica Neue", sans-serif;
     font-size: 14px;
     color: #333333;
     padding: 0;
@@ -887,7 +888,7 @@ body .ui-chips .ui-chips-container .ui-chips-input-token {
     margin: 0;
     padding: 0.2145em 0; }
 body .ui-chips .ui-chips-container .ui-chips-input-token input {
-    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: "Niramit", "Helvetica Neue", sans-serif;
     font-size: 14px;
     color: #333333;
     padding: 0;
@@ -5181,6 +5182,7 @@ body .ui-dialog .ui-dialog-content {
     color: #333333;
     border: 1px solid #c8c8c8;
     padding: 0.571em 1em;
+    margin-left: 1em;
     line-height: 1.5;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -5200,7 +5202,7 @@ body .ui-dialog.ui-confirm-dialog .ui-dialog-content {
     padding: 14px; }
 body .ui-dialog.ui-confirm-dialog .ui-dialog-content > span {
     float: none;
-    display: inline-block;
+    display: none;
     vertical-align: middle;
     line-height: 1;
     margin: 0; }
