@@ -3,17 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/idiomas/GestionarUsuarios_en.properties</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/gestionar-ordenProduccion-admin.xhtml</file>
             <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Ingeniero/consultar-pedidos.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/css/estilos-usuarios.css</file>
             <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/gestionar-usuarios.xhtml</file>
             <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/facade/UsuarioFacade.java</file>
             <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/controlador/UsuarioControlador.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/index.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/crear-usuario.xhtml</file>
             <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/controlador/Mailer.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/menu.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/idiomas/GestionarUsuarios_en.properties</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/gestionar-ordenProduccion-admin.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/idiomas/App_en.properties</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/css/primefaces-omega.css</file>
             <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/idiomas/Index_en.properties</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/idiomas/Index.properties</file>
-            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/web/Admin/crear-solicitud.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/FlowersXProyecto/src/java/idiomas/App.properties</file>
         </group>
     </open-files>
 </project-private>

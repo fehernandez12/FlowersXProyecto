@@ -2215,11 +2215,11 @@ body .ui-panel.ui-panel-collapsed-h .ui-panel-titlebar .ui-panel-titlebar-icon {
     margin-left: -0.625em;
     margin-top: -0.625em; }
 body .ui-accordion .ui-accordion-header {
+    font-family: 'Niramit';
     border: 1px solid #c8c8c8;
     background-color: #f4f4f4;
     color: #333333;
     padding: 0.571em 1em 0.571em 1em;
-    font-weight: 700;
     position: static;
     margin-top: 1px;
     -moz-transition: background-color 0.3s;
@@ -2229,7 +2229,9 @@ body .ui-accordion .ui-accordion-header {
 body .ui-accordion .ui-accordion-header:first-child {
     margin-top: 0; }
 body .ui-accordion .ui-accordion-header .ui-icon {
-    color: #848484; }
+    color: #848484; 
+    font-size: 1em;
+}
 body .ui-accordion .ui-accordion-header.ui-state-hover, body .ui-accordion .ui-accordion-header.ui-tabs-outline {
     outline: 0 none;
     border: 1px solid #dbdbdb;
@@ -2272,7 +2274,9 @@ body .ui-accordion .ui-accordion-header > .ui-icon.ui-icon-triangle-1-e {
     display: inline-block;
     font-size: 1.25em; }
 body .ui-accordion .ui-accordion-header > .ui-icon.ui-icon-triangle-1-e:before {
-    content: ""; }
+    content: ""; 
+    font-size: 0.8em;
+}
 body .ui-accordion .ui-accordion-header > .ui-icon.ui-icon-triangle-1-s {
     font-family: 'primeicons';
     speak: none;

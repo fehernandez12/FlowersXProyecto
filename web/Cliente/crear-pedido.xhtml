@@ -18,6 +18,12 @@
     </h:head>
     <h:body>
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+            <nav class="migas breadcrumb-nav" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../main-usuario.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear orden de compra</li>
+                </ol>
+            </nav>
             <div class="titulo row">
                 <div class="col">
                     <h1>Crear Pedido</h1>
@@ -50,8 +56,8 @@
                         <h:form enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="col-2 md-2 mb-2">
-                                    <h:outputLabel value="Id del pedido:" for="idSolicitud" />
-                                    <h:inputText class="form-control" pt:placeholder="Id del pedido" id="idPedido" value="#{pedidoControlador.pedido.idPedido}" title="IdPedido" required="true" requiredMessage="Este campo es obligatorio."/>
+                                    <p:outputLabel value="Id del pedido:" for="idPedido" />
+                                    <p:inputText class="form-control" pt:placeholder="Id del pedido" id="idPedido" value="#{pedidoControlador.pedido.idPedido}" title="IdPedido" required="true" requiredMessage="Este campo es obligatorio."/>
                                 </div>
                                 <script type="text/javascript">
                                     PrimeFaces.locales['es'] = {
@@ -88,69 +94,52 @@
                                 </style>
                                 <div class="col-2 md-2 mb-2">
                                     <p:outputLabel value="Fecha de creación:" /><br/>
-                                    <p:calendar id="button" value="#{pedidoControlador.pedido.fechaDeCreacion}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" showOn="button" />
+                                    <p:calendar id="popup" value="#{pedidoControlador.pedido.fechaDeCreacion}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" />
                                 </div>
                                 <div class="col-2 md-2 mb-2">
                                     <p:outputLabel for="date" value="Fecha de envío: " /><br/>
-                                    <p:inputMask id="date" value="#{pedidoControlador.pedido.fechaDeEntrega}" mask="99/99/9999"/>
+                                    <p:inputMask id="date" value="#{pedidoControlador.pedido.fechaDeEntrega}" mask="99/99/9999" readonly="true" />
                                 </div>
                             </div>
                             <br/>
                             <div class="form-row">
-                                <div class="accordion" id="accordionProductos">
-                                    <div class="card">
-                                        <div class="card-header col-12" id="headingOne">
-                                            <h2 class="mb-0">
-                                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#agregarProductos" aria-expanded="true" aria-controls="collapseOne">
-                                                    Agregar productos
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        <div id="agregarProductos" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionProductos">
-                                            <div class="card-body">
+                                <h3>Agregar productos</h3>
+                                <p:accordionPanel value="#{productoControlador.listar()}" var="producto">
+                                    <p:tab title="#{producto.nombreProducto}">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <div class="col-md-4">
+                                                <img src="#{p.foto}" class="card-img" style="overflow: hidden; object-fit: cover;" height="150%" alt="..." />
+                                            </div>
+                                            <div class="col-md-8">
                                                 <h:form>
-                                                    <c:forEach items="#{productoControlador.listar()}" var="p">
-                                                        <div class="card mb-2" style="max-width: 540px; height: 13rem; display: inline-block; overflow: hidden; margin-right: 0.6rem;" >
-                                                            <div class="row no-gutters">
-                                                                <div class="col-md-4">
-                                                                    <img src="#{p.foto}" class="card-img" style="overflow: hidden; object-fit: cover;" height="150%" alt="..." />
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title">#{p.nombreProducto}</h5>
-                                                                        <c:if test="#{!(p.existencias eq 0)}">
-                                                                            <p class="card-text">
-                                                                                <small class="text-muted">
-                                                                                    Disponible
-                                                                                </small>
-                                                                            </p>
-                                                                            <h:inputText value="#{pedidoControlador.cantidadCamas}" class="form-control form-control-sm" id="carritoCantidad" pt:type="number" pt:placeholder="Ingresa la cantidad deseada." validatorMessage="Cantidad máxima: #{(p.existencias)/100}">
-                                                                                <f:validateDoubleRange minimum="1" maximum="#{(p.existencias)/100}" for="carritoCantidad"/>
-                                                                            </h:inputText>
-                                                                            <br/>
-                                                                            <h:commandLink onclick="botonCarrito()" action="#{pedidoControlador.agregarAlCarrito(p)}" class="btn boton-ingreso btn-sm">
-                                                                                <f:ajax execute="@form" render="@none" />
-                                                                                <i class="fas fa-cart-plus"></i> Agregar al carrito
-                                                                            </h:commandLink>
-                                                                        </c:if>
-                                                                        <c:if test="#{p.existencias eq 0}">
-                                                                            <p class="card-text">
-                                                                                <small class="text-muted">
-                                                                                    Agotada
-                                                                                </small>
-                                                                            </p>
-                                                                            <button class="btn boton-ingreso btn-sm" disabled="true"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
-                                                                        </c:if>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </c:forEach>
+                                                    <c:if test="#{!(p.existencias eq 0)}">
+                                                        <p class="card-text">
+                                                            <small class="text-muted">
+                                                                Disponible
+                                                            </small>
+                                                        </p>
+                                                        <h:inputText value="#{pedidoControlador.cantidadCamas}" class="form-control form-control-sm" id="carritoCantidad" pt:type="number" pt:placeholder="Ingresa la cantidad deseada." validatorMessage="Cantidad máxima: #{(p.existencias)/100}">
+                                                            <f:validateDoubleRange minimum="1" maximum="#{(p.existencias)/100}" for="carritoCantidad"/>
+                                                        </h:inputText>
+                                                        <br/>
+                                                        <h:commandLink onclick="botonCarrito()" action="#{pedidoControlador.agregarAlCarrito(p)}" class="btn boton-ingreso btn-sm">
+                                                            <f:ajax execute="@form" render="@none" />
+                                                            <i class="fas fa-cart-plus"></i> Agregar al carrito
+                                                        </h:commandLink>
+                                                    </c:if>
+                                                    <c:if test="#{p.existencias eq 0}">
+                                                        <p class="card-text">
+                                                            <small class="text-muted">
+                                                                Agotada
+                                                            </small>
+                                                        </p>
+                                                        <button class="btn boton-ingreso btn-sm" disabled="true"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
+                                                    </c:if>
                                                 </h:form>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                </p:accordionPanel>
                             </div>
                             <div class="form-row">
                                 <div class="col-4 md-4 mb-4">
