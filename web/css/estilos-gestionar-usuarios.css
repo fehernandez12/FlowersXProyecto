@@ -34,7 +34,7 @@ h1 {
 }
 .titulo {
     text-align: center;
-    padding-top: 70px;
+    padding-top: 5em;
 }
 .tabla {
     padding-left: 100px;
@@ -63,7 +63,7 @@ td{
     background-color: #79B3AA;
 }
 .container{
-    padding-top: 150px;
+    padding-top: 5em;
 }
 .ui-row-editor .ui-row-editor-pencil {
     margin-left:8px;
@@ -72,7 +72,7 @@ td{
     text-align: center;
 }
 .opciones-tabla {
-    color:"#000";
+    color: #000000;
     margin-right: 10px;
 }
 .formulario {
@@ -96,19 +96,19 @@ td{
     background-color: rgba(129,204,193,0.7);
 }
 .boton-salir {
-	/*border-color: #B370B3;*/
-	color: #000;
-	background-color: #FFBBFF;
+    /*border-color: #B370B3;*/
+    color: #000;
+    background-color: #FFBBFF;
 }
 .boton-salir:hover {
-	/*border-color: #B370B3;*/
-	color: #000;
-	background-color: rgba(255,187,255,0.9);
+    /*border-color: #B370B3;*/
+    color: #000;
+    background-color: rgba(255,187,255,0.9);
 }
 .boton-salir:active {
-	/*border-color: #B370B3;*/
-	box-shadow: 0 0 7px #B370B3;
-	color: #000;
-	background-color: rgba(255,187,255,0.7);
+    /*border-color: #B370B3;*/
+    box-shadow: 0 0 7px #B370B3;
+    color: #000;
+    background-color: rgba(255,187,255,0.7);
 }
 

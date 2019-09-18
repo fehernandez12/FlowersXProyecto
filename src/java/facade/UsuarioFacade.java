@@ -35,6 +35,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
+    public Usuario buscarPorCorreo (String email) {
+        Usuario usuarioCorreo = null;
+        try {
+            Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.email=?1");
+            query.setParameter(1, email);
+            List<Usuario> lista = query.getResultList();
+            if (!lista.isEmpty()) {
+                usuarioCorreo = lista.get(0);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return usuarioCorreo;
+    }
+    
     public Usuario login (Usuario usuario) {
         Usuario usuarioLogin = null;
         try {

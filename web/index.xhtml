@@ -60,30 +60,21 @@
                         <ul class="navbar-nav my-2 my-sm-0" style="padding-right: 1rem">
                             <li class="nav-item active mr-auto">
                                 <h:form id="form-logout" prependId="false">
-                                    <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    #{msjApp[sessionController.idiomaSeleccionado.language]}
-                                </button> -->
                                     <c:forEach items="#{sessionController.idiomasSoportados}" var="idioma">
-                                        <h:commandLink actionListener="#{sessionController.cambiarIdioma(idioma)}"><img src="Archivos/#{msjApp[idioma.language]}.png"  width="18px"/></h:commandLink>
+                                        <h:commandLink actionListener="#{sessionController.cambiarIdioma(idioma)}"><img src="Archivos/#{msjApp[idioma.language]}.png"  width="18px" /></h:commandLink>
                                     </c:forEach>
                                 </h:form>
                             </li>
                         </ul>
-                        <ul class="navbar-nav my-2 my-sm-0">
+                        <ul class="navbar-nav my-4 my-sm-0">
                             <li class="nav-item active">
-                                <h:form class="form-inline my-2 my-lg-0">
-                                    <f:view>
-                                        <h:inputText class="form-control mr-sm-2" pt:placeholder="#{msjIndex.email}" id="txtCorreo" value="#{usuarioControlador.usuario.email}"></h:inputText>
-                                        <h:inputText pt:type="password" class="form-control mr-sm-2" pt:placeholder="#{msjIndex.password}" id="txtPassword" value="#{usuarioControlador.usuario.password}"></h:inputText>                      
-                                        <h:commandButton action="#{usuarioControlador.validarLogin()}" class="btn boton-ingreso" value="#{msjIndex.ingresar}" />
-                                    </f:view>
-                                </h:form>
+                                <button type="button" class="btn boton-ingreso" data-toggle="modal" data-target="#modalLogin">#{msjIndex.ingresar}</button>
                             </li>
                         </ul>
                     </div>
                 </nav>
                 <!-- Carrusel -->
-                <div id="inicio carruselFlores" class="carousel slide" data-ride="carousel">
+                <div id="carruselFlores" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carruselFlores" data-slide-to="0" class="active"></li>
                         <li data-target="#carruselFlores" data-slide-to="1"></li>
@@ -92,7 +83,12 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carrusel-1 carousel-item active">
-                            <img src="img/banner_flores.jpg" class="d-block w-100" alt="..."/>
+                            <c:if test="#{sessionController.idiomaPorDefecto == sessionController.idiomaSeleccionado}">                                           
+                                <img src="img/banner_flores.jpg" class="d-block w-100" alt="..."/>
+                            </c:if>
+                            <c:if test="#{!(sessionController.idiomaPorDefecto == sessionController.idiomaSeleccionado)}">                                           
+                                <img src="img/banner_flores_en.jpg" class="d-block w-100" alt="..."/>
+                            </c:if>
                         </div>
                         <div class="carousel-item">
                             <img src="img/japanese-cherry-trees-324175_1920.jpg" class="d-block w-100" alt="..."></img>
@@ -285,7 +281,7 @@
                         </div>
                         <h:form>
                             <f:view>
-                                <div class="modal-body">
+                                <div class="modal-body cuerpo-modal">
                                     <div class="form-row">
                                         <h:outputLabel value="E-mail" />
                                         <h:inputText class="form-control mr-sm-2" pt:placeholder="#{msjIndex.email}" id="txtCorreo" value="#{usuarioControlador.usuario.email}" />
@@ -297,8 +293,36 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
+                                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPassword" data-dismiss="modal">#{msjIndex.cambiarPassword}</button>
                                     <h:commandButton action="#{usuarioControlador.validarLogin()}" class="btn boton-ingreso" value="#{msjIndex.iniciarSesion}" />
-                                </div>  
+                                </div>
+                            </f:view>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal de recuperar contraseña -->
+            <div class="modal fade" id="modalPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">#{msjIndex.nuevaPassword}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <h:form>
+                            <p:growl id="growl" showDetail="true" />  
+                            <f:view>
+                                <div class="modal-body cuerpo-modal">
+                                    <div class="form-row">
+                                        <p>#{msjIndex.ingresaCorreo}</p>
+                                        <h:inputText class="form-control mr-sm-2" pt:placeholder="#{msjIndex.email}" id="txtCorreo" value="#{usuarioControlador.usuario.email}" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <p:commandButton value="#{msjIndex.nuevaPassword}" action="#{usuarioControlador.nuevoPassword()}" pt:data-dismiss="modal" update="@form" />
+                                </div>
                             </f:view>
                         </h:form>
                     </div>

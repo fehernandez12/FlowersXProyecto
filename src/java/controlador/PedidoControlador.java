@@ -34,6 +34,7 @@ public class PedidoControlador implements Serializable {
     @EJB
     PedidoFacade pedidoFacade;
     Pedido pedido = new Pedido();
+    List<Pedido> listaPedidos;
     @EJB
     UsuarioFacade usuarioFacade;
     Usuario usuario = new Usuario();
@@ -44,6 +45,14 @@ public class PedidoControlador implements Serializable {
     List<Producto> listaProductos = new ArrayList();
     private int cantidadCamas;
     private double impuestos = 0;
+
+    public List<Pedido> getListaPedidos() {
+        return listaPedidos;
+    }
+
+    public void setListaPedidos(List<Pedido> listaPedidos) {
+        this.listaPedidos = listaPedidos;
+    }
 
     public PedidoFacade getPedidoFacade() {
         return pedidoFacade;

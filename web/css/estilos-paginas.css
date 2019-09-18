@@ -81,3 +81,10 @@ h1 {
 .accordion {
     width: 100%;
 }
+.titulo-jumbotron {
+    font-family: 'Niramit', sans-serif;
+}
+.jumbotron {
+    padding: 2rem;
+    margin: 5rem;
+}

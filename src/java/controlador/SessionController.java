@@ -25,6 +25,7 @@ public class SessionController implements Serializable {
     
     private Locale idiomaSeleccionado;
     private List<Locale> idiomasSoportados;
+    private Locale idiomaPorDefecto = new Locale("es");
 
     @PostConstruct
     public void init() {
@@ -43,6 +44,14 @@ public class SessionController implements Serializable {
     }
 
     public SessionController() {
+    }
+
+    public Locale getIdiomaPorDefecto() {
+        return idiomaPorDefecto;
+    }
+
+    public void setIdiomaPorDefecto(Locale idiomaPorDefecto) {
+        this.idiomaPorDefecto = idiomaPorDefecto;
     }
 
     public Locale getIdiomaSeleccionado() {

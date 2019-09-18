@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Consultar catálogo</title>
+        <link rel="stylesheet" href="../css/bootstrap.css"></link>
+        <link rel="stylesheet" href="../css/all.min.css"></link>
+        <link rel="stylesheet" href="../css/brands.css"></link>
+        <link rel="stylesheet" href="../css/estilos-paginas.css"></link>
+        <link rel="stylesheet" href="../css/estilos-ver-catalogo.css"></link>
+        <link href="../css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <f:view locale="#{sessionController.idiomaSeleccionado}">
+            <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+                <div class="row">
+                    <div class="jumbotron">
+                        <h1 class="titulo-jumbotron">#{msjVerCatalogo.catalogo}</h1>
+                        <h:form>
+                            <c:forEach items="#{productoControlador.listar()}" var="p">
+                                <div class="card mb-2" style="max-width: 470px; height: 13rem; display: inline-block; overflow: hidden; margin-right: 0.6rem;" >
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <img src="#{p.foto}" class="card-img" style="overflow: hidden; object-fit: cover;" height="150%" alt="..." />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">#{p.nombreProducto}</h5>
+                                                <c:if test="#{!(p.existencias eq 0)}">
+                                                    <p class="card-text">
+                                                        <small class="text-muted">
+                                                            Disponible
+                                                        </small>
+                                                    </p>
+                                                    <h:inputText value="#{pedidoControlador.cantidadCamas}" class="form-control form-control-sm" id="carritoCantidad" pt:type="number" pt:placeholder="Ingresa la cantidad deseada." validatorMessage="Cantidad máxima: #{(p.existencias)/100}">
+                                                        <f:validateDoubleRange minimum="1" maximum="#{(p.existencias)/100}" for="carritoCantidad"/>
+                                                    </h:inputText>
+                                                    <br/>
+                                                    <h:commandLink onclick="botonCarrito()" action="#{pedidoControlador.agregarAlCarrito(p)}" class="btn boton-ingreso btn-sm">
+                                                        <f:ajax execute="@form" render="@none" />
+                                                        <i class="fas fa-cart-plus"></i> Agregar al carrito
+                                                    </h:commandLink>
+                                                </c:if>
+                                                <c:if test="#{p.existencias eq 0}">
+                                                    <p class="card-text">
+                                                        <small class="text-muted">
+                                                            Agotada
+                                                        </small>
+                                                    </p>
+                                                    <button class="btn boton-ingreso btn-sm" disabled="true"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </h:form>
+                        <hr class="my-4" />
+                        <a class="btn boton-registro btn-lg" href="crear-pedido.xhtml" role="button">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </f:view>
+    </h:body>
+</html>
+

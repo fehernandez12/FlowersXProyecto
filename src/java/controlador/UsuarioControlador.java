@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIInput;
 import javax.faces.component.UIViewRoot;
 import javax.faces.event.ValueChangeEvent;
@@ -51,6 +52,7 @@ public class UsuarioControlador implements Serializable {
     RolFacade rolFacade;
     Rol rol = new Rol();
     Usuario usuarioLogueado;
+    Usuario usuarioCorreo;
     @EJB
     PaisFacade paisFacade;
     Pais pais = new Pais();
@@ -63,6 +65,8 @@ public class UsuarioControlador implements Serializable {
     private Part file;
     private String paisNombre;
     private String ciudadNombre;
+    private boolean existe;
+    FacesContext context = FacesContext.getCurrentInstance();
 
     Mailer mailer = new Mailer();
 
@@ -89,7 +93,7 @@ public class UsuarioControlador implements Serializable {
     public void setCiudadNombre(String ciudadNombre) {
         this.ciudadNombre = ciudadNombre;
     }
-    
+
     public Usuario getUsuarioLogueado() {
         return usuarioLogueado;
     }
@@ -154,9 +158,55 @@ public class UsuarioControlador implements Serializable {
         return "gestionar-usuarios";
     }
 
+    public String cambiarPassword() throws NoSuchAlgorithmException {
+        this.usuario = usuario;
+        usuario.setRolidRol(rolFacade.find(rol.getIdRol()));
+        MessageDigest m = MessageDigest.getInstance("MD5");
+        String password = usuario.getPassword();
+        m.reset();
+        m.update(password.getBytes());
+        byte[] digest = m.digest();
+        BigInteger bigInt = new BigInteger(1, digest);
+        String hashtext = bigInt.toString(16);
+        usuario.setPassword(hashtext);
+        usuarioFacade.edit(usuario);
+        return "main-usuario";
+    }
+
+    public void nuevoPassword() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        usuarioCorreo = usuarioFacade.buscarPorCorreo(usuario.getEmail());
+        if (usuarioCorreo != null) {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            String password = UsuarioControlador.randomAlphaNumeric(10);
+            m.reset();
+            m.update(password.getBytes());
+            byte[] digest = m.digest();
+            BigInteger bigInt = new BigInteger(1, digest);
+            String hashtext = bigInt.toString(16);
+            usuarioCorreo.setPassword(hashtext);
+            String mensaje = "<h1>Has solicitado una nueva password</h1><br><p>¡Gracias por contactarnos, " + usuarioCorreo.getTitular() + "!</p><p>Tu nueva password es: " + password + "</p>";
+            usuarioFacade.edit(usuarioCorreo);
+            mailer.configurar();
+            mailer.enviarMensaje(usuario.getEmail(), "Nueva password en FlowersX - Santa Marta Flowers S.A.S.", mensaje);
+            if (mailer.isFueEnviado()) {
+                context.addMessage(null, new FacesMessage("¡Hecho!",  "Tu nueva password ha sido enviada.") );
+            } else {
+                context.addMessage(null, new FacesMessage("¡Error!",  "No hemos podido procesar tu solicitud.") );
+            }
+            usuario = new Usuario();
+        } else {
+            context.addMessage(null, new FacesMessage("¡Error!", "El usuario no está registrado."));
+        }
+    }
+
     public String preEditarUsuario(Usuario usuario) {
         this.usuario = usuario;
         return "editar-usuario";
+    }
+    
+    public String preEditarPassword(Usuario usuario) {
+        this.usuario = usuario;
+        return "editar-password";
     }
 
     public String editarUsuario() {
@@ -212,8 +262,8 @@ public class UsuarioControlador implements Serializable {
         }
         return builder.toString();
     }
-    
-    public void ciudadListener(ValueChangeEvent valueChangeEvent) {
+
+    /* public void ciudadListener(ValueChangeEvent valueChangeEvent) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         UIViewRoot uiViewRoot = facesContext.getViewRoot();
         String newPais = (String) valueChangeEvent.getNewValue();
@@ -225,7 +275,5 @@ public class UsuarioControlador implements Serializable {
         }
         ciudadInputText.setValue(listaCiudades);
         facesContext.renderResponse();
-    }
-    
-
+    } */
 }

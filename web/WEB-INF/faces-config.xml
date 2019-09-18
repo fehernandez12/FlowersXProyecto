@@ -37,5 +37,9 @@
             <base-name>idiomas.GestionarUsuarios</base-name>
             <var>msjGestionarUsuarios</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.VerCatalogo</base-name>
+            <var>msjVerCatalogo</var>
+        </resource-bundle>
     </application>
 </faces-config>

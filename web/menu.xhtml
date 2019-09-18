@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta charset="UTF-8"></meta>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"></meta>
@@ -13,6 +14,8 @@
         <link rel="stylesheet" href="css/all.min.css"></link>
         <link rel="stylesheet" href="css/brands.css"></link>
         <link rel="stylesheet" href="css/bootstrap.min.css"></link>
+        <link href="css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
         <link rel="stylesheet" href="css/estilos-usuarios.css"></link>
     </h:head>
     <h:body>
@@ -29,13 +32,23 @@
                                 <li class="nav-item dropdown">
                                     <c:if test="#{empty p.permisoPadre}">
                                         <a class="nav-link js-scroll-trigger dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            #{p.nombre}
+                                            <c:if test="#{sessionController.idiomaPorDefecto == sessionController.idiomaSeleccionado}">                                           
+                                                #{p.nombre}
+                                            </c:if>
+                                            <c:if test="#{!(sessionController.idiomaPorDefecto == sessionController.idiomaSeleccionado)}">
+                                                #{p.nombreEn}
+                                            </c:if>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <c:forEach items="#{p.permisoList}" var="pl">
                                                 <c:forEach items="#{usuarioControlador.rol.permisoList}" var="pl1">
                                                     <c:if test="#{pl1.idpermisos eq pl.idpermisos}">
-                                                        <a class="dropdown-item" href="#{pl.url}" target="area-trabajo">#{pl.nombre}</a>
+                                                        <c:if test="#{sessionController.idiomaPorDefecto == sessionController.idiomaSeleccionado}">
+                                                            <a class="dropdown-item" href="#{pl.url}" target="area-trabajo">#{pl.nombre}</a>
+                                                        </c:if>
+                                                        <c:if test="#{!(sessionController.idiomaPorDefecto == sessionController.idiomaSeleccionado)}">
+                                                            <a class="dropdown-item" href="#{pl.url}" target="area-trabajo">#{pl.nombreEn}</a>
+                                                        </c:if>
                                                     </c:if>
                                                 </c:forEach>
                                             </c:forEach>
@@ -43,6 +56,30 @@
                                     </c:if>
                                 </li>
                             </c:forEach>
+                        </ul>
+                        <ul class="navbar-nav my-4 my-sm-0">
+                            <li class="nav-item active mr-auto">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-info btn-sm dropdown-toggle" style="width: 12em; margin-right: 3em" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        #{msjMenu.opcionesUsuario}
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <h:form>
+                                            <p:commandLink class="dropdown-item" action="#{usuarioControlador.preEditarPassword(usuarioControlador.usuario)}">
+                                                #{msjMenu.cambiarMiContrasena}
+                                                <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar tu password?" icon="fas fa-exclamation-triangle" />
+                                            </p:commandLink>
+                                        </h:form>
+                                        <div class="dropdown-divider"></div>
+                                        <h:form>
+                                            <p:commandLink class="dropdown-item" action="#{usuarioControlador.preEditarUsuario(usuarioControlador.usuario)}">
+                                                #{msjMenu.editarMisDatos}
+                                                <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar tus datos?" icon="fas fa-exclamation-triangle" />
+                                            </p:commandLink>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                         <ul class="navbar-nav my-2 my-sm-0" style="padding-right: 1rem">
                             <li class="nav-item active mr-auto">
@@ -73,6 +110,10 @@
                 </div>
             </div>  
         </f:view>
+        <p:confirmDialog style="left: 41%;top: 50%" global="true" showEffect="fade" hideEffect="explode">
+            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
+        </p:confirmDialog>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="text/javascript"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>

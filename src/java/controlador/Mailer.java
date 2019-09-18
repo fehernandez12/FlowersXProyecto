@@ -26,12 +26,21 @@ public class Mailer {
     //Credenciales de la cuenta de correo
     final String user = "santamartaflowers@gmail.com";//cambiará en consecuencia al servidor utilizado
     final String pass = "flowersx";
+    private boolean fueEnviado = false;
 
     public Mailer(Session session) {
         this.session = session;
     }
 
     public Mailer() {
+    }
+
+    public boolean isFueEnviado() {
+        return fueEnviado;
+    }
+
+    public void setFueEnviado(boolean fueEnviado) {
+        this.fueEnviado = fueEnviado;
     }
 
     public void configurar() {
@@ -53,6 +62,7 @@ public class Mailer {
     }
 
     public void enviarMensaje(String destinatario, String asunto, String mensaje) throws UnsupportedEncodingException {
+        this.fueEnviado = false;
         //Estructura del mensaje en HTML
         String nuevoMensaje = "<h1 style=\"font-size: 20px; color:#79B3AA; font-weight: bold; text-transform: uppercase ; \">FlowersX - Mensaje del administrador" + "</h1>" + "<img src=\"https://i.imgur.com/2seKBWE.png\"/ style=\"float: left;\"><p>" + mensaje + "<br>\n"
                 + "<p style=\"text-align: center;\">\n"
@@ -73,6 +83,7 @@ public class Mailer {
             //Enviar mensaje
             Transport.send(message);
             System.out.println("Enviado");
+            this.fueEnviado = true;
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

@@ -17,6 +17,12 @@
     </h:head>
     <h:body>
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
+            <nav class="migas breadcrumb-nav" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../main-usuario.xhtml">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear solicitud</li>
+                </ol>
+            </nav>
             <div class="titulo row">
                 <div class="col">
                     <h1>Crear Solicitud</h1>
@@ -49,8 +55,8 @@
                         <h:form class="formulario" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="col-2 md-1 mb-1">
-                                    <h:outputLabel value="Id de la Solicitud:" for="idSolicitud" />
-                                    <h:inputText class="form-control" pt:placeholder="Id de la Solicitud" id="idSolicitud" value="#{solicitudControlador.solicitud.idSolicitud}" title="IdSolicitud" required="true" requiredMessage="The IdSolicitud field is required."/>
+                                    <p:outputLabel value="Id de la Solicitud:" for="idSolicitud" />
+                                    <p:inputText class="form-control" pt:placeholder="Id de la Solicitud" id="idSolicitud" value="#{solicitudControlador.solicitud.idSolicitud}" title="IdSolicitud" required="true" requiredMessage="The IdSolicitud field is required."/>
                                 </div>
                                 <script type="text/javascript">
                                     PrimeFaces.locales['es'] = {
@@ -87,34 +93,36 @@
                                 </style>
                                 <div class="col-3 md-3 mb-3">
                                     <p:outputLabel value="Fecha:" /><br />
-                                    <p:calendar id="button" value="#{solicitudControlador.solicitud.fecha}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" showOn="button" />
+                                    <p:calendar id="restricted" value="#{solicitudControlador.solicitud.fecha}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" mindate="" maxdate="" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-6 md-4 mb-4">
-                                    <h:outputLabel value="Destinatario:" for="destinatario" />
-                                    <h:inputText class="form-control" pt:placeholder="Destinatario" id="destinatario" value="#{solicitudControlador.solicitud.destinatario}" title="Destinatario" required="true" requiredMessage="The Destinatario field is required."/>
+                                    <p:outputLabel value="Destinatario:" for="destinatario" />
+                                    <p:inputText class="form-control" pt:placeholder="Destinatario" id="destinatario" value="#{solicitudControlador.solicitud.destinatario}" title="Destinatario" required="true" requiredMessage="The Destinatario field is required."/>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <h:outputLabel value="Soporte:" for="soporte1" />
-                                <h:inputFile class="form-control-file" pt:placeholder="Soporte:" id="soporte1" value="#{solicitudControlador.file}" title="Soporte1" required="true" requiredMessage="The Soporte1 field is required."/>
-                                <h:outputLabel value="Soporte adicional:" for="soporte2" />
-                                <h:inputFile class="form-control-file" pt:placeholder="Soporte adicional:" id="soporte2" value="#{solicitudControlador.file1}" title="Soporte2" />
-                                <h:outputLabel value="Soporte adicional:" for="soporte3" />
-                                <h:inputFile class="form-control-file" pt:placeholder="Soporte adicional" id="soporte3" value="#{solicitudControlador.file2}" title="Soporte3" />
+                                <div class="col">
+                                    <p:outputLabel value="Soporte:" for="soporte1" />
+                                    <h:inputFile class="form-control-file" pt:placeholder="Soporte:" id="soporte1" value="#{solicitudControlador.file}" title="Soporte1" required="true" requiredMessage="The Soporte1 field is required."/>
+                                    <p:outputLabel value="Soporte adicional:" for="soporte2" />
+                                    <h:inputFile class="form-control-file" pt:placeholder="Soporte adicional:" id="soporte2" value="#{solicitudControlador.file1}" title="Soporte2" />
+                                    <p:outputLabel value="Soporte adicional:" for="soporte3" />
+                                    <h:inputFile class="form-control-file" pt:placeholder="Soporte adicional" id="soporte3" value="#{solicitudControlador.file2}" title="Soporte3" />
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="col md-3 mb-3">
-                                    <h:outputLabel value="Id de Pedido:" for="pedidoidPedido" />
-                                    <h:selectOneMenu class="form-control" pt:placeholder="Id de Pedido" id="pedidoidPedido" value="#{solicitudControlador.pedido.idPedido}" title="PedidoidPedido" required="true" requiredMessage="The PedidoidPedido field is required.">
+                                    <p:outputLabel value="Id de Pedido:" for="pedidoidPedido" />
+                                    <p:selectOneMenu class="form-control" pt:placeholder="Id de Pedido" id="pedidoidPedido" value="#{solicitudControlador.pedido.idPedido}" required="true" requiredMessage="The PedidoidPedido field is required.">
                                         <!-- TODO: update below reference to list of available items-->
                                         <f:selectItems class="dropdown-item" value="#{pedidoControlador.listar()}" var="pedido" itemValue="#{pedido.idPedido}" itemLabel="#{pedido.idPedido}"/>
-                                    </h:selectOneMenu>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col md-3 mb-3">
-                                    <h:outputLabel value="Id de Usuario:" for="usuarioid" />
-                                    <h:inputText class="form-control" id="usuarioid" value="#{usuarioControlador.usuarioLogueado.id}" title="Usuarioid" readonly="true" />
+                                    <p:outputLabel value="Id de Usuario:" for="usuarioid" />
+                                    <p:inputText class="form-control" id="usuarioid" value="#{usuarioControlador.usuarioLogueado.id}" title="Usuarioid" readonly="true" />
                                 </div>
                             </div>
                             <h:commandButton class="btn boton-registro" action="#{solicitudControlador.crearSolicitud()}" value="Crear solicitud" />

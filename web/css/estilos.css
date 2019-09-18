@@ -242,3 +242,7 @@ body{
 .mapa {
 	height: 600px;
 }
+.cuerpo-modal {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}

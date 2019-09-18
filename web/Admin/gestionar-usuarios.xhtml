@@ -20,7 +20,13 @@
         <f:view locale="#{sessionController.idiomaSeleccionado}">
             <div data-spy="scroll" data-target="#" data-offset="0" class="container">
                 <div class="row">
-                    <div class="col">
+                    <div class="col tabla">
+                        <nav class="breadcrumb-nav" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="../main-usuario.xhtml">Inicio</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Gestión de usuarios</li>
+                            </ol>
+                        </nav>
                         <style type="text/css">
                             .ui-datatable .ui-datatable-header {
                                 text-align: right !important;
@@ -62,7 +68,7 @@
                                     <f:facet name="header">
                                         <p:outputPanel>
                                             <h:outputText value="#{msjGestionarUsuarios.todosLosCampos}" />
-                                            <p:inputText id="globalFilter" onkeyup="PF('tablaUsuarios').filter()" style="width:150px" placeholder="#{msjGestionarUsuarios.palabraClave}"/>
+                                            <p:inputText id="globalFilter" onkeyup="PF('tablaUsuarios').filter()" style="width:200px" placeholder="#{msjGestionarUsuarios.palabraClave}"/>
                                         </p:outputPanel>
                                     </f:facet>
 
@@ -108,11 +114,11 @@
                                         <f:facet class="header" name="header">
                                             <h:outputText value="#{msjGestionarUsuarios.opciones}"/>
                                         </f:facet>
-                                        <p:commandLink class="opciones-tabla" action="#{usuarioControlador.preEditarUsuario(item)}">
+                                        <p:commandLink class="opciones-tabla" action="#{usuarioControlador.preEditarUsuario(user)}">
                                             <i class="fas fa-pen"></i>
-                                            <p:confirm header="¡Alerta!" message="    ¿Estás seguro de que quieres editar este usuario?" />
+                                            <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar este usuario?" icon="fas fa-exclamation-triangle" />
                                         </p:commandLink>
-                                        <h:commandLink class="opciones-tabla" action="#{usuarioControlador.eliminarUsuario(item)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
+                                        <h:commandLink class="opciones-tabla" action="#{usuarioControlador.eliminarUsuario(user)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
                                     </p:column>
                                 </p:dataTable>
                                 <br/>

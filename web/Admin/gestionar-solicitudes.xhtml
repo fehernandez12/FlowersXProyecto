@@ -20,6 +20,12 @@
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
             <div class="row">
                 <div class="col tabla">
+                    <nav class="migas breadcrumb-nav" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="../main-usuario.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Gestión de solicitudes</li>
+                        </ol>
+                    </nav>
                     <f:view>
                         <div class="col">
                             <h1><h:outputText value="Solicitudes"/></h1>
@@ -74,9 +80,9 @@
                                 <p:column filterBy="#{solicitud.usuarioid}" headerText="Usuario" filterMatchMode="contains">
                                     <f:facet name="filter">
                                         <p:selectOneMenu onchange="PF('tablaSolicitudes').filter()" styleClass="custom-filter">
-                                        <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
-                                        <f:selectItems value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.titular}" />
-                                    </p:selectOneMenu>
+                                            <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItems value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.titular}" />
+                                        </p:selectOneMenu>
                                     </f:facet>
                                     <h:outputText value="#{solicitud.usuarioid.titular}" />
                                 </p:column>
