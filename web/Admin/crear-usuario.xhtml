@@ -32,51 +32,53 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h:form class="formulario needs-validation" id="crearUsuario">
-                            <div class="form-row">
-                                <div class="col-md-1 mb-1">
-                                    <label for="validationCustom01">ID</label>
-                                    <p:inputText pt:placeholder="ID" value="#{usuarioControlador.usuario.id}" id="idUsuario" class="form-control"></p:inputText>
-                                </div>
-                                <div class="col-md-4 mb-4">
-                                    <label for="validationCustom01">#{msjCrearUsuario.nombreTitular}</label>
-                                    <p:inputText pt:placeholder="John Doe" value="#{usuarioControlador.usuario.titular}" id="nombreTitular" class="form-control"></p:inputText>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="validationCustom02">#{msjCrearUsuario.razonSocial}</label>
-                                    <p:inputText pt:placeholder="Empresa Inc." value="#{usuarioControlador.usuario.razonSocial}" id="razonSocial" class="form-control"></p:inputText>
-                                </div>
-                                <div class="col-md-4 mb-4">
-                                    <label for="validationCustomUsername">#{msjCrearUsuario.email}</label>
-                                    <div class="input-group">
-                                        <p:inputText pt:placeholder="ejemplo@ejemplo.com" type="email" value="#{usuarioControlador.usuario.email}" id="email" class="form-control"></p:inputText>
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h:form class="formulario needs-validation" id="crearUsuario">
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-6">
+                                            <p:outputLabel value="#{msjCrearUsuario.nombreTitular}" />
+                                            <p:inputText pt:placeholder="John Doe" value="#{usuarioControlador.usuario.titular}" id="nombreTitular" class="form-control"></p:inputText>
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <p:outputLabel value="#{msjCrearUsuario.razonSocial}" />
+                                            <p:inputText pt:placeholder="Empresa Inc." value="#{usuarioControlador.usuario.razonSocial}" id="razonSocial" class="form-control"></p:inputText>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-6">
+                                            <p:outputLabel value="#{msjCrearUsuario.email}" />
+                                            <div class="input-group">
+                                                <p:inputText pt:placeholder="ejemplo@ejemplo.com" type="email" value="#{usuarioControlador.usuario.email}" id="email" class="form-control"></p:inputText>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <p:outputLabel value="#{msjCrearUsuario.pais}" /><br />
+                                            <p:selectOneMenu id="pais" filter="true" filterMatchMode="" required="true" value="#{usuarioControlador.pais.idpais}" style="width:14.5em">
+                                                <f:selectItem itemLabel="#{msjCrearUsuario.lblPais}" itemValue="" />
+                                                <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <p:outputLabel value="#{msjCrearUsuario.ciudad}" />
+                                            <p:selectOneMenu id="ciudad" filter="true" filterMatchMode="" required="true" value="#{usuarioControlador.ciudad.idciudad}" style="width: 14.5em">
+                                                <f:selectItem itemLabel="#{msjCrearUsuario.lblCiudad}" itemValue="" />
+                                                <f:selectItems value="#{ciudadControlador.listarTodas()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <p:outputLabel value="#{msjCrearUsuario.cargo}" />
+                                            <p:selectOneMenu id="rol" filter="true" filterMatchMode="" required="true" value="#{usuarioControlador.rol.idRol}" style="width: 14.5em">
+                                                <f:selectItem itemLabel="#{msjCrearUsuario.cargo}" itemValue="" />
+                                                <f:selectItems value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <p:commandButton action="#{usuarioControlador.crearUsuario()}" type="submit" value="#{msjCrearUsuario.botonCrearUsuario}"></p:commandButton>
+                                </h:form>
                             </div>
-                            <div class="form-row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="validationCustom03">#{msjCrearUsuario.pais}</label><br/>
-                                    <p:selectOneMenu id="pais" immediate="true" required="true" value="#{usuarioControlador.pais.idpais}" style="width:200px">
-                                        <f:selectItem itemLabel="#{msjCrearUsuario.lblPais}" itemValue="" />
-                                        <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}"/>
-                                    </p:selectOneMenu>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="validationCustom04">#{msjCrearUsuario.ciudad}</label><br/>
-                                    <p:selectOneMenu id="ciudad" required="true" value="#{usuarioControlador.ciudad.idciudad}" style="width: 250px">
-                                        <f:selectItem itemLabel="#{msjCrearUsuario.lblCiudad}" itemValue="" />
-                                        <f:selectItems value="#{ciudadControlador.listarTodas()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}"/>
-                                    </p:selectOneMenu>
-                                </div>
-                                <div class="dropdown col-md-3 mb-3">
-                                    <label for="validationCustom03">#{msjCrearUsuario.cargo}</label><br/>
-                                    <p:selectOneMenu id="rol" value="#{usuarioControlador.rol.idRol}" style="width: 200px">
-                                        <f:selectItems value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
-                                    </p:selectOneMenu>
-                                </div>
-                            </div>
-                            <h:commandButton action="#{usuarioControlador.crearUsuario()}" class="btn boton-registro" type="submit" value="#{msjCrearUsuario.botonCrearUsuario}"></h:commandButton>
-                        </h:form>
+                        </div>
+
                     </div>
                 </div>
             </div>

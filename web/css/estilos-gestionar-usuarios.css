@@ -15,19 +15,11 @@
 }
 body{
     font-family: 'Niramit', sans-serif;
-    background-color: #81CCC1;
+    background-color: #FAFAFA;
     color: #B370B3;
 }
 h1 {
-    color: #FFF6D4;
-    -webkit-text-stroke: 1px #B370B3;
-    text-shadow:
-        3px 3px #B370B3,
-        -1px -1px 0 #B370B3,  
-        1px -1px 0 #B370B3,
-        -1px 1px 0 #B370B3,
-        1px 1px 0 #B370B3;
-    -webkit-text-stroke-width: 1px;
+    color: #666666;
 }
 .container {
     max-width: 100%;

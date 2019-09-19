@@ -14,19 +14,11 @@
 }
 body{
     font-family: 'Niramit', sans-serif;
-    background-color: #FFBBFF;
+    background-color: #FAFAFA;
     color: #B370B3;
 }
 h1 {
-    color: #FFF6D4;
-    -webkit-text-stroke: 1px #B370B3;
-    text-shadow:
-        3px 3px #B370B3,
-        -1px -1px 0 #B370B3,  
-        1px -1px 0 #B370B3,
-        -1px 1px 0 #B370B3,
-        1px 1px 0 #B370B3;
-    -webkit-text-stroke-width: 1px;
+    color: #666666;
 }
 .container {
     max-width: 100%;
@@ -36,8 +28,8 @@ h1 {
     padding-top: 5em;
 }
 .formulario {
-    padding-left: 140px;
-    padding-right: 140px;
+    padding-left: 5em;
+    padding-right: 5em;
 }
 .boton-registro {
     border-color: #79B3AA;

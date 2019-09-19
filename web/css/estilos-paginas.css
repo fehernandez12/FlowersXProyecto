@@ -15,17 +15,7 @@
 }
 body{
     font-family: 'Niramit', sans-serif;
-	background-color: #81CCC1;
-}
-h1 {
-    -webkit-text-stroke: 1px #79B3AA;
-    text-shadow:
-        3px 3px #79B3AA,
-        -1px -1px 0 #79B3AA,  
-        1px -1px 0 #79B3AA,
-        -1px 1px 0 #79B3AA,
-        1px 1px 0 #79B3AA;
-    -webkit-text-stroke-width: 1px;
+    background-color: #FAFAFA;
 }
 .container {
     max-width: 100%;
@@ -33,7 +23,7 @@ h1 {
 .texto {
     padding-top: 280px;
     text-align: right;
-    color: #FFF6D4;
+    color: #666666;
 }
 .texto p {
     font-size: 1.5em;

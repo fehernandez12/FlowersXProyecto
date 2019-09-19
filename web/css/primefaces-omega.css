@@ -599,12 +599,12 @@ body .ui-selectonemenu-panel .ui-selectonemenu-filter-container .ui-icon {
     text-align: center;
     background: none;
     display: inline-block;
-    font-size: 1.25em;
+    font-size: 1em;
     position: absolute;
     left: 1.1146em;
     top: 50%;
     margin-top: -0.5em;
-    color: #007ad9; }
+    color: #FF99FF; }
 body .ui-selectonemenu-panel .ui-selectonemenu-filter-container .ui-icon:before {
     content: ""; }
 body .ui-selectonemenu-panel .ui-selectonemenu-items {
@@ -1788,9 +1788,9 @@ body .ui-texteditor .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-
     stroke: #333333; }
 
 body .ui-button {
-    background-color: #FFBBFF;
-    color: #ffffff;
-    border: 1px solid #FFBBFF;
+    background-color: #FFDDFF;
+    color: #121212;
+    border: 1px solid #888888;
     font-size: 14px;
     margin: 0;
     margin-right: .1em;
@@ -1800,20 +1800,20 @@ body .ui-button {
     -webkit-transition: background-color 0.3s;
     transition: background-color 0.3s; }
 body .ui-button.ui-state-focus {
-    outline: 1px solid #666666;
+    outline: 1px solid #888888;
     outline-offset: 1px;
-    background-color: #FFBBFF;
+    background-color: #FFDDFF;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none; }
 body .ui-button.ui-state-hover {
-    background-color: #B370B3;
-    border-color: #B370B3;
-    color: #ffffff; }
+    background-color: #FFBBFF;
+    border-color: #777777;
+    color: #121212; }
 body .ui-button.ui-state-active, body .ui-button.ui-state-down {
-    background-color: #B370B3;
-    border-color: #B370B3;
-    color: #ffffff; }
+    background-color: #FFBBFF;
+    border-color: #777777;
+    color: #121212; }
 body .ui-button.ui-button-text-only .ui-button-text {
     padding: 0.429em 1em; }
 body .ui-button.ui-button-text-icon-left .ui-button-text {

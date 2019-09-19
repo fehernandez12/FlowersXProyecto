@@ -50,13 +50,14 @@
                                 box-sizing: border-box;
                             }
                         </style>
-                        <div class="col">
-                            <h1><h:outputText value="#{msjGestionarUsuarios.usuarios}"/></h1>
-                            <div class="mr-auto">
-                                <a class="mr-auto" href="crear-usuario.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
-                                        #{msjCrearUsuario.botonCrearUsuario}
-                                    </button>  
-                                </a> 
+                        <div class="row">
+                            <div class="col-10 ">
+                                <h1><h:outputText value="#{msjGestionarUsuarios.usuarios}"/></h1>
+                            </div>
+                            <div class="col-2 text-right" style="padding-top: 1em">
+                                <a align="right" href="crear-usuario.xhtml">
+                                    <p:commandButton type="button" value="#{msjCrearUsuario.botonCrearUsuario}" />
+                                </a>
                             </div>
                         </div>
                         <f:view>
