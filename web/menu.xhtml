@@ -60,16 +60,10 @@
                         <ul class="navbar-nav my-4 my-sm-0">
                             <li class="nav-item active mr-auto">
                                 <h:form>
-                                    <p:selectOneMenu id="opcionesUsuarios" value="" style="width:150px">
-                                        <f:selectItem itemLabel="#{msjMenu.opcionesUsuario}" itemValue="" noSelectionOption="true" />
-                                        <f:selectItem value="#{usuarioControlador.preEditarPassword(usuarioControlador.usuarioLogueado)}" itemLabel="#{msjMenu.cambiarMiContrasena}">
-                                            <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar tu password?" icon="fas fa-exclamation-triangle" />
-                                        </f:selectItem>
-                                        <div class="dropdown-divider"></div>
-                                        <f:selectItem value="#{usuarioControlador.preEditarUsuario(usuarioControlador.usuarioLogueado)}" itemLabel="#{msjMenu.editarMisDatos}">
-                                            <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar tus datos?" icon="fas fa-exclamation-triangle" />
-                                        </f:selectItem>
-                                    </p:selectOneMenu>
+                                    <p:commandLink id="nonAjax" action="#{usuarioControlador.preEditarPassword(usuarioControlador.usuarioLogueado)}" style="margin-right:20px;" ajax="false">
+                                        <h:outputText value="Cambiar mi password" />
+                                        <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar tu password?" icon="fas fa-exclamation-triangle" />
+                                    </p:commandLink>
                                 </h:form>
                             </li>
                         </ul>
@@ -102,7 +96,7 @@
                 </div>
             </div>  
         </f:view>
-        <p:confirmDialog style="left: 41%;top: 50%" global="true" showEffect="fade" hideEffect="explode">
+        <p:confirmDialog styleClass="ui-dialog" showEffect="fade" hideEffect="explode">
             <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" />
             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
         </p:confirmDialog>
