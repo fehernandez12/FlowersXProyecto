@@ -5207,8 +5207,6 @@ body .ui-dialog .ui-dialog-footer button {
     width: auto; }
 body .ui-dialog.ui-confirm-dialog .ui-dialog-content {
     padding: 14px;
-    left: 41%;
-    top: 50%
 }
 body .ui-dialog.ui-confirm-dialog .ui-dialog-content > span {
     float: none;
