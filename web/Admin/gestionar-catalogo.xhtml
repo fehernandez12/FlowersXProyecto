@@ -45,8 +45,13 @@
                                 }
                             </style>
                             <div class="row">
-                                <div class="col-10 ">
+                                <div class="col-8">
                                     <h1><h:outputText value="#{msjGestionarCatalogo.catalogo}"/></h1>
+                                </div>
+                                <div class="col-2 text-right" style="padding-top: 1em">
+                                    <a align="right" href="crear-catalogo.xhtml">
+                                        <p:commandButton type="button" value="#{msjRegistrarProducto.botonRegistrarProducto}" />
+                                    </a>
                                 </div>
                                 <div class="col-2 text-right" style="padding-top: 1em">
                                     <a align="right" href="crear-catalogo.xhtml">
@@ -92,11 +97,11 @@
                                         <f:facet class="header" name="header">
                                             <h:outputText value="#{msjGestionarUsuarios.opciones}"/>
                                         </f:facet>
-                                        <p:commandLink class="opciones-tabla" action="#{usuarioControlador.preEditarUsuario(user)}">
+                                        <p:commandLink class="opciones-tabla" action="#{productoControlador.preEditarProducto(producto)}">
                                             <i class="fas fa-pen"></i>
-                                            <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar este usuario?" icon="fas fa-exclamation-triangle" />
+                                            <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar este producto?" icon="fas fa-exclamation-triangle" />
                                         </p:commandLink>
-                                        <h:commandLink class="opciones-tabla" onclick="return confirm('¿Estás seguro?')" action="#{usuarioControlador.eliminarUsuario(user)}">
+                                        <h:commandLink class="opciones-tabla" onclick="return confirm('¿Estás seguro?')" action="#{productoControlador.eliminarProducto(producto)}">
                                             <i class="fas fa-trash-alt"></i>
                                         </h:commandLink>
                                     </p:column>
@@ -117,8 +122,8 @@
             </div>
         </div>
         <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" />
-            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
+            <p:commandButton style="width: 7em;" value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" />
+            <p:commandButton style="width: 7em;" value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
         </p:confirmDialog>
         <script src="../../js/popper.min.js"></script>
         <script src="../../js/jquery.min.js"></script>

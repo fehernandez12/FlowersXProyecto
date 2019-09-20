@@ -197,6 +197,8 @@ public class ProductoControlador implements Serializable {
     }
 
     public String editarProducto() {
+        producto.setIdProducto(1);
+        producto.setFoto(producto.getFoto());
         productoFacade.edit(producto);
         producto = new Producto();
         return "gestionar-catalogo";
@@ -207,8 +209,8 @@ public class ProductoControlador implements Serializable {
         return "editar-catalogo";
     }
 
-    public void eliminarPedido(Pedido pedido) {
-        pedidoFacade.remove(pedido);
+    public void eliminarProducto(Producto producto) {
+        productoFacade.remove(producto);
         //return "Lista";
     }
 

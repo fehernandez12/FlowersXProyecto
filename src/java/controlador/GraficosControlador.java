@@ -9,9 +9,12 @@ import entidades.Producto;
 import facade.ProductoFacade;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
@@ -28,17 +31,17 @@ public class GraficosControlador implements Serializable {
      */
     public GraficosControlador() {
     }
-    
+
     BarChartModel graficoBarra;
-    
+
     @EJB
     ProductoFacade productoFacade;
     Producto producto = new Producto();
-    
-    /* @PostConstruct
+
+    @PostConstruct
     public void init() {
-        graficarBarra();
-    } */
+        createBarModel();
+    }
 
     public BarChartModel getGraficoBarra() {
         return graficoBarra;
@@ -48,7 +51,6 @@ public class GraficosControlador implements Serializable {
         this.graficoBarra = graficoBarra;
     }
 
-    
     public Producto getProducto() {
         return producto;
     }
@@ -57,17 +59,30 @@ public class GraficosControlador implements Serializable {
         this.producto = producto;
     }
 
-    
-    public void graficarBarra() {
+    private BarChartModel initBarModel() {
         List<Producto> listaProductos = productoFacade.findAll();
-        graficoBarra = new BarChartModel();
+        BarChartModel model = new BarChartModel();
         ChartSeries serieProducto = new ChartSeries();
         serieProducto.setLabel("Productos");
-        for (Producto producto1 : listaProductos) {
-            serieProducto.set(producto1.getNombreProducto(), producto1.getExistencias());
+        for (Producto producto : listaProductos) {
+            if (!(producto.getExistencias() == 0)) {
+                serieProducto.set(producto.getNombreProducto(), producto.getExistencias());
+            }
         }
         graficoBarra.addSeries(serieProducto);
-        graficoBarra.setTitle("Existencias de producto");
+        graficoBarra.setTitle("Existencias de productos");
+        return model;
     }
-    
+
+    private void createBarModel() {
+        graficoBarra = initBarModel();
+        graficoBarra.setLegendPosition("ne");
+        Axis ejeX = graficoBarra.getAxis(AxisType.X);
+        ejeX.setLabel("Producto");
+        Axis ejeY = graficoBarra.getAxis(AxisType.Y);
+        ejeY.setLabel("Existencias");
+        ejeY.setMin(0);
+        ejeY.setMax(80000);
+    }
+
 }

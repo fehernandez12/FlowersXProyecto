@@ -94,7 +94,7 @@
                                 </style>
                                 <div class="col-2 md-2 mb-2">
                                     <p:outputLabel value="Fecha de creación:" /><br/>
-                                    <p:calendar id="popup" value="#{pedidoControlador.pedido.fechaDeCreacion}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" />
+                                    <p:calendar id="popup" widgetVar="calendario" value="#{pedidoControlador.pedido.fechaDeCreacion}" mindate="calendario.today()" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" />
                                 </div>
                                 <div class="col-2 md-2 mb-2">
                                     <p:outputLabel for="date" value="Fecha de envío: " /><br/>

@@ -167,7 +167,7 @@ public class UsuarioControlador implements Serializable {
         return "gestionar-usuarios";
     }
 
-    public String cambiarPassword() throws NoSuchAlgorithmException {
+    public String cambiarPassword() throws NoSuchAlgorithmException, UnsupportedEncodingException {
         usuario.setId(1);
         usuario.setTitular(usuarioLogueado.getTitular());
         usuario.setRazonSocial(usuarioLogueado.getRazonSocial());
@@ -185,6 +185,10 @@ public class UsuarioControlador implements Serializable {
         String hashtext = bigInt.toString(16);
         usuario.setPassword(hashtext);
         usuarioFacade.edit(usuario);
+        String mensaje = "Has cambiado tu password en FlowersX exitosamente.<br>Tu nueva password es: " + password;
+        usuarioFacade.create(usuario);
+        mailer.configurar();
+        mailer.enviarMensaje(usuario.getEmail(), "Cambio de password en FlowersX - Santa Marta Flowers S.A.S.", mensaje);
         usuario = new Usuario();
         return "main-usuario";
     }
