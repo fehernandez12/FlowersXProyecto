@@ -162,6 +162,7 @@ public class ProductoControlador implements Serializable {
     }
 
     public String crearProducto() throws UnsupportedEncodingException {
+        producto.setIdProducto(1);
         String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("Archivos");
         path = path.substring(0, path.indexOf("\\build"));
         path = path + "\\web\\Archivos\\";

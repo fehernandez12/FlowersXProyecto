@@ -7,7 +7,7 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta charset="UTF-8"></meta>
-        <title>Gestionar solicitudes</title>
+        <title>Gestionar novedades</title>
         <link rel="stylesheet" href="../css/bootstrap.css"></link>
         <link rel="stylesheet" href="../css/all.min.css"></link>
         <link rel="stylesheet" href="../css/brands.css"></link>
@@ -23,7 +23,7 @@
                     <nav class="migas breadcrumb-nav" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="../main-usuario.xhtml">Inicio</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Gestión de solicitudes</li>
+                            <li class="breadcrumb-item active" aria-current="page">Gestión de novedades</li>
                         </ol>
                     </nav>
                     <f:view>
@@ -47,64 +47,55 @@
                         </style>
                         <div class="row">
                             <div class="col-10 ">
-                                <h1><h:outputText value="#{msjGestionarSolicitudes.solicitudes}"/></h1>
+                                <h1><h:outputText value="#{msjGestionarNovedades.novedades}"/></h1>
                             </div>
                             <div class="col-2 text-right" style="padding-top: 1em">
                                 <a align="right" href="crear-solicitud.xhtml">
-                                    <p:commandButton type="button" value="#{msjCrearSolicitud.botonCrearSolicitud}" />
+                                    <p:commandButton type="button" value="#{msjCrearNovedad.botonCrearNovedad}" />
                                 </a>
                             </div>
                         </div>
                         <h:form>
-                            <p:dataTable id="tablaSolicitudes" var="solicitud" value="#{solicitudControlador.consultarSolicitud()}" widgetVar="tablaSolicitudes" 
-                                         emptyMessage="No se han encontrado solicitudes con los criterios dados." filteredValue="#{solicitudControlador.listaSolicitudes}" 
+                            <p:dataTable id="tablaNovedades" var="novedad" value="#{novedadControlador.consultarNovedad()}" widgetVar="tablaNovedades" 
+                                         emptyMessage="No se han encontrado novedades con los criterios dados." filteredValue="#{novedadControlador.listaNovedades}" 
                                          resizableColumns="true" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15" style="margin-bottom:20px">
                                 <f:facet name="header">
                                     <p:outputPanel>
                                         <h:outputText value="Buscar todos los campos: " />
-                                        <p:inputText id="globalFilter" onkeyup="PF('tablaSolicitudes').filter()" style="width:200px" placeholder="Palabra clave..."/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('tablaNovedades').filter()" style="width:200px" placeholder="Palabra clave..."/>
                                     </p:outputPanel>
                                 </f:facet>
-                                <p:column filterBy="#{solicitud.idSolicitud}" headerText="Id" filterMatchMode="contains">
-                                    <h:outputText value="#{solicitud.idSolicitud}" />
+                                <p:column filterBy="#{novedad.idNovedad}" headerText="Id" filterMatchMode="contains">
+                                    <h:outputText value="#{novedad.idNovedad}" />
                                 </p:column>
-                                <p:column filterBy="#{solicitud.destinatario}" headerText="Destinatario" filterMatchMode="exact">
+                                <p:column filterBy="#{novedad.fecha}" headerText="Fecha" filterMatchMode="contains">                                  
+                                    <h:outputText value="#{novedad.fecha}" />
+                                </p:column>
+                                <p:column filterBy="#{novedad.pedidoidPedido}" headerText="Id del Pedido" filterMatchMode="contains">
+                                    <h:outputText value="#{novedad.pedidoidPedido}" />
+                                </p:column>
+                                <p:column filterBy="#{novedad.usuarioid}" headerText="Usuario" filterMatchMode="contains">
                                     <f:facet name="filter">
-                                        <p:selectOneMenu onchange="PF('tablaSolicitudes').filter()">
-                                            <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
-                                            <f:selectItems value="#{solicitudControlador.consultarSolicitud()}" var="destinatario" itemValue="#{destinatario.destinatario}" itemLabel="#{destinatario.destinatario}" />
-                                        </p:selectOneMenu>
-                                    </f:facet>
-                                    <h:outputText value="#{solicitud.destinatario}" />
-                                </p:column>
-                                <p:column filterBy="#{solicitud.fecha}" headerText="Fecha" filterMatchMode="contains">
-                                    <h:outputText value="#{solicitud.fecha}" />
-                                </p:column>
-                                <p:column filterBy="#{solicitud.pedidoidPedido}" headerText="Id de pedido" filterMatchMode="contains">
-                                    <h:outputText value="#{solicitud.pedidoidPedido.idPedido}" />
-                                </p:column>
-                                <p:column filterBy="#{solicitud.usuarioid}" headerText="Usuario" filterMatchMode="contains">
-                                    <f:facet name="filter">
-                                        <p:selectOneMenu onchange="PF('tablaSolicitudes').filter()" styleClass="custom-filter">
+                                        <p:selectOneMenu onchange="PF('tablaNovedades').filter()" styleClass="custom-filter">
                                             <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
                                             <f:selectItems value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.titular}" />
                                         </p:selectOneMenu>
                                     </f:facet>
-                                    <h:outputText value="#{solicitud.usuarioid.titular}" />
+                                    <h:outputText value="#{novedad.usuarioid.titular}" />
                                 </p:column>
                                 <p:column>
-                                        <f:facet class="header" name="header">
-                                            <h:outputText value="#{msjGestionarUsuarios.opciones}"/>
-                                        </f:facet>
-                                        <p:commandLink class="opciones-tabla" action="#{usuarioControlador.preEditarUsuario(user)}">
-                                            <i class="fas fa-pen"></i>
-                                            <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar este usuario?" icon="fas fa-exclamation-triangle" />
-                                        </p:commandLink>
-                                        <h:commandLink class="opciones-tabla" onclick="return confirm('¿Estás seguro?')" action="#{usuarioControlador.eliminarUsuario(user)}">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </h:commandLink>
-                                    </p:column>
+                                    <f:facet class="header" name="header">
+                                        <h:outputText value="#{msjGestionarUsuarios.opciones}"/>
+                                    </f:facet>
+                                    <p:commandLink class="opciones-tabla" action="#{usuarioControlador.preEditarUsuario(user)}">
+                                        <i class="fas fa-pen"></i>
+                                        <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar este usuario?" icon="fas fa-exclamation-triangle" />
+                                    </p:commandLink>
+                                    <h:commandLink class="opciones-tabla" onclick="return confirm('¿Estás seguro?')" action="#{usuarioControlador.eliminarUsuario(user)}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </h:commandLink>
+                                </p:column>
                             </p:dataTable>
                             <h3>Exportar datos a Microsoft Excel</h3>
                             <h:commandLink>
@@ -123,4 +114,6 @@
         <script src="../../js/main.js"></script>
     </h:body>
 </html>
+
+
 

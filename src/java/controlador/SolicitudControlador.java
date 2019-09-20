@@ -89,6 +89,7 @@ public class SolicitudControlador implements Serializable {
     }
 
     public String crearSolicitud() throws UnsupportedEncodingException {
+        solicitud.setIdSolicitud(1);
         solicitud.setPedidoidPedido(pedidoFacade.find(pedido.getIdPedido()));
         usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sesionLogin");
         solicitud.setUsuarioid(usuarioFacade.find(usuario.getId()));

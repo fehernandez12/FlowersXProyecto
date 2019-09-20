@@ -29,105 +29,107 @@
                     <p>Por favor llena los siguientes datos.</p>
                 </div>
             </div>
+            <script type="text/javascript">
+                PrimeFaces.locales['es'] = {
+                    closeText: 'Cerrar',
+                    prevText: 'Anterior',
+                    nextText: 'Siguiente',
+                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                    dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                    weekHeader: 'Semana',
+                    firstDayOfWeek: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: '',
+                    timeOnlyTitle: 'Sólo hora',
+                    timeText: 'Tiempo',
+                    hourText: 'Hora',
+                    minuteText: 'Minuto',
+                    secondText: 'Segundo',
+                    currentText: 'Fecha actual',
+                    ampm: false,
+                    month: 'Mes',
+                    week: 'Semana',
+                    day: 'Día',
+                    allDayText: 'Todo el día'
+                };
+            </script>
+            <style type="text/css">
+                .ui-datalist .ui-datalist-content {
+                    border:0 none
+                }
+
+                .ui-datalist ul {
+                    padding: 0px 10px 0 20px;
+                    margin: 5px 0;
+                }
+
+                .value {
+                    font-weight: bold;
+                }
+
+                .ui-autocomplete-itemtip {
+                    -moz-box-sizing: content-box;
+                    -webkit-box-sizing: content-box;
+                    box-sizing: content-box;
+                }
+            </style>
+            <style type="text/css">
+                .value {
+                    font-weight: bold;
+                }
+            </style>
             <div class="row">
                 <div class="col">
-                    <f:view>
-                        <style type="text/css">
-                            .ui-datalist .ui-datalist-content {
-                                border:0 none
-                            }
-
-                            .ui-datalist ul {
-                                padding: 0px 10px 0 20px;
-                                margin: 5px 0;
-                            }
-
-                            .value {
-                                font-weight: bold;
-                            }
-
-                            .ui-autocomplete-itemtip {
-                                -moz-box-sizing: content-box;
-                                -webkit-box-sizing: content-box;
-                                box-sizing: content-box;
-                            }
-                        </style>
-                        <h:form class="formulario" enctype="multipart/form-data">
-                            <div class="form-row">
-                                <div class="col-2 md-1 mb-1">
-                                    <p:outputLabel value="Id de la Solicitud:" for="idSolicitud" />
-                                    <p:inputText class="form-control" pt:placeholder="Id de la Solicitud" id="idSolicitud" value="#{solicitudControlador.solicitud.idSolicitud}" title="IdSolicitud" required="true" requiredMessage="The IdSolicitud field is required."/>
-                                </div>
-                                <script type="text/javascript">
-                                    PrimeFaces.locales['es'] = {
-                                        closeText: 'Cerrar',
-                                        prevText: 'Anterior',
-                                        nextText: 'Siguiente',
-                                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                                        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
-                                        weekHeader: 'Semana',
-                                        firstDayOfWeek: 1,
-                                        isRTL: false,
-                                        showMonthAfterYear: false,
-                                        yearSuffix: '',
-                                        timeOnlyTitle: 'Sólo hora',
-                                        timeText: 'Tiempo',
-                                        hourText: 'Hora',
-                                        minuteText: 'Minuto',
-                                        secondText: 'Segundo',
-                                        currentText: 'Fecha actual',
-                                        ampm: false,
-                                        month: 'Mes',
-                                        week: 'Semana',
-                                        day: 'Día',
-                                        allDayText: 'Todo el día'
-                                    };
-                                </script>
-                                <style type="text/css">
-                                    .value {
-                                        font-weight: bold;
-                                    }
-                                </style>
-                                <div class="col-3 md-3 mb-3">
-                                    <p:outputLabel value="Fecha:" /><br />
-                                    <p:calendar id="restricted" value="#{solicitudControlador.solicitud.fecha}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" mindate="" maxdate="" />
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-6 md-4 mb-4">
-                                    <p:outputLabel value="Destinatario:" for="destinatario" />
-                                    <p:inputText class="form-control" pt:placeholder="Destinatario" id="destinatario" value="#{solicitudControlador.solicitud.destinatario}" title="Destinatario" required="true" requiredMessage="The Destinatario field is required."/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col">
-                                    <p:outputLabel value="Soporte:" for="soporte1" />
-                                    <h:inputFile class="form-control-file" pt:placeholder="Soporte:" id="soporte1" value="#{solicitudControlador.file}" title="Soporte1" required="true" requiredMessage="The Soporte1 field is required."/>
-                                    <p:outputLabel value="Soporte adicional:" for="soporte2" />
-                                    <h:inputFile class="form-control-file" pt:placeholder="Soporte adicional:" id="soporte2" value="#{solicitudControlador.file1}" title="Soporte2" />
-                                    <p:outputLabel value="Soporte adicional:" for="soporte3" />
-                                    <h:inputFile class="form-control-file" pt:placeholder="Soporte adicional" id="soporte3" value="#{solicitudControlador.file2}" title="Soporte3" />
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col md-3 mb-3">
-                                    <p:outputLabel value="Id de Pedido:" for="pedidoidPedido" />
-                                    <p:selectOneMenu class="form-control" pt:placeholder="Id de Pedido" id="pedidoidPedido" value="#{solicitudControlador.pedido.idPedido}" required="true" requiredMessage="The PedidoidPedido field is required.">
-                                        <!-- TODO: update below reference to list of available items-->
-                                        <f:selectItems class="dropdown-item" value="#{pedidoControlador.listar()}" var="pedido" itemValue="#{pedido.idPedido}" itemLabel="#{pedido.idPedido}"/>
-                                    </p:selectOneMenu>
-                                </div>
-                                <div class="col md-3 mb-3">
-                                    <p:outputLabel value="Id de Usuario:" for="usuarioid" />
-                                    <p:inputText class="form-control" id="usuarioid" value="#{usuarioControlador.usuarioLogueado.id}" title="Usuarioid" readonly="true" />
-                                </div>
-                            </div>
-                            <h:commandButton class="btn boton-registro" action="#{solicitudControlador.crearSolicitud()}" value="Crear solicitud" />
-                        </h:form>
-                    </f:view>
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <f:view>
+                                <h:form class="formulario" enctype="multipart/form-data">
+                                    <div class="form-row">
+                                        <div class="col-3 md-3 mb-3">
+                                            <p:outputLabel value="Fecha:" />
+                                            <p:calendar id="restricted" value="#{solicitudControlador.solicitud.fecha}" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" mindate="" maxdate="" />
+                                        </div>
+                                        <div class="col-9 md-9 mb-9">
+                                            <p:outputLabel value="Destinatario:" for="destinatario" />
+                                            <p:inputText class="form-control" pt:placeholder="Destinatario" id="destinatario" value="#{solicitudControlador.solicitud.destinatario}" title="Destinatario" required="true" requiredMessage="The Destinatario field is required."/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-6 md-6 mb-6">
+                                            <p:outputLabel value="Soporte:" for="soporte1" />
+                                            <h:inputFile class="form-control-file" pt:placeholder="Soporte:" id="soporte1" value="#{solicitudControlador.file}" title="Soporte1" required="true" requiredMessage="The Soporte1 field is required."/>
+                                        </div>
+                                        <div class="col-6 md-6 mb-6">
+                                            <p:outputLabel value="Soporte adicional:" for="soporte2" />
+                                            <h:inputFile class="form-control-file" pt:placeholder="Soporte adicional:" id="soporte2" value="#{solicitudControlador.file1}" title="Soporte2" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-6 md-6 mb-6">
+                                            <p:outputLabel value="Soporte adicional:" for="soporte3" />
+                                            <h:inputFile class="form-control-file" pt:placeholder="Soporte adicional" id="soporte3" value="#{solicitudControlador.file2}" title="Soporte3" />
+                                        </div>
+                                        <div class="col-3 md-3 mb-3">
+                                            <p:outputLabel value="Id de Pedido:" for="pedidoidPedido" />
+                                            <p:selectOneMenu class="form-control" pt:placeholder="Id de Pedido" id="pedidoidPedido" value="#{solicitudControlador.pedido.idPedido}" style="width: 11em" required="true" requiredMessage="The PedidoidPedido field is required.">
+                                                <!-- TODO: update below reference to list of available items-->
+                                                <f:selectItems class="dropdown-item" value="#{pedidoControlador.listar()}" var="pedido" itemValue="#{pedido.idPedido}" itemLabel="#{pedido.idPedido}"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="col-3 md-3 mb-3">
+                                            <p:outputLabel value="Id de Usuario:" for="usuarioid" />
+                                            <p:inputText class="form-control" id="usuarioid" value="#{usuarioControlador.usuarioLogueado.id}" title="Usuarioid" readonly="true" />
+                                        </div>
+                                        <p:commandButton action="#{solicitudControlador.crearSolicitud()}" type="submit" value="#{msjCrearSolicitud.botonCrearSolicitud}"></p:commandButton>
+                                    </div>
+                                </h:form>
+                            </f:view>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

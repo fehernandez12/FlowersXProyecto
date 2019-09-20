@@ -18,10 +18,13 @@
         <div data-spy="scroll" data-target="#" data-offset="0" class="container">
             <div class="row">
                 <div class="col tabla">
+                    <nav class="migas breadcrumb-nav" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="../main-usuario.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Gestión de catálogo</li>
+                        </ol>
+                    </nav>
                     <f:view>
-                        <div class="col">
-                            <h1><h:outputText value="Catalogos"/></h1>
-                        </div>
                         <f:view>
                             <style type="text/css">
                                 .ui-datatable .ui-datatable-header {
@@ -41,6 +44,16 @@
                                     box-sizing: border-box;
                                 }
                             </style>
+                            <div class="row">
+                                <div class="col-10 ">
+                                    <h1><h:outputText value="#{msjGestionarCatalogo.catalogo}"/></h1>
+                                </div>
+                                <div class="col-2 text-right" style="padding-top: 1em">
+                                    <a align="right" href="crear-catalogo.xhtml">
+                                        <p:commandButton type="button" value="#{msjRegistrarProducto.botonRegistrarProducto}" />
+                                    </a>
+                                </div>
+                            </div>
                             <h:form>
                                 <p:dataTable id="tablaProducto" var="producto" value="#{productoControlador.listar()}" widgetVar="tablaProducto" 
                                              emptyMessage="No se han encontrado productos con los criterios dados." filteredValue="#{productoControlador.listaProductos}" 
@@ -76,8 +89,16 @@
                                         </h:outputText>
                                     </p:column>
                                     <p:column>
-                                        <h:commandLink class="opciones-tabla" action="#{productoControlador.preEditarProducto(producto)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-pen"></i></h:commandLink>
-                                        <h:commandLink class="opciones-tabla" action="#{productoControlador.preEditarProducto(producto)}" onclick="return confirm('¿Estás seguro?')"><i class="fas fa-trash-alt"></i></h:commandLink>
+                                        <f:facet class="header" name="header">
+                                            <h:outputText value="#{msjGestionarUsuarios.opciones}"/>
+                                        </f:facet>
+                                        <p:commandLink class="opciones-tabla" action="#{usuarioControlador.preEditarUsuario(user)}">
+                                            <i class="fas fa-pen"></i>
+                                            <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar este usuario?" icon="fas fa-exclamation-triangle" />
+                                        </p:commandLink>
+                                        <h:commandLink class="opciones-tabla" onclick="return confirm('¿Estás seguro?')" action="#{usuarioControlador.eliminarUsuario(user)}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </h:commandLink>
                                     </p:column>
                                 </p:dataTable>
                                 <h3>Exportar datos a Microsoft Excel</h3>
@@ -95,6 +116,10 @@
                 </div>
             </div>
         </div>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
+        </p:confirmDialog>
         <script src="../../js/popper.min.js"></script>
         <script src="../../js/jquery.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>

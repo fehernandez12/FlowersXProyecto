@@ -33,6 +33,14 @@ function scrollFunction() {
         a.preventDefault();
         $('html, body').animate({scrollTop: 0}, '200');
     });
+    
+    var btn2 = $('#inicio');
+    btn2.on('click', function (a) {
+        a.preventDefault();
+        $('html, body').animate({
+            scrollTop: 0
+        }, '200');
+    })
 
     // Collapse Navbar
     var navbarCollapse = function () {

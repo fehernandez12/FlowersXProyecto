@@ -110,6 +110,14 @@ public class UsuarioControlador implements Serializable {
         this.usuario = usuario;
     }
 
+    public Usuario getUsuarioCorreo() {
+        return usuarioCorreo;
+    }
+
+    public void setUsuarioCorreo(Usuario usuarioCorreo) {
+        this.usuarioCorreo = usuarioCorreo;
+    }
+
     public Rol getRol() {
         return rol;
     }
@@ -139,6 +147,7 @@ public class UsuarioControlador implements Serializable {
     }
 
     public String crearUsuario() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        usuario.setId(1);
         usuario.setRolidRol(rolFacade.find(rol.getIdRol()));
         usuario.setPaisIdpais(paisFacade.find(pais.getIdpais()));
         usuario.setCiudadIdciudad(ciudadFacade.find(ciudad.getIdciudad()));
@@ -159,8 +168,14 @@ public class UsuarioControlador implements Serializable {
     }
 
     public String cambiarPassword() throws NoSuchAlgorithmException {
-        this.usuario = usuario;
-        usuario.setRolidRol(rolFacade.find(rol.getIdRol()));
+        usuario.setId(1);
+        usuario.setTitular(usuarioLogueado.getTitular());
+        usuario.setRazonSocial(usuarioLogueado.getRazonSocial());
+        usuario.setEmail(usuarioLogueado.getEmail());
+        usuario.setEstado(1);
+        usuario.setRolidRol(usuarioLogueado.getRolidRol());
+        usuario.setPaisIdpais(usuarioLogueado.getPaisIdpais());
+        usuario.setCiudadIdciudad(usuarioLogueado.getCiudadIdciudad());
         MessageDigest m = MessageDigest.getInstance("MD5");
         String password = usuario.getPassword();
         m.reset();
@@ -170,6 +185,7 @@ public class UsuarioControlador implements Serializable {
         String hashtext = bigInt.toString(16);
         usuario.setPassword(hashtext);
         usuarioFacade.edit(usuario);
+        usuario = new Usuario();
         return "main-usuario";
     }
 

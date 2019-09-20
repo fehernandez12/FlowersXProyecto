@@ -58,6 +58,7 @@ public class NovedadControlador implements Serializable {
     }
 
     public String crearNovedad() {
+        novedad.setIdNovedad(1);
         novedad.setPedidoidPedido(pedidoFacade.find(pedido.getIdPedido()));
         novedad.setUsuarioid(usuarioFacade.find(usuario.getId()));
         novedadFacade.create(novedad);

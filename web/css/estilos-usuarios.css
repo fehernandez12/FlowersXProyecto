@@ -76,7 +76,8 @@ body{
     z-index: -1;
     padding: 0;
     position: absolute;
-    height: 903px;
+    height: 100vh;
+    overflow: scroll;
 }
 .card {
     margin: 30px;

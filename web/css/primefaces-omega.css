@@ -6175,3 +6175,7 @@ body .ui-separator {
     border: 1px solid #c8c8c8; }
 
 /* Add your customizations of theme here */
+body .ui-button .ui-button-icon-left {
+    margin-left: 1em;
+    font-size: 1em;
+}

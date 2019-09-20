@@ -38,8 +38,40 @@
             <var>msjGestionarUsuarios</var>
         </resource-bundle>
         <resource-bundle>
+            <base-name>idiomas.CrearSolicitud</base-name>
+            <var>msjCrearSolicitud</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.GestionarSolicitudes</base-name>
+            <var>msjGestionarSolicitudes</var>
+        </resource-bundle>
+        <resource-bundle>
             <base-name>idiomas.VerCatalogo</base-name>
             <var>msjVerCatalogo</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.GestionarCatalogo</base-name>
+            <var>msjGestionarCatalogo</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.RegistrarProducto</base-name>
+            <var>msjRegistrarProducto</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.CrearNovedad</base-name>
+            <var>msjCrearNovedad</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.GestionarNovedades</base-name>
+            <var>msjGestionarNovedades</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.CambiarPassword</base-name>
+            <var>msjCambiarPassword</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.Error</base-name>
+            <var>msjError</var>
         </resource-bundle>
     </application>
 </faces-config>
