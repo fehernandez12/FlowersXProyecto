@@ -73,5 +73,13 @@
             <base-name>idiomas.Error</base-name>
             <var>msjError</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.CrearPedido</base-name>
+            <var>msjCrearPedido</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.RegistrarPago</base-name>
+            <var>msjRegistrarPago</var>
+        </resource-bundle>
     </application>
 </faces-config>

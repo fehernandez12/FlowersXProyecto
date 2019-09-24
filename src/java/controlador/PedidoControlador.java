@@ -15,7 +15,9 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.faces.context.FacesContext;
 import javax.ejb.EJB;
 
 /**
@@ -42,9 +44,17 @@ public class PedidoControlador implements Serializable {
     @EJB
     ProductoFacade productoFacade;
     Producto producto = new Producto();
-    List<Producto> listaProductos = new ArrayList();
-    private int cantidadCamas;
+    List<Producto> listaProductos;
+    List<Producto> carrito = new ArrayList();
     private double impuestos = 0;
+
+    public List<Producto> getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(List<Producto> carrito) {
+        this.carrito = carrito;
+    }
 
     public List<Pedido> getListaPedidos() {
         return listaPedidos;
@@ -117,17 +127,9 @@ public class PedidoControlador implements Serializable {
     public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
     }
-    
+
     public List<Pedido> listar() {
         return pedidoFacade.findAll();
-    }
-
-    public int getCantidadCamas() {
-        return cantidadCamas;
-    }
-
-    public void setCantidadCamas(int cantidadCamas) {
-        this.cantidadCamas = cantidadCamas;
     }
 
     public double getImpuestos() {
@@ -137,19 +139,43 @@ public class PedidoControlador implements Serializable {
     public void setImpuestos(double impuestos) {
         this.impuestos = impuestos;
     }
-    
+
     public void agregarAlCarrito(Producto p) {
-        for (int i = 0; i < this.cantidadCamas; i++) {
-            listaProductos.add(p);
-        }
+        carrito.add(p);
     }
-    
+
     public String crearPedido() {
+        usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sesionLogin");
         pedido.setUsuarioid(usuarioFacade.find(usuario.getId()));
         pedido.setIdPedido(1);
+        double subTotal = 0;
+        double[] tiempos = new double[carrito.size()];
+        for (int i = 0; i < tiempos.length; i++) {
+            for (Producto producto1 : carrito) {
+                tiempos[i] = producto1.getTiempoDeCultivo();
+            }
+        }
+        int max = 0;
+        for (double tiempo : tiempos) {
+            if (max < tiempo) {
+                max = (int) tiempo;
+            }
+        }
+        for (Producto producto3 : carrito) {
+            producto.setExistencias(producto.getExistencias() - 100);
+        }
+        Date fechaEnvio = pedido.getFechaDeCreacion();
+        fechaEnvio.setMonth((fechaEnvio.getMonth() - 1 + max) % 12 + 1);
+        pedido.setFechaDeEntrega(fechaEnvio);
+        for (Producto producto2 : carrito) {
+            subTotal = subTotal + producto2.getPrecio();
+        }
+        double total = subTotal + (subTotal * 0.18);
+        pedido.setSubTotal(subTotal);
+        pedido.setTotal(total);
+        pedidoFacade.agregarProductosAlPedido(carrito, pedido);
         pedidoFacade.create(pedido);
-        pedido = new Pedido();
-        return "gestionar-pedido";
+        return "registrar-pago";
     }
 
     public String preEditarPedido(Pedido pedido) {
@@ -168,23 +194,5 @@ public class PedidoControlador implements Serializable {
         pedidoFacade.remove(pedido);
         //return "Lista";
     }
-    
-    public double calcularSubTotal() {
-        double subTotal = 0;
-        for (Producto producto : listaProductos) {
-            pedido.setSubTotal(subTotal + producto.getPrecio());
-        }
-        return subTotal;
-    }
-    
-    public double calcularImpuestos() {
-        this.impuestos = (pedido.getSubTotal() / 100) * 18;
-        return this.impuestos;
-    }
-    
-    public double calcularTotal() {
-        pedido.setTotal(pedido.getSubTotal() + ((pedido.getSubTotal()/100) * 18));
-        return pedido.getTotal();
-    }
-    
-}
+
+} 

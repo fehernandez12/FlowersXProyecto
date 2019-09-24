@@ -242,10 +242,6 @@
                                                                 #{msjIndex.disponible}
                                                             </small>
                                                         </p>
-                                                        <h:inputText value="#{pedidoControlador.cantidadCamas}" class="form-control form-control-sm" id="carritoCantidad" pt:type="number" pt:placeholder="Ingresa la cantidad deseada." validatorMessage="Cantidad máxima: #{(p.existencias)/100}">
-                                                            <f:validateDoubleRange minimum="1" maximum="#{(p.existencias)/100}" for="carritoCantidad"/>
-                                                        </h:inputText>
-                                                        <br/>
                                                         <h:commandLink onclick="botonCarrito()" action="#{pedidoControlador.agregarAlCarrito(p)}" class="btn boton-ingreso btn-sm">
                                                             <f:ajax execute="@form" render="@none" />
                                                             <i class="fas fa-cart-plus"></i> #{msjIndex.agregarCarrito}
@@ -292,9 +288,9 @@
                                         <h:inputText pt:type="password" class="form-control mr-sm-2" pt:placeholder="#{msjIndex.password}" id="txtPassword" value="#{usuarioControlador.usuario.password}" />
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPassword" data-dismiss="modal">#{msjIndex.cambiarPassword}</button>
+                                <div class="modal-footer" style="text-align: left">
                                     <h:commandButton action="#{usuarioControlador.validarLogin()}" class="btn boton-ingreso" value="#{msjIndex.iniciarSesion}" />
+                                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPassword" data-dismiss="modal">#{msjIndex.cambiarPassword}</button>
                                 </div>
                             </f:view>
                         </h:form>

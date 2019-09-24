@@ -34,6 +34,7 @@ public class PagoControlador implements Serializable {
     @EJB
     PedidoFacade pedidoFacade;
     Pedido pedido = new Pedido();
+    PedidoControlador pedidoControlador = new PedidoControlador();
     @EJB
     NovedadFacade novedadFacade;
     Novedad novedad = new Novedad();
@@ -66,11 +67,12 @@ public class PagoControlador implements Serializable {
     }
     
     public String crearPago() {
-        
-        pago.setPedidoidPedido(pedidoFacade.find(pedido.getIdPedido()));
+        pago.setIdPago(1);
+        pago.setPedidoidPedido(pedidoControlador.getPedido());
+        pedidoControlador.setPedido(new Pedido());
         pagoFacade.create(pago);
         pago = new Pago();
-        return "gestionar-pago";
+        return "orden-realizada";
     }
     
      public String preEditarPago(Pago pago) {

@@ -76,6 +76,7 @@ public class GraficosControlador implements Serializable {
 
     private void createBarModel() {
         graficoBarra = initBarModel();
+        graficoBarra.setAnimate(true);
         graficoBarra.setLegendPosition("ne");
         Axis ejeX = graficoBarra.getAxis(AxisType.X);
         ejeX.setLabel("Producto");

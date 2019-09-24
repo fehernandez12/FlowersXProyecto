@@ -6,9 +6,12 @@
 package facade;
 
 import entidades.Pedido;
+import entidades.Producto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,15 @@ public class PedidoFacade extends AbstractFacade<Pedido> {
 
     public PedidoFacade() {
         super(Pedido.class);
+    }
+    
+    public void agregarProductosAlPedido (List<Producto> listaProductos, Pedido pedido) {
+        for (Producto producto : listaProductos) {
+            Query q = em.createNativeQuery("INSERT INTO producto_has_pedido (producto_idProducto, pedido_idPedido) VALUES (:1, :2)");
+            q.setParameter("1", producto.getIdProducto());
+            q.setParameter("2", pedido.getIdPedido());
+            q.executeUpdate();
+        }
     }
     
 }
