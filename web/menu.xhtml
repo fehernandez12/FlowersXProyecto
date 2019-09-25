@@ -65,7 +65,6 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalPassword">#{msjMainUsuario.cambiarPassword}</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalUsuario">#{msjMainUsuario.editarInfo}</a>
                                     </div>
                                 </div>
                             </li>
@@ -130,29 +129,6 @@
                                 <i class="fas fa-times" style="font-size: 1em" /> 
                                 #{msjMainUsuario.botonNo}
                             </a>
-                        </div>
-                    </h:form>
-                </div>
-            </div>
-        </div>
-        <!-- Modal datos -->
-        <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">                        
-                        <i style="font-size: 1.5em; margin-right: 1em; color: red;" class="fas fa-exclamation-triangle"></i>
-                        <h5 class="modal-title"> #{msjMainUsuario.alerta}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <h:form>                        
-                        <div class="modal-body">
-                            #{msjMainUsuario.estasSeguro} #{msjMainUsuario.modalEditarDatos}?
-                        </div>
-                        <div class="modal-footer">
-                            <p:commandButton style="width: 7em" icon="fas fa-check" value="#{msjMainUsuario.botonSi}" action="cambiar-password.xhtml?faces-redirect=true" pt:target="area-trabajo" />
-                            <p:commandButton style="width: 7em" icon="fas fa-times" value="#{msjMainUsuario.botonNo}" pt:data-dismiss="modal" pt:target="area-trabajo" />
                         </div>
                     </h:form>
                 </div>

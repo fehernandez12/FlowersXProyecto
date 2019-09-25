@@ -141,7 +141,7 @@ public class PedidoControlador implements Serializable {
     }
 
     public void agregarAlCarrito(Producto p) {
-        carrito.add(p);
+        this.carrito.add(p);
     }
 
     public String crearPedido() {
@@ -151,7 +151,7 @@ public class PedidoControlador implements Serializable {
         double subTotal = 0;
         double[] tiempos = new double[carrito.size()];
         for (int i = 0; i < tiempos.length; i++) {
-            for (Producto producto1 : carrito) {
+            for (Producto producto1 : this.carrito) {
                 tiempos[i] = producto1.getTiempoDeCultivo();
             }
         }

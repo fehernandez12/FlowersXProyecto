@@ -18,6 +18,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -41,6 +42,7 @@ public class ProductoControlador implements Serializable {
     ProductoFacade productoFacade;
     Producto producto = new Producto();
     List<Producto> listaProductos;
+    List<Producto> carrito = new ArrayList();
 
     @EJB
     PedidoFacade pedidoFacade;
@@ -64,6 +66,16 @@ public class ProductoControlador implements Serializable {
     public void setMailer(Mailer mailer) {
         this.mailer = mailer;
     }
+
+    public List<Producto> getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(List<Producto> carrito) {
+        this.carrito = carrito;
+    }
+    
+    
 
     public Part getFile() {
         return file;
@@ -159,6 +171,14 @@ public class ProductoControlador implements Serializable {
 
     public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
+    }
+    
+    public void agregarAlCarrito(Producto p) {
+        this.carrito.add(p);
+    }
+    
+    public void prueba() {
+        System.out.println("Hola");
     }
 
     public String crearProducto() throws UnsupportedEncodingException {

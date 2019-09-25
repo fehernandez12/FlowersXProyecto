@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -23,7 +24,7 @@ import org.primefaces.model.chart.ChartSeries;
  * @author Aprendiz
  */
 @Named(value = "graficosControlador")
-@SessionScoped
+@ViewScoped
 public class GraficosControlador implements Serializable {
 
     /**
@@ -32,16 +33,17 @@ public class GraficosControlador implements Serializable {
     public GraficosControlador() {
     }
 
+    @PostConstruct
+    public void init() {
+        graficoBarra = new BarChartModel();
+        createBarModel();
+    }
+
     BarChartModel graficoBarra;
 
     @EJB
     ProductoFacade productoFacade;
     Producto producto = new Producto();
-
-    @PostConstruct
-    public void init() {
-        createBarModel();
-    }
 
     public BarChartModel getGraficoBarra() {
         return graficoBarra;
@@ -59,7 +61,7 @@ public class GraficosControlador implements Serializable {
         this.producto = producto;
     }
 
-    private BarChartModel initBarModel() {
+    public BarChartModel initBarModel() {
         List<Producto> listaProductos = productoFacade.findAll();
         BarChartModel model = new BarChartModel();
         ChartSeries serieProducto = new ChartSeries();
@@ -74,7 +76,7 @@ public class GraficosControlador implements Serializable {
         return model;
     }
 
-    private void createBarModel() {
+    public BarChartModel createBarModel() {
         graficoBarra = initBarModel();
         graficoBarra.setAnimate(true);
         graficoBarra.setLegendPosition("ne");
@@ -84,6 +86,7 @@ public class GraficosControlador implements Serializable {
         ejeY.setLabel("Existencias");
         ejeY.setMin(0);
         ejeY.setMax(80000);
+        return graficoBarra;
     }
 
 }
