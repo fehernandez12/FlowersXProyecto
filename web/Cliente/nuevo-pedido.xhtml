@@ -93,11 +93,10 @@
                                             <p:outputLabel value="Fecha de creación:" /><br/>
                                             <p:calendar id="popup" widgetVar="calendario" value="#{pedidoControlador.pedido.fechaDeCreacion}" mindate="calendario.today()" maxdate="calendario.today()" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" />
                                         </div>
-                                        <p:commandButton styleClass="boton-pago" action="#{pedidoControlador.crearPedido()}" type="submit" style="height: 2.5em; margin-left: 2em; margin-top: 2.17em" icon="fas fa-dollar-sign" value="#{msjCrearPedido.botonPago}" />
-                                        <p:commandButton id="verCarrito" type="button" style="height: 2.5em; margin-left: 2em; margin-top: 2.17em" icon="fas fa-shopping-cart" value="#{msjCrearPedido.verCarrito}" update="tablaCarrito" />
-                                        <p:overlayPanel id="carritoPanel" for="verCarrito" hideEffect="fade">
+                                        <p:commandButton styleClass="boton-pago" action="#{pedidoControlador.crearPedido(productoControlador.carrito)}" type="submit" style="height: 2.5em; margin-left: 2em; margin-top: 2.17em" icon="fas fa-dollar-sign" value="#{msjCrearPedido.botonPago}" />
+                                        <!-- <p:overlayPanel id="carritoPanel" for="verCarrito" hideEffect="fade"> -->
                                             <h:form id="form">
-                                                <p:dataTable id="tablaCarrito" var="producto" value="#{productoControlador.carrito}">
+                                                <p:dataTable id="tablaCarrito" var="producto" value="#{productoControlador.getCarrito()}">
                                                     <f:facet name="header">
                                                         #{msjCrearPedido.contenidoCarrito}
                                                     </f:facet>
@@ -105,13 +104,13 @@
                                                         <h:outputText value="#{producto.nombreProducto}" />
                                                     </p:column>
                                                     <p:column>
-                                                        <p:commandLink class="opciones-tabla" action="#{productoControlador.carrito.remove(producto)}">
+                                                        <p:commandLink class="opciones-tabla" immediate="true" process="@this" action="#{productoControlador.removerDelCarrito(producto)}" update="tablaCarrito">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </p:commandLink>
                                                     </p:column>
                                                 </p:dataTable>
                                             </h:form>
-                                        </p:overlayPanel>
+                                        <!-- </p:overlayPanel> -->
                                     </div>
                                     <br/>
                                     <div class="form-row">
@@ -121,7 +120,7 @@
                                                 <div class="col-md-4 mb-4" style="float:left">
                                                     <p:panelGrid columns="2" style="margin: 1em">
                                                         <f:facet name="header">
-                                                            <img src="#{p.foto}" style="overflow: hidden; height: 10em; width: 21em; object-fit: cover" alt="..." />
+                                                            <img src="#{p.foto}" style="overflow: hidden; height: 10em; width: 21em; object-fit: cover" alt="#{p.nombreProducto}" />
                                                         </f:facet>
 
                                                         <h:outputText value="#{msjCrearPedido.nombreProducto}" />
@@ -130,7 +129,9 @@
                                                         <c:if test="#{!(p.existencias eq 0)}">
                                                             <h:outputText value="#{msjCrearPedido.existencias}" />
                                                             <h:outputText value="Disponible" />
-                                                            <p:commandButton immediate="true" process="@this" action="#{productoControlador.carrito.add(p)}" icon="fas fa-cart-plus" value="#{msjCrearPedido.botonCarrito}" />
+                                                            <p:commandButton immediate="true" action="#{productoControlador.agregarAlCarrito(p)}" process="@this" icon="fas fa-cart-plus" value="#{msjCrearPedido.botonCarrito}" update="form:tablaCarrito">
+                                                                <!-- <f:param name="action" value="{productoControlador.carrito.add(p)}" /> -->
+                                                            </p:commandButton>
                                                             <h:outputText value="" />
                                                         </c:if>
                                                         <c:if test="#{p.existencias eq 0}">

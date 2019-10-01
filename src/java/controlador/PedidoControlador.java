@@ -45,16 +45,7 @@ public class PedidoControlador implements Serializable {
     ProductoFacade productoFacade;
     Producto producto = new Producto();
     List<Producto> listaProductos;
-    List<Producto> carrito = new ArrayList();
     private double impuestos = 0;
-
-    public List<Producto> getCarrito() {
-        return carrito;
-    }
-
-    public void setCarrito(List<Producto> carrito) {
-        this.carrito = carrito;
-    }
 
     public List<Pedido> getListaPedidos() {
         return listaPedidos;
@@ -140,18 +131,14 @@ public class PedidoControlador implements Serializable {
         this.impuestos = impuestos;
     }
 
-    public void agregarAlCarrito(Producto p) {
-        this.carrito.add(p);
-    }
-
-    public String crearPedido() {
+    public String crearPedido(List<Producto> carrito) {
         usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sesionLogin");
         pedido.setUsuarioid(usuarioFacade.find(usuario.getId()));
         pedido.setIdPedido(1);
         double subTotal = 0;
         double[] tiempos = new double[carrito.size()];
         for (int i = 0; i < tiempos.length; i++) {
-            for (Producto producto1 : this.carrito) {
+            for (Producto producto1 : carrito) {
                 tiempos[i] = producto1.getTiempoDeCultivo();
             }
         }
@@ -165,6 +152,7 @@ public class PedidoControlador implements Serializable {
             producto.setExistencias(producto.getExistencias() - 100);
         }
         Date fechaEnvio = pedido.getFechaDeCreacion();
+        pedido.setFechaDeCreacion(fechaEnvio);
         fechaEnvio.setMonth((fechaEnvio.getMonth() - 1 + max) % 12 + 1);
         pedido.setFechaDeEntrega(fechaEnvio);
         for (Producto producto2 : carrito) {
@@ -173,8 +161,8 @@ public class PedidoControlador implements Serializable {
         double total = subTotal + (subTotal * 0.18);
         pedido.setSubTotal(subTotal);
         pedido.setTotal(total);
-        pedidoFacade.agregarProductosAlPedido(carrito, pedido);
         pedidoFacade.create(pedido);
+        pedidoFacade.agregarProductosAlPedido(carrito, pedido);
         return "registrar-pago";
     }
 

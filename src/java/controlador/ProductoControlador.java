@@ -173,8 +173,14 @@ public class ProductoControlador implements Serializable {
         this.listaUsuarios = listaUsuarios;
     }
     
-    public void agregarAlCarrito(Producto p) {
-        this.carrito.add(p);
+    public void agregarAlCarrito (Producto p) {
+        carrito.add(p);
+        System.out.println(carrito);
+    }
+    
+    public void removerDelCarrito (Producto p) {
+        carrito.remove(p);
+        System.out.println(carrito);
     }
     
     public void prueba() {

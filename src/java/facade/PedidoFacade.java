@@ -34,9 +34,9 @@ public class PedidoFacade extends AbstractFacade<Pedido> {
     
     public void agregarProductosAlPedido (List<Producto> listaProductos, Pedido pedido) {
         for (Producto producto : listaProductos) {
-            Query q = em.createNativeQuery("INSERT INTO producto_has_pedido (producto_idProducto, pedido_idPedido) VALUES (:1, :2)");
-            q.setParameter("1", producto.getIdProducto());
-            q.setParameter("2", pedido.getIdPedido());
+            Query q = em.createNativeQuery("INSERT INTO producto_has_pedido (producto_idProducto, pedido_idPedido) VALUES (?1, ?2)");
+            q.setParameter(1, producto.getIdProducto());
+            q.setParameter(2, pedido.getIdPedido());
             q.executeUpdate();
         }
     }

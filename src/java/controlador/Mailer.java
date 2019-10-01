@@ -22,6 +22,7 @@ import javax.mail.internet.MimeMultipart;
  * @author Aprendiz
  */
 public class Mailer {
+
     Session session;
     //Credenciales de la cuenta de correo
     final String user = "santamartaflowers@gmail.com";//cambiará en consecuencia al servidor utilizado
@@ -64,12 +65,18 @@ public class Mailer {
     public void enviarMensaje(String destinatario, String asunto, String mensaje) throws UnsupportedEncodingException {
         this.fueEnviado = false;
         //Estructura del mensaje en HTML
-        String nuevoMensaje = "<h1 style=\"font-size: 20px; color:#79B3AA; font-weight: bold; text-transform: uppercase ; \">FlowersX - Mensaje del administrador" + "</h1>" + "<img src=\"https://i.imgur.com/2seKBWE.png\"/ style=\"float: left;\"><p>" + mensaje + "<br>\n"
-                + "<p style=\"text-align: center;\">\n"
-                + "</p> \n"
-                + "<br>\n"
-                + "<p style=\"color:#79B3AA;font-weight: bold;\" > Gracias por creer en nosotros. </p> ";
-         try {
+        String nuevoMensaje = "<style>\n"
+                + "		@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');\n"
+                + "		@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');\n"
+                + "	</style>\n"
+                + "	<div style=\"background-image: url('https://i.imgur.com/GkfVLLj.jpg'); font-family: 'Open Sans', sans-serif; position: relative; text-align: center; color: #363636; width: 1600px; height: 1002px; background-size: cover\">\n"
+                + "		<div style=\"font-family: 'Open Sans', sans-serif; word-wrap: break-word; padding-top: 5%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 128em; max-height: 80em; z-index: 1000;\">\n"
+                + "			<h1>" + asunto + "</h1>\n"
+                + "			<p style=\"text-align: justify;\">" + mensaje + "</p>\n"
+                + "			<h1 style=\"font-size: 3em; font-family: 'Cookie', cursive; color: #CFB0FF\">¡Gracias por confiar en nosotros!</h1>\n"
+                + "		</div>\n"
+                + "	</div>";
+        try {
             //Configurar mensaje
             BodyPart texto = new MimeBodyPart();
             texto.setContent(nuevoMensaje, "text/html");
@@ -91,12 +98,18 @@ public class Mailer {
 
     public void enviarMensajeConUnAdjunto(String destinatario, String asunto, String mensaje, String ruta, String nombre) throws UnsupportedEncodingException {
         //Estructura del mensaje
-        String nuevoMensaje = "<h1 style=\"font-size: 20px; color:#0C0; font-weight: bold; text-transform: uppercase ; \">FlowersX - " + asunto + "</h1>" + "<img src=\"https://i.imgur.com/2seKBWE.png\"/ style=\"float: left;\"><br>\n"
-                + "<p style=\"text-align: center; color: #222222\">\n"
-                + "</p> \n"
-                + "<br>\n"
-                + "<p style=\"color:#0C0;font-weight: bold;\" > Gracias por creer en nosotros. </p> ";
-         try {
+        String nuevoMensaje = "<style>\n"
+                + "		@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');\n"
+                + "		@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');\n"
+                + "	</style>\n"
+                + "	<div style=\"background-image: url('https://i.imgur.com/GkfVLLj.jpg'); font-family: 'Open Sans', sans-serif; position: relative; text-align: center; color: #363636; width: 1600px; height: 1002px; background-size: cover\">\n"
+                + "		<div style=\"font-family: 'Open Sans', sans-serif; word-wrap: break-word; padding-top: 5%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 128em; max-height: 80em; z-index: 1000;\">\n"
+                + "			<h1>" + asunto + "</h1>\n"
+                + "			<p style=\"text-align: justify;\">" + mensaje + "</p>\n"
+                + "			<h1 style=\"font-size: 3em; font-family: 'Cookie', cursive; color: #CFB0FF\">¡Gracias por confiar en nosotros!</h1>\n"
+                + "		</div>\n"
+                + "	</div>";
+        try {
             //Configurar mensaje
             BodyPart texto = new MimeBodyPart();
             texto.setContent(nuevoMensaje, "text/html");
@@ -122,14 +135,21 @@ public class Mailer {
             throw new RuntimeException(e);
         }
     }
+
     public void enviarMensajeConDosAdjuntos(String destinatario, String asunto, String mensaje, String ruta, String nombre, String ruta1, String nombre1) throws UnsupportedEncodingException {
         //Estructura del mensaje
-        String nuevoMensaje = "<h1 style=\"font-size: 20px; color:#0C0; font-weight: bold; text-transform: uppercase ; \">FlowersX - " + asunto + "</h1>" + "<img src=\"https://i.imgur.com/2seKBWE.png\"/ style=\"float: left;\"><br>\n"
-                + "<p style=\"text-align: center; color: #222222\">\n"
-                + "</p> \n"
-                + "<br>\n"
-                + "<p style=\"color:#0C0;font-weight: bold;\" > Gracias por creer en nosotros. </p> ";
-         try {
+        String nuevoMensaje = "<style>\n"
+                + "		@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');\n"
+                + "		@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');\n"
+                + "	</style>\n"
+                + "	<div style=\"background-image: url('https://i.imgur.com/GkfVLLj.jpg'); font-family: 'Open Sans', sans-serif; position: relative; text-align: center; color: #363636; width: 1600px; height: 1002px; background-size: cover\">\n"
+                + "		<div style=\"font-family: 'Open Sans', sans-serif; word-wrap: break-word; padding-top: 5%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 128em; max-height: 80em; z-index: 1000;\">\n"
+                + "			<h1>" + asunto + "</h1>\n"
+                + "			<p style=\"text-align: justify;\">" + mensaje + "</p>\n"
+                + "			<h1 style=\"font-size: 3em; font-family: 'Cookie', cursive; color: #CFB0FF\">¡Gracias por confiar en nosotros!</h1>\n"
+                + "		</div>\n"
+                + "	</div>";
+        try {
             //Configurar mensaje
             BodyPart texto = new MimeBodyPart();
             texto.setContent(nuevoMensaje, "text/html");
@@ -159,15 +179,21 @@ public class Mailer {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void enviarMensajeConTresAdjuntos(String destinatario, String asunto, String mensaje, String ruta, String nombre, String ruta1, String nombre1, String ruta2, String nombre2) throws UnsupportedEncodingException {
         //Estructura del mensaje
-        String nuevoMensaje = "<h1 style=\"font-size: 20px; color:#0C0; font-weight: bold; text-transform: uppercase ; \">FlowersX - " + asunto + "</h1>" + "<img src=\"https://i.imgur.com/2seKBWE.png\"/ style=\"float: left;\"><br>\n"
-                + "<p style=\"text-align: center; color: #222222\">\n"
-                + "</p> \n"
-                + "<br>\n"
-                + "<p style=\"color:#0C0;font-weight: bold;\" > Gracias por creer en nosotros. </p> ";
-         try {
+        String nuevoMensaje = "<style>\n"
+                + "		@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');\n"
+                + "		@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');\n"
+                + "	</style>\n"
+                + "	<div style=\"background-image: url('https://i.imgur.com/GkfVLLj.jpg'); font-family: 'Open Sans', sans-serif; position: relative; text-align: center; color: #363636; width: 1600px; height: 1002px; background-size: cover\">\n"
+                + "		<div style=\"font-family: 'Open Sans', sans-serif; word-wrap: break-word; padding-top: 5%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 128em; max-height: 80em; z-index: 1000;\">\n"
+                + "			<h1>" + asunto + "</h1>\n"
+                + "			<p style=\"text-align: justify;\">" + mensaje + "</p>\n"
+                + "			<h1 style=\"font-size: 3em; font-family: 'Cookie', cursive; color: #CFB0FF\">¡Gracias por confiar en nosotros!</h1>\n"
+                + "		</div>\n"
+                + "	</div>";
+        try {
             //Configurar mensaje
             BodyPart texto = new MimeBodyPart();
             texto.setContent(nuevoMensaje, "text/html");
