@@ -79,7 +79,9 @@
                                     <h:outputText value="#{solicitud.destinatario}" />
                                 </p:column>
                                 <p:column filterBy="#{solicitud.fecha}" headerText="Fecha" filterMatchMode="contains">
-                                    <h:outputText value="#{solicitud.fecha}" />
+                                    <h:outputText value="#{solicitud.fecha}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                                    </h:outputText>
                                 </p:column>
                                 <p:column filterBy="#{solicitud.pedidoidPedido}" headerText="Id de pedido" filterMatchMode="contains">
                                     <h:outputText value="#{solicitud.pedidoidPedido.idPedido}" />

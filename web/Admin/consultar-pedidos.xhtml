@@ -22,9 +22,28 @@
             <div data-spy="scroll" data-target="#" data-offset="0" class="container">
                 <div class="row">
                     <div class="col tabla">
+                        <nav class="migas breadcrumb-nav" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="../main-usuario.xhtml">Inicio</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Ver pedidos</li>
+                            </ol>
+                        </nav>
                         <f:view>
-                            <div class="col">
+                            <div class="col-10">
                                 <h1><h:outputText value="Pedidos"/></h1>
+                            </div>
+                            <div class="col-2 text-right" style="padding-top: 1em">
+                                <p:commandButton id="botonReporte" value="#{msjGestionarCatalogo.generarReporte}" type="button" />
+                                <p:overlayPanel id="panelReporte" for="botonReporte">
+                                    <h:form>
+                                        <p:outputLabel value="#{msjConsultarPedidos.fechaInicial}"/>
+                                        <p:calendar value="#{controladorFechas.fechaI}" widgetVar="calendario" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" maxdate="calendario.today()" />
+                                        <p:outputLabel value="#{msjConsultarPedidos.fechaEnvio}" />
+                                        <p:calendar id="calendarioFinal" value="#{controladorFechas.fechaF}" widgetVar="calendario" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" maxdate="#{controladorFechas.fechaI}" />
+                                        <br />
+                                        <p:commandButton value="#{msjGestionarCatalogo.generarReporte}" action="#{controladorFechas.descargarPedidosFechas()}" />
+                                    </h:form>
+                                </p:overlayPanel>
                             </div>
                             <style type="text/css">
                                 .ui-datatable .ui-datatable-header {
@@ -59,15 +78,19 @@
                                         <h:outputText value="#{pedido.idPedido}" />
                                     </p:column>
                                     <p:column filterBy="#{pedido.fechaDeCreacion}" headerText="Fecha de creación" filterMatchMode="contains">
-                                        <h:outputText value="#{pedido.fechaDeCreacion}" />
+                                        <h:outputText value="#{pedido.fechaDeCreacion}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                                        </h:outputText>
                                     </p:column>
                                     <p:column filterBy="#{pedido.fechaDeEntrega}" headerText="Fecha de entrega" filterMatchMode="contains">
-                                        <h:outputText value="#{pedido.fechaDeEntrega}" />
+                                        <h:outputText value="#{pedido.fechaDeEntrega}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                                        </h:outputText>
                                     </p:column>
-                                    <p:column filterBy="#{pedido.subTotal}" headerText="Fecha" filterMatchMode="contains">
+                                    <p:column filterBy="#{pedido.subTotal}" headerText="Subtotal" filterMatchMode="contains">
                                         <h:outputText value="#{pedido.subTotal}" />
                                     </p:column>
-                                    <p:column filterBy="#{pedido.total}" headerText="Id de pedido" filterMatchMode="contains">
+                                    <p:column filterBy="#{pedido.total}" headerText="Total" filterMatchMode="contains">
                                         <h:outputText value="#{pedido.total}" />
                                     </p:column>
                                     <p:column filterBy="#{pedido.usuarioid}" headerText="Usuario" filterMatchMode="contains">
@@ -78,9 +101,6 @@
                                             </p:selectOneMenu>
                                         </f:facet>
                                         <h:outputText value="#{pedido.usuarioid.titular}" />
-                                    </p:column>
-                                    <p:column>
-                                        <h:commandLink class="opciones-tabla" onclick="PF('modalPedido').show(pedido);"><i class="fas fa-search"></i></h:commandLink>
                                     </p:column>
                                 </p:dataTable>
 

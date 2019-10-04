@@ -7,6 +7,8 @@ package facade;
 
 import entidades.Pedido;
 import entidades.Producto;
+import entidades.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -39,6 +41,13 @@ public class PedidoFacade extends AbstractFacade<Pedido> {
             q.setParameter(2, pedido.getIdPedido());
             q.executeUpdate();
         }
+    }
+    
+    public List<Pedido> listarPedidosCliente (Usuario usuario) {
+        Query q = em.createQuery("SELECT p FROM Pedido p WHERE p.usuarioid = ?1");
+        q.setParameter(1, usuario);
+        List<Pedido> listaPedidos = q.getResultList();
+        return listaPedidos;
     }
     
 }

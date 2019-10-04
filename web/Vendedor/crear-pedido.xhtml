@@ -94,7 +94,7 @@
                                             <p:outputLabel value="Fecha de creación:" /><br/>
                                             <p:calendar id="popup" widgetVar="calendario" value="#{pedidoControlador.pedido.fechaDeCreacion}" mindate="calendario.today()" maxdate="calendario.today()" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" />
                                         </div>
-                                        <p:commandButton styleClass="boton-pago" action="#{pedidoControlador.crearPedido(carrito)}" type="submit" style="height: 2.5em; margin-left: 2em; margin-top: 2.17em" icon="fas fa-dollar-sign" value="#{msjCrearPedido.botonPago}" />
+                                        <p:commandButton styleClass="boton-pago" action="#{pedidoControlador.crearPedido()}" type="submit" style="height: 2.5em; margin-left: 2em; margin-top: 2.17em" icon="fas fa-dollar-sign" value="#{msjCrearPedido.botonPago}" />
                                         <p:commandButton id="verCarrito" type="button" style="height: 2.5em; margin-left: 2em; margin-top: 2.17em" icon="fas fa-shopping-cart" value="#{msjCrearPedido.verCarrito}" update="tablaCarrito" />
                                         <p:overlayPanel id="carritoPanel" for="verCarrito" hideEffect="fade">
                                             <h:form id="form">

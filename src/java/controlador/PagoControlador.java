@@ -69,9 +69,9 @@ public class PagoControlador implements Serializable {
     public String crearPago() {
         pago.setIdPago(1);
         pago.setPedidoidPedido(pedidoControlador.getPedido());
-        pedidoControlador.setPedido(new Pedido());
         pagoFacade.create(pago);
         pago = new Pago();
+        pedidoControlador.setPedido(new Pedido());
         return "orden-realizada";
     }
     

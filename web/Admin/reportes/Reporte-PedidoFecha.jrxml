@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f43fdbe9-6afb-4a95-b302-e3f0f84bb3be">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaI" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaF" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT pedido.`fechaDeCreacion` AS pedido_fechaDeCreacion ,COUNT(*), pedido.`Usuario_id` AS pedido_Usuario_id, usuario.`titular` AS usuario_titular, usuario.`razonSocial` AS usuario_razonSocial, rol.`nombre` AS rol_nombre
+FROM
+     `usuario` usuario INNER JOIN `pedido` pedido ON usuario.`id` = pedido.`Usuario_id`
+     INNER JOIN `rol` rol ON usuario.`Rol_idRol` = rol.`idRol`
+WHERE   pedido.`fechaDeCreacion` between $P{fechaI} and $P{fechaF} GROUP BY  pedido.fechaDeCreacion]]>
+	</queryString>
+	<field name="pedido_fechaDeCreacion" class="java.sql.Date"/>
+	<field name="COUNT(*)" class="java.lang.Long"/>
+	<field name="pedido_Usuario_id" class="java.lang.Integer"/>
+	<field name="usuario_titular" class="java.lang.String"/>
+	<field name="usuario_razonSocial" class="java.lang.String"/>
+	<field name="rol_nombre" class="java.lang.String"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="1" y="1" width="767" height="179" uuid="aa0e6085-e480-4baf-a751-9c43c10d5fb7"/>
+				<imageExpression><![CDATA["C:\\Users\\Aprendiz\\Documents\\NetBeansProjects\\FlowersXProyecto\\web\\img\\top-reporte.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="93" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="49" width="169" height="30" uuid="8bd49448-a7d0-4776-9810-b3eabfb86c5e"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Pedidos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="33"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="276" y="35" width="100" height="20" uuid="591c6200-8898-491e-a456-67ad32ff5a7e"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="34" width="100" height="20" uuid="f3b7211d-62ee-44b3-8366-72473c0be8a2"/>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="34" width="100" height="20" uuid="4c6ff2e5-f6c2-4149-bb22-b2b1895ca929"/>
+				<text><![CDATA[Razon Social]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="276" y="1" width="100" height="20" uuid="82699390-d9fd-4f08-86db-71ba627bc136"/>
+				<textFieldExpression><![CDATA[$F{COUNT(*)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="1" width="100" height="20" uuid="5bf507fe-e95a-4c68-8170-f7913543cad1"/>
+				<textFieldExpression><![CDATA[$F{usuario_titular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="100" height="20" uuid="7bd2b223-dbcd-41df-96c6-d1e35fefdf10"/>
+				<textFieldExpression><![CDATA[$F{usuario_razonSocial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="8590df3f-0db5-4910-a350-03918a9c5688"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

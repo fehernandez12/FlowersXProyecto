@@ -6,7 +6,7 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Crear catalogo</title>
+        <title>Ver existencias</title>
         <link rel="stylesheet" href="../css/bootstrap.css"></link>
         <link rel="stylesheet" href="../css/all.min.css"></link>
         <link rel="stylesheet" href="../css/brands.css"></link>
@@ -32,7 +32,12 @@
                 <div class="col">
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
-                            <p:chart type="bar" model="#{graficosControlador.graficoBarra}" style="height:300px"/>
+                            <h:form>
+                                <p:commandButton value="Ver existencias" style="padding-left: 0" action="#{graficosControlador.createBarModel()}" update="grafico" />
+                                <h:panelGroup id="grafico" layout="blocked">
+                                    <p:chart type="bar" model="#{graficosControlador.graficoBarra}" style="height:300px" rendered="#{graficosControlador.graficoBarra != null}"/>
+                                </h:panelGroup>
+                            </h:form>
                         </div>
                     </div>
                 </div>

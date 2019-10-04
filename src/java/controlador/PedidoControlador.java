@@ -182,5 +182,9 @@ public class PedidoControlador implements Serializable {
         pedidoFacade.remove(pedido);
         //return "Lista";
     }
+    
+    public List<Pedido> listarPedidoCliente(Usuario usuario) {
+        return pedidoFacade.listarPedidosCliente(usuario);
+    }
 
 } 

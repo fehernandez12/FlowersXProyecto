@@ -49,4 +49,9 @@ public class CiudadControlador implements Serializable {
         listaCiudades = ciudadFacade.findAll();
         return listaCiudades;
     }
+    
+    public List<Ciudad> filtrarCiudades(Pais pais) {
+        listaCiudades = ciudadFacade.consultarCiudades(pais);
+        return listaCiudades;
+    }
 }

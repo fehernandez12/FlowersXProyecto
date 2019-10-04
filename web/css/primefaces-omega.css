@@ -6192,6 +6192,9 @@ body .ui-accordion-content table tr td {
 body .ui-button .ui-button-text {
     margin-left: 0.5em;
 }
+body .ui-button.ui-button-text-icon-left .ui-icon {
+    margin-right: 0.5em;
+}
 body .boton-pago {
     background-color: #91DCD1;
     color: #121212;

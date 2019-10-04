@@ -24,7 +24,7 @@ import org.primefaces.model.chart.ChartSeries;
  * @author Aprendiz
  */
 @Named(value = "graficosControlador")
-@ViewScoped
+@SessionScoped
 public class GraficosControlador implements Serializable {
 
     /**

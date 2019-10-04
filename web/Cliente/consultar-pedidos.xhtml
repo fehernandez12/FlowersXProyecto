@@ -51,7 +51,7 @@
                                 }
                             </style>
                             <h:form>
-                                <p:dataTable id="tablaPedidos" var="pedido" value="#{pedidoControlador.listar()}" widgetVar="tablaPedidos" 
+                                <p:dataTable id="tablaPedidos" var="pedido" value="#{pedidoControlador.listarPedidoCliente(usuarioControlador.usuarioLogueado)}" widgetVar="tablaPedidos" 
                                              emptyMessage="No se han encontrado pedidos con los criterios dados." filteredValue="#{pedidoControlador.listaPedidos}" 
                                              resizableColumns="true" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15" style="margin-bottom:20px">
@@ -79,15 +79,6 @@
                                     </p:column>
                                     <p:column filterBy="#{pedido.total}" headerText="Total" filterMatchMode="contains">
                                         <h:outputText value="#{pedido.total}" />
-                                    </p:column>
-                                    <p:column filterBy="#{pedido.usuarioid}" headerText="Usuario" filterMatchMode="contains">
-                                        <f:facet name="filter">
-                                            <p:selectOneMenu onchange="PF('tablaPedidos').filter()" styleClass="custom-filter">
-                                                <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
-                                                <f:selectItems value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.titular}" />
-                                            </p:selectOneMenu>
-                                        </f:facet>
-                                        <h:outputText value="#{pedido.usuarioid.titular}" />
                                     </p:column>
                                 </p:dataTable>
 

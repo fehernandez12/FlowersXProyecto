@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7df6d744-c8ff-49b6-85f5-ce2de3a1ab65">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="18"/>
+	<parameter name="RolC" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT pedido.`fechaDeCreacion` AS pedido_fechaDeCreacion, pedido.`Usuario_id` AS pedido_Usuario_id,COUNT(*), usuario.`titular` AS usuario_titular, usuario.`razonSocial` AS usuario_razonSocial, rol.`nombre` AS rol_nombre FROM `usuario` usuario INNER JOIN `pedido` pedido ON usuario.`id` = pedido.`Usuario_id` INNER JOIN `rol` rol ON usuario.`Rol_idRol` = rol.`idRol` 
+ WHERE  rol.`nombre`=$P{RolC} GROUP BY pedido.Usuario_id]]>
+	</queryString>
+	<field name="pedido_fechaDeCreacion" class="java.sql.Date"/>
+	<field name="pedido_Usuario_id" class="java.lang.Integer"/>
+	<field name="COUNT(*)" class="java.lang.Long"/>
+	<field name="usuario_titular" class="java.lang.String"/>
+	<field name="usuario_razonSocial" class="java.lang.String"/>
+	<field name="rol_nombre" class="java.lang.String"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="74" width="560" height="431" uuid="4ac90f34-e90c-40f0-9f2a-d75b0d422ce5"/>
+				<imageExpression><![CDATA["C:\\Users\\ACER\\Pictures\\diseno-fondo-moderno-blanco-3d_53876-88246.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement x="192" y="31" width="243" height="24" uuid="d723149e-af73-4e06-8193-a7210efa7d4f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pedidos realizados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="100" height="20" uuid="81a1d9ef-3cbc-4ea1-9767-f787cc184cad"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="0" width="100" height="20" uuid="d0cf24b3-e987-465a-a646-26b2ee687dcb"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titular]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="0" width="100" height="20" uuid="9e90a4c3-6ed6-49a9-b690-d337892e1664"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Razon social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="0" width="100" height="20" uuid="24ffd151-9896-4f7d-9cd5-2537501e582c"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pedidos realizados]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="100" height="20" uuid="147ba39f-fbfb-4695-b010-8dcfab17eeaf"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rol_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="0" width="100" height="20" uuid="82941e67-f8e1-4cef-9cd9-2673815e8258"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_titular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="0" width="100" height="20" uuid="0e23d5aa-1a1b-49c2-8e90-e04542ec2c67"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="0" width="100" height="20" uuid="03696d9f-0d1a-4fd9-bfe2-45d040700dfe"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COUNT(*)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="66" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="76" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="56" width="80" height="20" uuid="7605f1c9-f031-4f29-9260-0b3653e034ff"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="56" width="40" height="20" uuid="4b67eca9-5ae1-421f-a2ab-b7c7a4ac07de"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="63" splitType="Stretch"/>
+	</summary>
+</jasperReport>

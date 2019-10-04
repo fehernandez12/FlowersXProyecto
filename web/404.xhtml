@@ -9,6 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>FlowersX - Error 404</title>
+        <link href="css/primefaces-omega.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" rel="stylesheet" href="css/style.css" />
     </h:head>
     <h:body>
@@ -21,10 +22,9 @@
                     <h2>404 - #{msjError.noEncontrado}</h2>
                     <p>#{msjError.parrafo1}</p>
                     <p>#{msjError.parrafo2}</p>
-                    <p:commandButton action="index.xhtml" style="height: 3em; width: 15em; font-size: 1.5em" value="#{msjError.regresar}" />
+                    <p:commandButton action="index.xhtml?faces-redirect=true" style="height: 3em; width: 15em; font-size: 1.5em" value="#{msjError.regresar}" />
                 </div>
             </div>
         </f:view>
     </h:body>
 </html>
-

@@ -45,8 +45,11 @@
                                 }
                             </style>
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-6">
                                     <h1><h:outputText value="#{msjGestionarCatalogo.catalogo}"/></h1>
+                                </div>
+                                <div class="col-2 text-right" style="padding-top: 1em">
+                                    <p:commandButton value="#{msjGestionarCatalogo.generarReporte}" action="#{controladorFechas.reporteProductos()}"></p:commandButton>
                                 </div>
                                 <div class="col-2 text-right" style="padding-top: 1em">
                                     <a align="right" href="ver-existencias.xhtml">
@@ -108,15 +111,11 @@
                                 </p:dataTable>
                                 <h3>Exportar datos a Microsoft Excel</h3>
                                 <h:commandLink>
-                                    <img src="excel.png" style="width: 50px" alt="Excel"/>
+                                    <img src="../Archivos/excel.png" style="width: 3em" alt="Excel"/>
                                     <p:dataExporter type="xls" target="tablaProducto" fileName="Producto" pageOnly="true"/>
                                 </h:commandLink>
                             </h:form>
                         </f:view>
-                        <a href="crear-catalogo.xhtml"><button type="button" class="boton-salir btn" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión y salir">
-                                Registrar producto
-                            </button>  
-                        </a> 
                     </f:view>
                 </div>
             </div>
