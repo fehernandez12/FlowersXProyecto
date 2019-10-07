@@ -55,12 +55,15 @@ public class Novedad implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @JoinColumn(name = "Pedido_idPedido", referencedColumnName = "idPedido")
+    @JoinColumn(name = "Pedido", referencedColumnName = "idPedido")
     @ManyToOne(optional = false)
-    private Pedido pedidoidPedido;
+    private Pedido pedido;
     @JoinColumn(name = "Usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Usuario usuarioid;
+    @JoinColumn(name = "tipo_novedad", referencedColumnName = "idtiponovedad")
+    @ManyToOne(optional = false)
+    private TipoNovedad tipoNovedad;
 
     public Novedad() {
     }
@@ -99,12 +102,12 @@ public class Novedad implements Serializable {
         this.fecha = fecha;
     }
 
-    public Pedido getPedidoidPedido() {
-        return pedidoidPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setPedidoidPedido(Pedido pedidoidPedido) {
-        this.pedidoidPedido = pedidoidPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     public Usuario getUsuarioid() {
@@ -113,6 +116,14 @@ public class Novedad implements Serializable {
 
     public void setUsuarioid(Usuario usuarioid) {
         this.usuarioid = usuarioid;
+    }
+
+    public TipoNovedad getTipoNovedad() {
+        return tipoNovedad;
+    }
+
+    public void setTipoNovedad(TipoNovedad tipoNovedad) {
+        this.tipoNovedad = tipoNovedad;
     }
 
     @Override

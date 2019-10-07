@@ -6,11 +6,13 @@
 package controlador;
 
 import entidades.Ciudad;
+import entidades.EstadoUsuario;
 import entidades.Pais;
 import entidades.Permiso;
 import entidades.Rol;
 import entidades.Usuario;
 import facade.CiudadFacade;
+import facade.EstadoUsuarioFacade;
 import facade.PaisFacade;
 import facade.RolFacade;
 import facade.UsuarioFacade;
@@ -61,6 +63,11 @@ public class UsuarioControlador implements Serializable {
     CiudadFacade ciudadFacade;
     Ciudad ciudad = new Ciudad();
     private List<Ciudad> listaCiudades;
+    
+    @EJB
+    EstadoUsuarioFacade estadoUsuarioFacade;
+    EstadoUsuario estadoUsuario = new EstadoUsuario();
+    private List<EstadoUsuario> listaEstadosUsuarios;
 
     private Part file;
     private String paisNombre;
@@ -69,6 +76,22 @@ public class UsuarioControlador implements Serializable {
     FacesContext context = FacesContext.getCurrentInstance();
 
     Mailer mailer = new Mailer();
+
+    public EstadoUsuario getEstadoUsuario() {
+        return estadoUsuario;
+    }
+
+    public void setEstadoUsuario(EstadoUsuario estadoUsuario) {
+        this.estadoUsuario = estadoUsuario;
+    }
+
+    public List<EstadoUsuario> getListaEstadosUsuarios() {
+        return listaEstadosUsuarios;
+    }
+
+    public void setListaEstadosUsuarios(List<EstadoUsuario> listaEstadosUsuarios) {
+        this.listaEstadosUsuarios = listaEstadosUsuarios;
+    }
 
     public Part getFile() {
         return file;
@@ -147,10 +170,11 @@ public class UsuarioControlador implements Serializable {
     }
 
     public String crearUsuario() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        usuario.setId(1);
-        usuario.setRolidRol(rolFacade.find(rol.getIdRol()));
-        usuario.setPaisIdpais(paisFacade.find(pais.getIdpais()));
-        usuario.setCiudadIdciudad(ciudadFacade.find(ciudad.getIdciudad()));
+        usuario.setId(null);
+        usuario.setRol(rolFacade.find(rol.getIdRol()));
+        usuario.setPais(paisFacade.find(pais.getIdpais()));
+        usuario.setCiudad(ciudadFacade.find(ciudad.getIdciudad()));
+        usuario.setEstadoUsuario(estadoUsuarioFacade.find(1));
         MessageDigest m = MessageDigest.getInstance("MD5");
         String password = UsuarioControlador.randomAlphaNumeric(10);
         m.reset();
@@ -169,13 +193,13 @@ public class UsuarioControlador implements Serializable {
 
     public String cambiarPassword() throws NoSuchAlgorithmException, UnsupportedEncodingException {
         usuario.setId(1);
-        usuario.setTitular(usuarioLogueado.getTitular());
+        usuario.setNombreTitular(usuarioLogueado.getNombreTitular());
         usuario.setRazonSocial(usuarioLogueado.getRazonSocial());
         usuario.setEmail(usuarioLogueado.getEmail());
-        usuario.setEstado(1);
-        usuario.setRolidRol(usuarioLogueado.getRolidRol());
-        usuario.setPaisIdpais(usuarioLogueado.getPaisIdpais());
-        usuario.setCiudadIdciudad(usuarioLogueado.getCiudadIdciudad());
+        usuario.setRol(usuarioLogueado.getRol());
+        usuario.setPais(usuarioLogueado.getPais());
+        usuario.setCiudad(usuarioLogueado.getCiudad());
+        usuario.setEstadoUsuario(usuarioLogueado.getEstadoUsuario());
         MessageDigest m = MessageDigest.getInstance("MD5");
         String password = usuario.getPassword();
         m.reset();
@@ -204,7 +228,7 @@ public class UsuarioControlador implements Serializable {
             BigInteger bigInt = new BigInteger(1, digest);
             String hashtext = bigInt.toString(16);
             usuarioCorreo.setPassword(hashtext);
-            String mensaje = "<h1>Has solicitado una nueva password</h1><br><p>¡Gracias por contactarnos, " + usuarioCorreo.getTitular() + "!</p><p>Tu nueva password es: " + password + "</p>";
+            String mensaje = "<h1>Has solicitado una nueva password</h1><br><p>¡Gracias por contactarnos, " + usuarioCorreo.getNombreTitular() + " " + usuario.getApellidoTitular() + "!</p><p>Tu nueva password es: " + password + "</p>";
             usuarioFacade.edit(usuarioCorreo);
             mailer.configurar();
             mailer.enviarMensaje(usuario.getEmail(), "Nueva password en FlowersX - Santa Marta Flowers S.A.S.", mensaje);
@@ -230,7 +254,7 @@ public class UsuarioControlador implements Serializable {
     }
 
     public String editarUsuario() {
-        usuario.setRolidRol(rolFacade.find(rol.getIdRol()));
+        usuario.setRol(rolFacade.find(rol.getIdRol()));
         usuarioFacade.edit(usuario);
         usuario = new Usuario();
         return "gestionar-usuarios";
@@ -247,14 +271,14 @@ public class UsuarioControlador implements Serializable {
             usuarioLogueado = usuarioFacade.login(usuario);
             usuarioLogueado = usuarioFacade.find(usuarioLogueado.getId());
             if (usuarioLogueado != null) {
-                rol = usuarioLogueado.getRolidRol();
-                for (/*  */Permiso permiso : usuarioLogueado.getRolidRol().getPermisoList()) {
+                rol = usuarioLogueado.getRol();
+                for (/*  */Permiso permiso : usuarioLogueado.getRol().getPermisoList()) {
                     System.out.println("Permisos: " + permiso.getNombre());
                 }
                 /* usuarioLogueado.getRolidRol().getPermisoList().forEach((permiso) -> {
                     System.out.println("Permisos: " + permiso.getNombre());
                 }); */
-                System.out.println("Usuario Logueado: " + usuarioLogueado.getTitular());
+                System.out.println("Usuario Logueado: " + usuarioLogueado.getNombreTitular() + " " + usuarioLogueado.getApellidoTitular());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sesionLogin", usuarioLogueado);
                 redireccionar = "menu.xhtml";
             }

@@ -90,11 +90,12 @@ public class SolicitudControlador implements Serializable {
 
     public String crearSolicitud() throws UnsupportedEncodingException {
         solicitud.setIdSolicitud(1);
-        solicitud.setPedidoidPedido(pedidoFacade.find(pedido.getIdPedido()));
+        solicitud.setPedido(pedidoFacade.find(pedido.getIdPedido()));
+//        solicitud.setPedidoidPedido(pedidoFacade.find(pedido.getIdPedido()));
         usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sesionLogin");
-        solicitud.setUsuarioid(usuarioFacade.find(usuario.getId()));
+        solicitud.setUsuario(usuarioFacade.find(usuario.getId()));
         String asunto = "Nueva solicitud de transporte";
-        String mensaje = "Se ha generado una nueva solicitud de transporte:\nPedido correspondiente: " + solicitud.getPedidoidPedido() + "\nSoporte(s) adjuntos.";
+        String mensaje = "Se ha generado una nueva solicitud de transporte:\nPedido correspondiente: " + solicitud.getPedido() + "\nSoporte(s) adjuntos.";
         String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("Archivos");
         String path1 = "";
         String path2 = "";

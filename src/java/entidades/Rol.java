@@ -62,7 +62,7 @@ public class Rol implements Serializable {
         @JoinColumn(name = "permisos_idpermisos", referencedColumnName = "idpermisos")})
     @ManyToMany
     private List<Permiso> permisoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolidRol")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
     private List<Usuario> usuarioList;
 
     public Rol() {

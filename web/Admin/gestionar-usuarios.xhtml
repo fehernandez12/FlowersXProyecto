@@ -76,8 +76,11 @@
                                     <p:column filterBy="#{user.id}" headerText="ID" filterMatchMode="contains">
                                         <h:outputText value="#{user.id}" />
                                     </p:column>
-                                    <p:column filterBy="#{user.titular}" headerText="#{msjCrearUsuario.nombreTitular}" filterMatchMode="contains">
-                                        <h:outputText value="#{user.titular}" />
+                                    <p:column filterBy="#{user.nombreTitular}" headerText="#{msjCrearUsuario.nombreTitular}" filterMatchMode="contains">
+                                        <h:outputText value="#{user.nombreTitular}" />
+                                    </p:column>
+                                    <p:column filterBy="#{user.apellidoTitular}" headerText="#{msjCrearUsuario.apellidoTitular}" filterMatchMode="contains">
+                                        <h:outputText value="#{user.apellidoTitular}" />
                                     </p:column>
                                     <p:column filterBy="#{user.razonSocial}" headerText="#{msjCrearUsuario.razonSocial}" filterMatchMode="contains">
                                         <h:outputText value="#{user.razonSocial}" />
@@ -85,31 +88,31 @@
                                     <p:column filterBy="#{user.email}" headerText="#{msjCrearUsuario.email}" filterMatchMode="contains">
                                         <h:outputText value="#{user.email}" />
                                     </p:column>
-                                    <p:column filterBy="#{user.paisIdpais.nombre}" headerText="#{msjCrearUsuario.pais}" filterMatchMode="exact">
+                                    <p:column filterBy="#{user.pais.nombre}" headerText="#{msjCrearUsuario.pais}" filterMatchMode="exact">
                                         <f:facet name="filter">
                                             <p:selectOneMenu onchange="PF('tablaUsuarios').filter()" styleClass="custom-filter">
                                                 <f:selectItem itemLabel="#{msjCrearUsuario.lblPais}" itemValue="#{null}" noSelectionOption="true" />
                                                 <f:selectItems value="#{paisControlador.listar()}" var="pais" itemValue="#{pais.idpais}" itemLabel="#{pais.nombre}" />
                                             </p:selectOneMenu>
                                         </f:facet>
-                                        <h:outputText value="#{user.paisIdpais.nombre}" />
+                                        <h:outputText value="#{user.pais.nombre}" />
                                     </p:column>
-                                    <p:column filterBy="#{user.ciudadIdciudad.nombre}" headerText="#{msjCrearUsuario.ciudad}" filterMatchMode="exact">
+                                    <p:column filterBy="#{user.ciudad.nombre}" headerText="#{msjCrearUsuario.ciudad}" filterMatchMode="exact">
                                         <f:facet name="filter">
                                             <p:selectOneMenu onchange="PF('tablaUsuarios').filter()" styleClass="custom-filter">
                                                 <f:selectItem itemLabel="#{msjCrearUsuario.lblCiudad}" itemValue="#{null}" noSelectionOption="true" />
                                                 <f:selectItems value="#{ciudadControlador.listar()}" var="ciudad" itemValue="#{ciudad.idciudad}" itemLabel="#{ciudad.nombre}" />
                                             </p:selectOneMenu>
                                         </f:facet>
-                                        <h:outputText value="#{user.ciudadIdciudad.nombre}" />
+                                        <h:outputText value="#{user.ciudad.nombre}" />
                                     </p:column>
-                                    <p:column filterBy="#{user.rolidRol.nombre}" headerText="#{msjCrearUsuario.cargo}" filterMatchMode="in">
+                                    <p:column filterBy="#{user.rol.nombre}" headerText="#{msjCrearUsuario.cargo}" filterMatchMode="in">
                                         <f:facet name="filter">
                                             <p:selectCheckboxMenu label="Roles" onchange="PF('tablaUsuarios').filter()" scrollHeight="150" styleClass="custom-filter">
                                                 <f:selectItems value="#{rolControlador.listar()}" var="rol" itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}" />
                                             </p:selectCheckboxMenu>
                                         </f:facet>
-                                        <h:outputText value="#{user.rolidRol.nombre}" />
+                                        <h:outputText value="#{user.rol.nombre}" />
                                     </p:column>
                                     <p:column>
                                         <f:facet class="header" name="header">

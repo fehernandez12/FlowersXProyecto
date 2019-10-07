@@ -36,11 +36,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")
-    , @NamedQuery(name = "Usuario.findByTitular", query = "SELECT u FROM Usuario u WHERE u.titular = :titular")
+    , @NamedQuery(name = "Usuario.findByNombreTitular", query = "SELECT u FROM Usuario u WHERE u.nombreTitular = :nombreTitular")
+    , @NamedQuery(name = "Usuario.findByApellidoTitular", query = "SELECT u FROM Usuario u WHERE u.apellidoTitular = :apellidoTitular")
     , @NamedQuery(name = "Usuario.findByRazonSocial", query = "SELECT u FROM Usuario u WHERE u.razonSocial = :razonSocial")
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
-    , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")
-    , @NamedQuery(name = "Usuario.findByEstado", query = "SELECT u FROM Usuario u WHERE u.estado = :estado")})
+    , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,8 +52,13 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "titular")
-    private String titular;
+    @Column(name = "nombre_titular")
+    private String nombreTitular;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "apellido_titular")
+    private String apellidoTitular;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -70,27 +75,24 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "estado")
-    private int estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid")
-    private List<Ordenproduccion> ordenproduccionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid")
     private List<Novedad> novedadList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Solicitud> solicitudList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid")
     private List<Pedido> pedidoList;
-    @JoinColumn(name = "Rol_idRol", referencedColumnName = "idRol")
+    @JoinColumn(name = "Rol", referencedColumnName = "idRol")
     @ManyToOne(optional = false)
-    private Rol rolidRol;
-    @JoinColumn(name = "ciudad_idciudad", referencedColumnName = "idciudad")
+    private Rol rol;
+    @JoinColumn(name = "ciudad", referencedColumnName = "idciudad")
     @ManyToOne(optional = false)
-    private Ciudad ciudadIdciudad;
-    @JoinColumn(name = "pais_idpais", referencedColumnName = "idpais")
+    private Ciudad ciudad;
+    @JoinColumn(name = "estado_usuario", referencedColumnName = "idestado_usuario")
     @ManyToOne(optional = false)
-    private Pais paisIdpais;
+    private EstadoUsuario estadoUsuario;
+    @JoinColumn(name = "pais", referencedColumnName = "idpais")
+    @ManyToOne(optional = false)
+    private Pais pais;
 
     public Usuario() {
     }
@@ -99,13 +101,13 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Usuario(Integer id, String titular, String razonSocial, String email, String password, int estado) {
+    public Usuario(Integer id, String nombreTitular, String apellidoTitular, String razonSocial, String email, String password) {
         this.id = id;
-        this.titular = titular;
+        this.nombreTitular = nombreTitular;
+        this.apellidoTitular = apellidoTitular;
         this.razonSocial = razonSocial;
         this.email = email;
         this.password = password;
-        this.estado = estado;
     }
 
     public Integer getId() {
@@ -116,12 +118,20 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getTitular() {
-        return titular;
+    public String getNombreTitular() {
+        return nombreTitular;
     }
 
-    public void setTitular(String titular) {
-        this.titular = titular;
+    public void setNombreTitular(String nombreTitular) {
+        this.nombreTitular = nombreTitular;
+    }
+
+    public String getApellidoTitular() {
+        return apellidoTitular;
+    }
+
+    public void setApellidoTitular(String apellidoTitular) {
+        this.apellidoTitular = apellidoTitular;
     }
 
     public String getRazonSocial() {
@@ -146,24 +156,6 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public List<Ordenproduccion> getOrdenproduccionList() {
-        return ordenproduccionList;
-    }
-
-    public void setOrdenproduccionList(List<Ordenproduccion> ordenproduccionList) {
-        this.ordenproduccionList = ordenproduccionList;
     }
 
     @XmlTransient
@@ -196,28 +188,36 @@ public class Usuario implements Serializable {
         this.pedidoList = pedidoList;
     }
 
-    public Rol getRolidRol() {
-        return rolidRol;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRolidRol(Rol rolidRol) {
-        this.rolidRol = rolidRol;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
-    public Ciudad getCiudadIdciudad() {
-        return ciudadIdciudad;
+    public Ciudad getCiudad() {
+        return ciudad;
     }
 
-    public void setCiudadIdciudad(Ciudad ciudadIdciudad) {
-        this.ciudadIdciudad = ciudadIdciudad;
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
     }
 
-    public Pais getPaisIdpais() {
-        return paisIdpais;
+    public EstadoUsuario getEstadoUsuario() {
+        return estadoUsuario;
     }
 
-    public void setPaisIdpais(Pais paisIdpais) {
-        this.paisIdpais = paisIdpais;
+    public void setEstadoUsuario(EstadoUsuario estadoUsuario) {
+        this.estadoUsuario = estadoUsuario;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 
     @Override

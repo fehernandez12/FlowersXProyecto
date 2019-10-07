@@ -36,11 +36,15 @@
                             <div class="container">
                                 <h:form class="formulario needs-validation" id="crearUsuario">
                                     <div class="form-row">
-                                        <div class="col-md-6 mb-6">
+                                        <div class="col-md-4 mb-4">
                                             <p:outputLabel value="#{msjCrearUsuario.nombreTitular}" />
-                                            <p:inputText pt:placeholder="John Doe" value="#{usuarioControlador.usuario.titular}" id="nombreTitular" class="form-control"></p:inputText>
+                                            <p:inputText pt:placeholder="John" value="#{usuarioControlador.usuario.nombreTitular}" id="nombreTitular" class="form-control"></p:inputText>
                                         </div>
-                                        <div class="col-md-6 mb-6">
+                                        <div class="col-md-4 mb4">
+                                            <p:outputLabel value="#{msjCrearUsuario.apellidoTitular}" />
+                                            <p:inputText pt:placeholder="Doe" value="#{usuarioControlador.usuario.apellidoTitular}" id="apellidoTitular" class="form-control"></p:inputText>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
                                             <p:outputLabel value="#{msjCrearUsuario.razonSocial}" />
                                             <p:inputText pt:placeholder="Empresa Inc." value="#{usuarioControlador.usuario.razonSocial}" id="razonSocial" class="form-control"></p:inputText>
                                         </div>

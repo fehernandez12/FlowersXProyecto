@@ -64,11 +64,9 @@ public class Reporte {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, conexion);
 
-            JRExporter jrExporter = null;                      
-            jrExporter = new JRPdfExporter();
+            JRExporter jrExporter = new JRPdfExporter();
             jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
             jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, httpServletResponse.getOutputStream());
-
             if (jrExporter != null) {
                 try {
                     jrExporter.exportReport();
@@ -76,7 +74,6 @@ public class Reporte {
                     e.printStackTrace();
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

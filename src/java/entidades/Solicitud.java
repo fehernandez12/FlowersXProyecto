@@ -69,12 +69,12 @@ public class Solicitud implements Serializable {
     @Size(max = 65535)
     @Column(name = "soporte3")
     private String soporte3;
-    @JoinColumn(name = "Pedido_idPedido", referencedColumnName = "idPedido")
+    @JoinColumn(name = "pedido", referencedColumnName = "idPedido")
     @ManyToOne(optional = false)
-    private Pedido pedidoidPedido;
-    @JoinColumn(name = "Usuario_id", referencedColumnName = "id")
+    private Pedido pedido;
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Usuario usuarioid;
+    private Usuario usuario;
 
     public Solicitud() {
     }
@@ -138,20 +138,20 @@ public class Solicitud implements Serializable {
         this.soporte3 = soporte3;
     }
 
-    public Pedido getPedidoidPedido() {
-        return pedidoidPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setPedidoidPedido(Pedido pedidoidPedido) {
-        this.pedidoidPedido = pedidoidPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
-    public Usuario getUsuarioid() {
-        return usuarioid;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioid(Usuario usuarioid) {
-        this.usuarioid = usuarioid;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

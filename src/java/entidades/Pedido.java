@@ -72,17 +72,18 @@ public class Pedido implements Serializable {
         @JoinColumn(name = "producto_idProducto", referencedColumnName = "idProducto")})
     @ManyToMany
     private List<Producto> productoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido")
-    private List<Ordenproduccion> ordenproduccionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private List<Pago> pagoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<Novedad> novedadList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<Solicitud> solicitudList;
     @JoinColumn(name = "Usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Usuario usuarioid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoidPedido")
-    private List<Pago> pagoList;
+    @JoinColumn(name = "estado_pedido", referencedColumnName = "idestado_pedido")
+    @ManyToOne(optional = false)
+    private EstadoPedido estadoPedido;
 
     public Pedido() {
     }
@@ -149,12 +150,12 @@ public class Pedido implements Serializable {
 
     @XmlTransient
     @JsonIgnore
-    public List<Ordenproduccion> getOrdenproduccionList() {
-        return ordenproduccionList;
+    public List<Pago> getPagoList() {
+        return pagoList;
     }
 
-    public void setOrdenproduccionList(List<Ordenproduccion> ordenproduccionList) {
-        this.ordenproduccionList = ordenproduccionList;
+    public void setPagoList(List<Pago> pagoList) {
+        this.pagoList = pagoList;
     }
 
     @XmlTransient
@@ -185,14 +186,12 @@ public class Pedido implements Serializable {
         this.usuarioid = usuarioid;
     }
 
-    @XmlTransient
-    @JsonIgnore
-    public List<Pago> getPagoList() {
-        return pagoList;
+    public EstadoPedido getEstadoPedido() {
+        return estadoPedido;
     }
 
-    public void setPagoList(List<Pago> pagoList) {
-        this.pagoList = pagoList;
+    public void setEstadoPedido(EstadoPedido estadoPedido) {
+        this.estadoPedido = estadoPedido;
     }
 
     @Override

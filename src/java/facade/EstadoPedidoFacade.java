@@ -5,7 +5,7 @@
  */
 package facade;
 
-import entidades.Ordenproduccion;
+import entidades.EstadoPedido;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Aprendiz
  */
 @Stateless
-public class OrdenproduccionFacade extends AbstractFacade<Ordenproduccion> {
+public class EstadoPedidoFacade extends AbstractFacade<EstadoPedido> {
 
     @PersistenceContext(unitName = "FlowersXPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class OrdenproduccionFacade extends AbstractFacade<Ordenproduccion> {
         return em;
     }
 
-    public OrdenproduccionFacade() {
-        super(Ordenproduccion.class);
+    public EstadoPedidoFacade() {
+        super(EstadoPedido.class);
     }
     
 }

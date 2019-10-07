@@ -29,21 +29,21 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * @author Aprendiz
  */
 @Entity
-@Table(name = "pais")
+@Table(name = "tipo_novedad")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pais.findAll", query = "SELECT p FROM Pais p")
-    , @NamedQuery(name = "Pais.findByIdpais", query = "SELECT p FROM Pais p WHERE p.idpais = :idpais")
-    , @NamedQuery(name = "Pais.findByNombre", query = "SELECT p FROM Pais p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "Pais.findByNombreIngles", query = "SELECT p FROM Pais p WHERE p.nombreIngles = :nombreIngles")})
-public class Pais implements Serializable {
+    @NamedQuery(name = "TipoNovedad.findAll", query = "SELECT t FROM TipoNovedad t")
+    , @NamedQuery(name = "TipoNovedad.findByIdtiponovedad", query = "SELECT t FROM TipoNovedad t WHERE t.idtiponovedad = :idtiponovedad")
+    , @NamedQuery(name = "TipoNovedad.findByNombre", query = "SELECT t FROM TipoNovedad t WHERE t.nombre = :nombre")
+    , @NamedQuery(name = "TipoNovedad.findByNombreEn", query = "SELECT t FROM TipoNovedad t WHERE t.nombreEn = :nombreEn")})
+public class TipoNovedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idpais")
-    private Integer idpais;
+    @Column(name = "idtiponovedad")
+    private Integer idtiponovedad;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -52,32 +52,30 @@ public class Pais implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_ingles")
-    private String nombreIngles;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pais")
-    private List<Ciudad> ciudadList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pais")
-    private List<Usuario> usuarioList;
+    @Column(name = "nombre_en")
+    private String nombreEn;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoNovedad")
+    private List<Novedad> novedadList;
 
-    public Pais() {
+    public TipoNovedad() {
     }
 
-    public Pais(Integer idpais) {
-        this.idpais = idpais;
+    public TipoNovedad(Integer idtiponovedad) {
+        this.idtiponovedad = idtiponovedad;
     }
 
-    public Pais(Integer idpais, String nombre, String nombreIngles) {
-        this.idpais = idpais;
+    public TipoNovedad(Integer idtiponovedad, String nombre, String nombreEn) {
+        this.idtiponovedad = idtiponovedad;
         this.nombre = nombre;
-        this.nombreIngles = nombreIngles;
+        this.nombreEn = nombreEn;
     }
 
-    public Integer getIdpais() {
-        return idpais;
+    public Integer getIdtiponovedad() {
+        return idtiponovedad;
     }
 
-    public void setIdpais(Integer idpais) {
-        this.idpais = idpais;
+    public void setIdtiponovedad(Integer idtiponovedad) {
+        this.idtiponovedad = idtiponovedad;
     }
 
     public String getNombre() {
@@ -88,49 +86,39 @@ public class Pais implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getNombreIngles() {
-        return nombreIngles;
+    public String getNombreEn() {
+        return nombreEn;
     }
 
-    public void setNombreIngles(String nombreIngles) {
-        this.nombreIngles = nombreIngles;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public List<Ciudad> getCiudadList() {
-        return ciudadList;
-    }
-
-    public void setCiudadList(List<Ciudad> ciudadList) {
-        this.ciudadList = ciudadList;
+    public void setNombreEn(String nombreEn) {
+        this.nombreEn = nombreEn;
     }
 
     @XmlTransient
     @JsonIgnore
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public List<Novedad> getNovedadList() {
+        return novedadList;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setNovedadList(List<Novedad> novedadList) {
+        this.novedadList = novedadList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idpais != null ? idpais.hashCode() : 0);
+        hash += (idtiponovedad != null ? idtiponovedad.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pais)) {
+        if (!(object instanceof TipoNovedad)) {
             return false;
         }
-        Pais other = (Pais) object;
-        if ((this.idpais == null && other.idpais != null) || (this.idpais != null && !this.idpais.equals(other.idpais))) {
+        TipoNovedad other = (TipoNovedad) object;
+        if ((this.idtiponovedad == null && other.idtiponovedad != null) || (this.idtiponovedad != null && !this.idtiponovedad.equals(other.idtiponovedad))) {
             return false;
         }
         return true;
@@ -138,7 +126,7 @@ public class Pais implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Pais[ idpais=" + idpais + " ]";
+        return "entidades.TipoNovedad[ idtiponovedad=" + idtiponovedad + " ]";
     }
     
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2019 a las 05:09:18
+-- Tiempo de generación: 07-10-2019 a las 18:33:44
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -31,16 +31,50 @@ SET time_zone = "+00:00";
 CREATE TABLE `ciudad` (
   `idciudad` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  `idPais` int(11) NOT NULL
+  `nombreIngles` varchar(45) NOT NULL,
+  `Pais` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ciudad`
 --
 
-INSERT INTO `ciudad` (`idciudad`, `nombre`, `idPais`) VALUES
-(1, 'Bogotá D.C.', 8),
-(2, 'Nueva York', 11);
+INSERT INTO `ciudad` (`idciudad`, `nombre`, `nombreIngles`, `Pais`) VALUES
+(3, 'Bogotá D.C.', '', 8),
+(4, 'Nueva York', '', 11),
+(5, 'Washington D.C.', '', 11);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado_pedido`
+--
+
+CREATE TABLE `estado_pedido` (
+  `idestado_pedido` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `nombre_en` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado_usuario`
+--
+
+CREATE TABLE `estado_usuario` (
+  `idestado_usuario` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `nombre_en` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `estado_usuario`
+--
+
+INSERT INTO `estado_usuario` (`idestado_usuario`, `nombre`, `nombre_en`) VALUES
+(1, 'Activo', 'Active'),
+(2, 'Inactivo', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -52,22 +86,9 @@ CREATE TABLE `novedad` (
   `idNovedad` int(5) NOT NULL,
   `descripcion` text NOT NULL,
   `fecha` date NOT NULL,
-  `Pedido_idPedido` int(5) NOT NULL,
-  `Usuario_id` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ordenproduccion`
---
-
-CREATE TABLE `ordenproduccion` (
-  `idOrdenProduccion` int(5) NOT NULL,
-  `fechainicio` date NOT NULL,
-  `fechaFin` date NOT NULL,
-  `Pedido_idPedido` int(5) NOT NULL,
-  `Usuario_id` int(5) NOT NULL
+  `Pedido` int(5) NOT NULL,
+  `Usuario_id` int(5) NOT NULL,
+  `tipo_novedad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -83,7 +104,7 @@ CREATE TABLE `pago` (
   `fechaDeVencimiento` varchar(5) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
-  `Pedido_idPedido` int(5) NOT NULL
+  `Pedido` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -138,19 +159,9 @@ CREATE TABLE `pedido` (
   `fechaDeEntrega` date NOT NULL,
   `subTotal` double DEFAULT NULL,
   `total` double DEFAULT NULL,
-  `Usuario_id` int(5) NOT NULL
+  `Usuario_id` int(5) NOT NULL,
+  `estado_pedido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `pedido`
---
-
-INSERT INTO `pedido` (`idPedido`, `fechaDeCreacion`, `fechaDeEntrega`, `subTotal`, `total`, `Usuario_id`) VALUES
-(1, '2019-09-22', '2019-12-22', 250000, 300000, 12),
-(2, '2019-09-23', '2019-09-23', 0, 0, 12),
-(3, '2019-09-23', '2019-09-23', 0, 0, 12),
-(4, '2019-09-23', '2019-09-23', 0, 0, 12),
-(5, '2019-09-23', '2019-09-23', 0, 0, 12);
 
 -- --------------------------------------------------------
 
@@ -180,13 +191,10 @@ INSERT INTO `permisos` (`idpermisos`, `nombre`, `nombre_en`, `url`, `icon`, `per
 (6, 'Gestionar Usuarios', 'Manage users', 'Admin/gestionar-usuarios.xhtml', 'x', 1),
 (7, 'Crear Solicitud', 'Create request', 'Admin/crear-solicitud.xhtml', 'x', 2),
 (8, 'Gestionar Solicitudes', 'Manage requests', 'Admin/gestionar-solicitudes.xhtml', 'x', 2),
-(9, 'Consultar órdenes de producción', 'Search production orders', 'Admin/gestionar-ordenProduccion-admin.xhtml', 'x', 3),
 (10, 'Crear Novedad', 'Create novelty', 'Admin/crear-novedad.xhtml', 'x', 3),
 (11, 'Gestionar Novedades', 'Manage novelties', 'Admin/gestionar-novedades.xhtml', 'x', 3),
 (12, 'Registrar producto', 'Add product', 'Admin/crear-catalogo.xhtml', 'x', 4),
 (13, 'Gestionar Catálogo', 'Manage catalog', 'Admin/gestionar-catalogo.xhtml', 'x', 4),
-(14, 'Nueva orden de producción', 'Create production order', 'Ingeniero/crear-ordenProduccion.xhtml', 'x', 3),
-(15, 'Gestionar órdenes de producción', 'Manage production orders', 'Ingeniero/gestionar-ordenProduccion.xhtml', 'x', 3),
 (17, 'Ventas', 'Sales', '', '', NULL),
 (18, 'Nuevo pedido', 'New sales order', 'Vendedor/crear-pedido-vendedor.xhtml', 'x', 17),
 (19, 'Consultar pedidos', 'Search sales orders', 'Vendedor/gestionar-pedido-vendedor.xhtml', 'x', 17),
@@ -194,11 +202,10 @@ INSERT INTO `permisos` (`idpermisos`, `nombre`, `nombre_en`, `url`, `icon`, `per
 (21, 'Registrar método de pago', 'Add payment method', 'Cliente/crear-pago.xhtml', 'x', 20),
 (22, 'Gestionar métodos de pago', 'Manage payment methods', 'Cliente/gestionar-pago.xhtml', 'x', 20),
 (23, 'Comprar', 'Buy', NULL, NULL, NULL),
-(24, 'Nuevo pedido', 'New order', 'Cliente/crear-pedido.xhtml', 'x', 23),
+(24, 'Nuevo pedido', 'New order', 'Cliente/nuevo-pedido.xhtml', 'x', 23),
 (25, 'Consultar pedidos', 'Search orders', 'Cliente/gestionar-pedido.xhtml', 'x', 23),
 (26, 'Consultar catálogo', 'Catalog lookup', 'Cliente/consultar-catalogo.xhtml', 'x', 4),
-(27, 'Consultar pedidos', 'Search orders', 'Admin/consultar-pedidos.xhtml', 'x', 3),
-(28, 'Consultar pedidos', 'Search orders', 'Ingeniero/consultar-pedidos.xhtml', 'x', 3);
+(27, 'Consultar pedidos', 'Search orders', 'Admin/consultar-pedidos.xhtml', 'x', 3);
 
 -- --------------------------------------------------------
 
@@ -209,6 +216,7 @@ INSERT INTO `permisos` (`idpermisos`, `nombre`, `nombre_en`, `url`, `icon`, `per
 CREATE TABLE `producto` (
   `idProducto` int(5) NOT NULL,
   `nombreProducto` varchar(45) NOT NULL,
+  `nombreIngles` varchar(45) NOT NULL,
   `foto` text NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   `tiempoDeCultivo` int(11) NOT NULL,
@@ -220,14 +228,14 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idProducto`, `nombreProducto`, `foto`, `descripcion`, `tiempoDeCultivo`, `existencias`, `precio`) VALUES
-(1, 'Rosas', '/FlowersXProyecto/Archivos/rosas.jpg', 'Varios colores disponibles', 3, 50000, 300),
-(2, 'Orquídeas', '/FlowersXProyecto/Archivos/orchid.jpg', 'Varios colores disponibles', 6, 20000, 200),
-(3, 'Girasoles', '/FlowersXProyecto/Archivos/sunflower.jpg', 'Varios colores disponibles', 3, 80000, 150),
-(4, 'Tulipanes', '/FlowersXProyecto/Archivos/tulip.jpg', 'Varios colores disponibles', 4, 0, 250),
-(5, 'Azucenas', '/FlowersXProyecto/Archivos/azucena.jpg', 'Varios colores disponibles.', 4, 500, 300),
-(6, 'Violetas', '/FlowersXProyecto/Archivos/violeta.jpg', 'Disponible en un solo color.', 2, 0, 250),
-(7, 'Claveles', '/FlowersXProyecto/Archivos/flor-clavel.jpg', 'Varios colores disponibles', 4, 600, 100);
+INSERT INTO `producto` (`idProducto`, `nombreProducto`, `nombreIngles`, `foto`, `descripcion`, `tiempoDeCultivo`, `existencias`, `precio`) VALUES
+(1, 'Rosas', 'Roses', '/FlowersXProyecto/Archivos/rosas.jpg', 'Varios colores disponibles', 3, 50000, 300),
+(2, 'Orquídeas', 'Orchids', '/FlowersXProyecto/Archivos/orchid.jpg', 'Varios colores disponibles', 6, 20000, 200),
+(3, 'Girasoles', 'Sunflowers', '/FlowersXProyecto/Archivos/sunflower.jpg', 'Varios colores disponibles', 3, 80000, 150),
+(4, 'Tulipanes', 'Tulips', '/FlowersXProyecto/Archivos/tulip.jpg', 'Varios colores disponibles', 4, 0, 250),
+(5, 'Azucenas', 'Lilies', '/FlowersXProyecto/Archivos/azucena.jpg', 'Varios colores disponibles.', 4, 500, 300),
+(6, 'Violetas', 'Violets', '/FlowersXProyecto/Archivos/violeta.jpg', 'Disponible en un solo color.', 2, 0, 250),
+(7, 'Claveles', 'Carnations', '/FlowersXProyecto/Archivos/flor-clavel.jpg', 'Varios colores disponibles', 4, 600, 100);
 
 -- --------------------------------------------------------
 
@@ -239,17 +247,6 @@ CREATE TABLE `producto_has_pedido` (
   `producto_idProducto` int(5) NOT NULL,
   `pedido_idPedido` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `producto_has_pedido`
---
-
-INSERT INTO `producto_has_pedido` (`producto_idProducto`, `pedido_idPedido`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(5, 1),
-(7, 1);
 
 -- --------------------------------------------------------
 
@@ -269,10 +266,8 @@ CREATE TABLE `rol` (
 
 INSERT INTO `rol` (`idRol`, `nombre`, `name`) VALUES
 (1, 'Administrador', 'Administrator'),
-(2, 'Supervisor de siembra', 'Seeds Supervisor'),
-(3, 'Ingeniero de siembra', 'Planting Engineer'),
-(4, 'Vendedor', 'Seller'),
-(5, 'Cliente', 'Customer');
+(2, 'Vendedor', 'Sales agent'),
+(3, 'Cliente', 'Customer');
 
 -- --------------------------------------------------------
 
@@ -298,34 +293,21 @@ INSERT INTO `rol_has_permisos` (`Rol_idRol`, `permisos_idpermisos`) VALUES
 (1, 6),
 (1, 7),
 (1, 8),
-(1, 9),
 (1, 10),
 (1, 11),
 (1, 12),
 (1, 13),
 (1, 27),
-(2, 2),
-(2, 3),
-(2, 7),
-(2, 8),
-(2, 9),
-(2, 10),
-(2, 11),
-(2, 28),
-(3, 3),
-(3, 14),
-(3, 15),
-(4, 17),
-(4, 18),
-(4, 19),
-(5, 4),
-(5, 20),
-(5, 21),
-(5, 22),
-(5, 23),
-(5, 24),
-(5, 25),
-(5, 26);
+(2, 17),
+(2, 18),
+(2, 19),
+(3, 20),
+(3, 21),
+(3, 22),
+(3, 23),
+(3, 24),
+(3, 25),
+(3, 26);
 
 -- --------------------------------------------------------
 
@@ -337,22 +319,24 @@ CREATE TABLE `solicitud` (
   `idSolicitud` int(5) NOT NULL,
   `fecha` date NOT NULL,
   `destinatario` varchar(45) NOT NULL,
-  `Pedido_idPedido` int(5) NOT NULL,
-  `Usuario_id` int(5) NOT NULL,
   `soporte1` text NOT NULL,
   `soporte2` text,
-  `soporte3` text
+  `soporte3` text,
+  `pedido` int(5) NOT NULL,
+  `usuario` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `solicitud`
+-- Estructura de tabla para la tabla `tipo_novedad`
 --
 
-INSERT INTO `solicitud` (`idSolicitud`, `fecha`, `destinatario`, `Pedido_idPedido`, `Usuario_id`, `soporte1`, `soporte2`, `soporte3`) VALUES
-(1, '2019-08-19', 'fehernandez12@misena.edu.co', 1, 1, '/FlowersX/Archivos/CQYYPWK1YQPZN42', '/FlowersX/Archivos/APVW88RB8Z5Y4FA', '/FlowersX/Archivos/0G821B95H77PCF2'),
-(2, '2019-08-19', 'fehernandez12@misena.edu.co', 1, 1, '/FlowersX/Archivos/FFJ8I4HZ3DIBZ63', '/FlowersX/Archivos/W6577CQOEYMNB4M', '/FlowersX/Archivos/IK9UOCRYUXDKK62'),
-(3, '2019-08-19', 'fehernandez12@misena.edu.co', 1, 1, '/FlowersX/Archivos/65MYQ8ZZSLR1NOZ', '/FlowersX/Archivos/XJZECG82QHGT3RK', '/FlowersX/Archivos/9ZAON0G2XCWDKHT'),
-(4, '2018-12-11', 'feehernandezba@gmail.com', 1, 1, '/FlowersX/Archivos/LCXM7SQDV1ZLLMF', '/FlowersX/Archivos/J0WTTMRFFQR6S3Z', '/FlowersX/Archivos/15A7NRLNK4VKADB');
+CREATE TABLE `tipo_novedad` (
+  `idtiponovedad` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `nombre_en` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -362,31 +346,23 @@ INSERT INTO `solicitud` (`idSolicitud`, `fecha`, `destinatario`, `Pedido_idPedid
 
 CREATE TABLE `usuario` (
   `id` int(5) NOT NULL,
-  `titular` varchar(45) NOT NULL,
+  `nombre_titular` varchar(45) NOT NULL,
+  `apellido_titular` varchar(45) NOT NULL,
   `razonSocial` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `estado` int(11) NOT NULL,
-  `Rol_idRol` int(5) NOT NULL,
-  `pais_idpais` int(11) NOT NULL,
-  `ciudad_idciudad` int(11) NOT NULL
+  `Rol` int(5) NOT NULL,
+  `pais` int(11) NOT NULL,
+  `ciudad` int(11) NOT NULL,
+  `estado_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `titular`, `razonSocial`, `email`, `password`, `estado`, `Rol_idRol`, `pais_idpais`, `ciudad_idciudad`) VALUES
-(1, 'Felipe Hernández', 'FlowersX', 'feehernandezba@gmail.com', 'a873de377ffbd389c31e5fc9f5c6dcd8', 1, 1, 8, 1),
-(3, 'Santiago Ruiz', 'SENA', 'sruiz8864@misena.edu.co', 'XRO31ZLzk9', 0, 5, 8, 1),
-(4, 'Sergio Quintero', 'SENA', 'saquintero074@misena.edu.co', '7qLhDRZEye', 0, 5, 8, 1),
-(5, 'Jonathan Patiño', 'SENA', 'japatino967@misena.edu.co', 'ge4lyDur5H', 0, 5, 8, 1),
-(6, 'Santiago Reyes', 'SENA', 'sreyes98@misena.edu.co', '123456789', 0, 5, 8, 1),
-(7, 'Santiago Salinas', 'SENA', 'dssalinas5@misena.edu.co', 'gv27tbNduB', 0, 5, 8, 1),
-(8, 'Diego Arenas', 'SENA', 'daarenas83@misena.edu.co', 'Ec1x6m4Sjv', 0, 5, 8, 1),
-(9, 'Valentina Marín', 'SENA', 'dvmarin3@misena.edu.co', 'SGnCP5rBgf', 0, 1, 8, 1),
-(12, 'Shirley Bernal', 'SENA', 'stbernal0@misena.edu.co', '25f9e794323b453885f5181f1b624d0b', 0, 5, 8, 1),
-(14, 'Juan Pablo Rodríguez', 'SENA', 'jprodriguez744@misena.edu.co', '0ed48cf6dc34f1f72a141a8014545629', 0, 3, 8, 1);
+INSERT INTO `usuario` (`id`, `nombre_titular`, `apellido_titular`, `razonSocial`, `email`, `password`, `Rol`, `pais`, `ciudad`, `estado_usuario`) VALUES
+(20, 'Felipe', 'Hernández', 'FlowersX', 'feehernandezba@gmail.com', 'a873de377ffbd389c31e5fc9f5c6dcd8', 1, 8, 3, 1);
 
 --
 -- Índices para tablas volcadas
@@ -397,30 +373,35 @@ INSERT INTO `usuario` (`id`, `titular`, `razonSocial`, `email`, `password`, `est
 --
 ALTER TABLE `ciudad`
   ADD PRIMARY KEY (`idciudad`),
-  ADD KEY `FK_Pais` (`idPais`);
+  ADD KEY `FK_Pais` (`Pais`);
+
+--
+-- Indices de la tabla `estado_pedido`
+--
+ALTER TABLE `estado_pedido`
+  ADD PRIMARY KEY (`idestado_pedido`);
+
+--
+-- Indices de la tabla `estado_usuario`
+--
+ALTER TABLE `estado_usuario`
+  ADD PRIMARY KEY (`idestado_usuario`);
 
 --
 -- Indices de la tabla `novedad`
 --
 ALTER TABLE `novedad`
   ADD PRIMARY KEY (`idNovedad`),
-  ADD KEY `fk_Novedad_Pedido1_idx` (`Pedido_idPedido`),
-  ADD KEY `fk_Novedad_Usuario1_idx` (`Usuario_id`);
-
---
--- Indices de la tabla `ordenproduccion`
---
-ALTER TABLE `ordenproduccion`
-  ADD PRIMARY KEY (`idOrdenProduccion`),
-  ADD KEY `fk_OrdenDeProduccion_Pedido1_idx` (`Pedido_idPedido`),
-  ADD KEY `fk_OrdenDeProduccion_Usuario1_idx` (`Usuario_id`);
+  ADD KEY `fk_Novedad_Pedido1_idx` (`Pedido`),
+  ADD KEY `fk_Novedad_Usuario1_idx` (`Usuario_id`),
+  ADD KEY `fk_novedad_tipo_novedad1_idx` (`tipo_novedad`);
 
 --
 -- Indices de la tabla `pago`
 --
 ALTER TABLE `pago`
   ADD PRIMARY KEY (`idPago`),
-  ADD KEY `fk_Pago_Pedido1_idx` (`Pedido_idPedido`);
+  ADD KEY `fk_Pago_Pedido1_idx` (`Pedido`);
 
 --
 -- Indices de la tabla `pais`
@@ -433,7 +414,8 @@ ALTER TABLE `pais`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
-  ADD KEY `fk_Pedido_Usuario1_idx` (`Usuario_id`);
+  ADD KEY `fk_Pedido_Usuario1_idx` (`Usuario_id`),
+  ADD KEY `fk_pedido_estado_pedido1_idx` (`estado_pedido`);
 
 --
 -- Indices de la tabla `permisos`
@@ -475,17 +457,24 @@ ALTER TABLE `rol_has_permisos`
 --
 ALTER TABLE `solicitud`
   ADD PRIMARY KEY (`idSolicitud`),
-  ADD KEY `fk_Solicitud_Pedido1_idx` (`Pedido_idPedido`),
-  ADD KEY `fk_Solicitud_Usuario1_idx` (`Usuario_id`);
+  ADD KEY `fk_solicitud_pedido1_idx` (`pedido`),
+  ADD KEY `fk_solicitud_usuario1_idx` (`usuario`);
+
+--
+-- Indices de la tabla `tipo_novedad`
+--
+ALTER TABLE `tipo_novedad`
+  ADD PRIMARY KEY (`idtiponovedad`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Usuario_Rol1_idx` (`Rol_idRol`),
-  ADD KEY `fk_usuario_pais1_idx` (`pais_idpais`),
-  ADD KEY `fk_usuario_ciudad1_idx` (`ciudad_idciudad`);
+  ADD KEY `fk_Usuario_Rol1_idx` (`Rol`),
+  ADD KEY `fk_usuario_pais1_idx` (`pais`),
+  ADD KEY `fk_usuario_ciudad1_idx` (`ciudad`),
+  ADD KEY `fk_usuario_estado_usuario1_idx` (`estado_usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -495,19 +484,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-  MODIFY `idciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `estado_usuario`
+--
+ALTER TABLE `estado_usuario`
+  MODIFY `idestado_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `novedad`
 --
 ALTER TABLE `novedad`
   MODIFY `idNovedad` int(5) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `ordenproduccion`
---
-ALTER TABLE `ordenproduccion`
-  MODIFY `idOrdenProduccion` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
@@ -525,7 +514,7 @@ ALTER TABLE `pais`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPedido` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPedido` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -546,10 +535,16 @@ ALTER TABLE `solicitud`
   MODIFY `idSolicitud` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `tipo_novedad`
+--
+ALTER TABLE `tipo_novedad`
+  MODIFY `idtiponovedad` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
@@ -559,33 +554,28 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-  ADD CONSTRAINT `FK_Pais` FOREIGN KEY (`idPais`) REFERENCES `pais` (`idpais`);
+  ADD CONSTRAINT `FK_Pais` FOREIGN KEY (`Pais`) REFERENCES `pais` (`idpais`);
 
 --
 -- Filtros para la tabla `novedad`
 --
 ALTER TABLE `novedad`
-  ADD CONSTRAINT `fk_Novedad_Pedido1` FOREIGN KEY (`Pedido_idPedido`) REFERENCES `pedido` (`idPedido`),
-  ADD CONSTRAINT `fk_Novedad_Usuario1` FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`id`);
-
---
--- Filtros para la tabla `ordenproduccion`
---
-ALTER TABLE `ordenproduccion`
-  ADD CONSTRAINT `fk_OrdenDeProduccion_Pedido1` FOREIGN KEY (`Pedido_idPedido`) REFERENCES `pedido` (`idPedido`),
-  ADD CONSTRAINT `fk_OrdenDeProduccion_Usuario1` FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `fk_Novedad_Pedido1` FOREIGN KEY (`Pedido`) REFERENCES `pedido` (`idPedido`),
+  ADD CONSTRAINT `fk_Novedad_Usuario1` FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `fk_novedad_tipo_novedad1` FOREIGN KEY (`tipo_novedad`) REFERENCES `tipo_novedad` (`idtiponovedad`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `pago`
 --
 ALTER TABLE `pago`
-  ADD CONSTRAINT `fk_Pago_Pedido1` FOREIGN KEY (`Pedido_idPedido`) REFERENCES `pedido` (`idPedido`);
+  ADD CONSTRAINT `fk_Pago_Pedido1` FOREIGN KEY (`Pedido`) REFERENCES `pedido` (`idPedido`);
 
 --
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `fk_Pedido_Usuario1` FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `fk_Pedido_Usuario1` FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `fk_pedido_estado_pedido1` FOREIGN KEY (`estado_pedido`) REFERENCES `estado_pedido` (`idestado_pedido`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `permisos`
@@ -608,12 +598,20 @@ ALTER TABLE `rol_has_permisos`
   ADD CONSTRAINT `fk_Rol_has_permisos_permisos1` FOREIGN KEY (`permisos_idpermisos`) REFERENCES `permisos` (`idpermisos`);
 
 --
+-- Filtros para la tabla `solicitud`
+--
+ALTER TABLE `solicitud`
+  ADD CONSTRAINT `fk_solicitud_pedido1` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`idPedido`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_solicitud_usuario1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_Usuario_Rol1` FOREIGN KEY (`Rol_idRol`) REFERENCES `rol` (`idRol`),
-  ADD CONSTRAINT `fk_usuario_ciudad1` FOREIGN KEY (`ciudad_idciudad`) REFERENCES `ciudad` (`idciudad`),
-  ADD CONSTRAINT `fk_usuario_pais1` FOREIGN KEY (`pais_idpais`) REFERENCES `pais` (`idpais`);
+  ADD CONSTRAINT `fk_Usuario_Rol1` FOREIGN KEY (`Rol`) REFERENCES `rol` (`idRol`),
+  ADD CONSTRAINT `fk_usuario_ciudad1` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`idciudad`),
+  ADD CONSTRAINT `fk_usuario_estado_usuario1` FOREIGN KEY (`estado_usuario`) REFERENCES `estado_usuario` (`idestado_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_pais1` FOREIGN KEY (`pais`) REFERENCES `pais` (`idpais`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

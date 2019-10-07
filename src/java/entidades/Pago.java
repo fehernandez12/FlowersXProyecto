@@ -69,9 +69,9 @@ public class Pago implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "direccion")
     private String direccion;
-    @JoinColumn(name = "Pedido_idPedido", referencedColumnName = "idPedido")
+    @JoinColumn(name = "Pedido", referencedColumnName = "idPedido")
     @ManyToOne(optional = false)
-    private Pedido pedidoidPedido;
+    private Pedido pedido;
 
     public Pago() {
     }
@@ -137,12 +137,12 @@ public class Pago implements Serializable {
         this.direccion = direccion;
     }
 
-    public Pedido getPedidoidPedido() {
-        return pedidoidPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setPedidoidPedido(Pedido pedidoidPedido) {
-        this.pedidoidPedido = pedidoidPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     @Override

@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Ciudad;
+import entidades.EstadoUsuario;
 import entidades.Pais;
 import entidades.Rol;
 import entidades.Usuario;
@@ -64,18 +65,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
                 Rol rol = new Rol();
                 Pais pais = new Pais();
                 Ciudad ciudad = new Ciudad();
+                EstadoUsuario estadoUsuario = new EstadoUsuario();
                 u.setId(Integer.parseInt(ob[0].toString()));
-                u.setTitular(ob[1].toString());
-                u.setRazonSocial(ob[2].toString());
-                u.setEmail(ob[3].toString());
-                u.setPassword(ob[4].toString());
-                u.setEstado(Integer.parseInt(ob[5].toString()));
+                u.setNombreTitular(ob[1].toString());
+                u.setApellidoTitular(ob[2].toString());
+                u.setRazonSocial(ob[3].toString());
+                u.setEmail(ob[4].toString());
+                u.setPassword(ob[5].toString());
                 rol.setIdRol(Integer.parseInt(ob[6].toString()));
-                u.setRolidRol(rol);
+                u.setRol(rol);
                 pais.setIdpais(Integer.parseInt(ob[7].toString()));
-                u.setPaisIdpais(pais);
+                u.setPais(pais);
                 ciudad.setIdciudad(Integer.parseInt(ob[8].toString()));
-                u.setCiudadIdciudad(ciudad);
+                u.setCiudad(ciudad);
+                estadoUsuario.setIdestadoUsuario(Integer.parseInt(ob[9].toString()));
                 list.add(u);
             }
             if (!list.isEmpty()) {

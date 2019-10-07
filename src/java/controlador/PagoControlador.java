@@ -68,7 +68,7 @@ public class PagoControlador implements Serializable {
     
     public String crearPago() {
         pago.setIdPago(1);
-        pago.setPedidoidPedido(pedidoControlador.getPedido());
+        pago.setPedido(pedidoControlador.getPedido());
         pagoFacade.create(pago);
         pago = new Pago();
         pedidoControlador.setPedido(new Pedido());
@@ -81,7 +81,7 @@ public class PagoControlador implements Serializable {
     }
 
     public String editarPago() {
-        pago.setPedidoidPedido(pedidoFacade.find(pedido.getIdPedido()));
+        pago.setPedido(pedidoFacade.find(pedido.getIdPedido()));
        
         pagoFacade.edit(pago);
         pago = new Pago();

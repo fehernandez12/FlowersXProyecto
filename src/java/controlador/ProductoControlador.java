@@ -214,7 +214,7 @@ public class ProductoControlador implements Serializable {
         mailer.configurar();
         listaUsuarios = usuarioFacade.findAll();
         for (Usuario usuario : listaUsuarios) {
-            if (usuario.getRolidRol().getIdRol() == 5) {
+            if (usuario.getRol().getIdRol() == 4) {
                 mailer.enviarMensajeConUnAdjunto(usuario.getEmail(), "¡Hemos añadido nuevos productos a nuestro catálogo!", mensaje, path, nombre);
             }
         }

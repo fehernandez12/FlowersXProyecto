@@ -35,6 +35,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")
     , @NamedQuery(name = "Producto.findByIdProducto", query = "SELECT p FROM Producto p WHERE p.idProducto = :idProducto")
     , @NamedQuery(name = "Producto.findByNombreProducto", query = "SELECT p FROM Producto p WHERE p.nombreProducto = :nombreProducto")
+    , @NamedQuery(name = "Producto.findByNombreIngles", query = "SELECT p FROM Producto p WHERE p.nombreIngles = :nombreIngles")
     , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
     , @NamedQuery(name = "Producto.findByTiempoDeCultivo", query = "SELECT p FROM Producto p WHERE p.tiempoDeCultivo = :tiempoDeCultivo")
     , @NamedQuery(name = "Producto.findByExistencias", query = "SELECT p FROM Producto p WHERE p.existencias = :existencias")
@@ -52,6 +53,11 @@ public class Producto implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombreProducto")
     private String nombreProducto;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "nombreIngles")
+    private String nombreIngles;
     @Basic(optional = false)
     @NotNull
     @Lob
@@ -85,9 +91,10 @@ public class Producto implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public Producto(Integer idProducto, String nombreProducto, String foto, String descripcion, int tiempoDeCultivo, int existencias, int precio) {
+    public Producto(Integer idProducto, String nombreProducto, String nombreIngles, String foto, String descripcion, int tiempoDeCultivo, int existencias, int precio) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
+        this.nombreIngles = nombreIngles;
         this.foto = foto;
         this.descripcion = descripcion;
         this.tiempoDeCultivo = tiempoDeCultivo;
@@ -109,6 +116,14 @@ public class Producto implements Serializable {
 
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
+    }
+
+    public String getNombreIngles() {
+        return nombreIngles;
+    }
+
+    public void setNombreIngles(String nombreIngles) {
+        this.nombreIngles = nombreIngles;
     }
 
     public String getFoto() {

@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,21 +29,21 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * @author Aprendiz
  */
 @Entity
-@Table(name = "ciudad")
+@Table(name = "estado_usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c")
-    , @NamedQuery(name = "Ciudad.findByIdciudad", query = "SELECT c FROM Ciudad c WHERE c.idciudad = :idciudad")
-    , @NamedQuery(name = "Ciudad.findByNombre", query = "SELECT c FROM Ciudad c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Ciudad.findByNombreIngles", query = "SELECT c FROM Ciudad c WHERE c.nombreIngles = :nombreIngles")})
-public class Ciudad implements Serializable {
+    @NamedQuery(name = "EstadoUsuario.findAll", query = "SELECT e FROM EstadoUsuario e")
+    , @NamedQuery(name = "EstadoUsuario.findByIdestadoUsuario", query = "SELECT e FROM EstadoUsuario e WHERE e.idestadoUsuario = :idestadoUsuario")
+    , @NamedQuery(name = "EstadoUsuario.findByNombre", query = "SELECT e FROM EstadoUsuario e WHERE e.nombre = :nombre")
+    , @NamedQuery(name = "EstadoUsuario.findByNombreEn", query = "SELECT e FROM EstadoUsuario e WHERE e.nombreEn = :nombreEn")})
+public class EstadoUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idciudad")
-    private Integer idciudad;
+    @Column(name = "idestado_usuario")
+    private Integer idestadoUsuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -54,33 +52,30 @@ public class Ciudad implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombreIngles")
-    private String nombreIngles;
-    @JoinColumn(name = "Pais", referencedColumnName = "idpais")
-    @ManyToOne(optional = false)
-    private Pais pais;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudad")
+    @Column(name = "nombre_en")
+    private String nombreEn;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoUsuario")
     private List<Usuario> usuarioList;
 
-    public Ciudad() {
+    public EstadoUsuario() {
     }
 
-    public Ciudad(Integer idciudad) {
-        this.idciudad = idciudad;
+    public EstadoUsuario(Integer idestadoUsuario) {
+        this.idestadoUsuario = idestadoUsuario;
     }
 
-    public Ciudad(Integer idciudad, String nombre, String nombreIngles) {
-        this.idciudad = idciudad;
+    public EstadoUsuario(Integer idestadoUsuario, String nombre, String nombreEn) {
+        this.idestadoUsuario = idestadoUsuario;
         this.nombre = nombre;
-        this.nombreIngles = nombreIngles;
+        this.nombreEn = nombreEn;
     }
 
-    public Integer getIdciudad() {
-        return idciudad;
+    public Integer getIdestadoUsuario() {
+        return idestadoUsuario;
     }
 
-    public void setIdciudad(Integer idciudad) {
-        this.idciudad = idciudad;
+    public void setIdestadoUsuario(Integer idestadoUsuario) {
+        this.idestadoUsuario = idestadoUsuario;
     }
 
     public String getNombre() {
@@ -91,20 +86,12 @@ public class Ciudad implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getNombreIngles() {
-        return nombreIngles;
+    public String getNombreEn() {
+        return nombreEn;
     }
 
-    public void setNombreIngles(String nombreIngles) {
-        this.nombreIngles = nombreIngles;
-    }
-
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
+    public void setNombreEn(String nombreEn) {
+        this.nombreEn = nombreEn;
     }
 
     @XmlTransient
@@ -120,18 +107,18 @@ public class Ciudad implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idciudad != null ? idciudad.hashCode() : 0);
+        hash += (idestadoUsuario != null ? idestadoUsuario.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ciudad)) {
+        if (!(object instanceof EstadoUsuario)) {
             return false;
         }
-        Ciudad other = (Ciudad) object;
-        if ((this.idciudad == null && other.idciudad != null) || (this.idciudad != null && !this.idciudad.equals(other.idciudad))) {
+        EstadoUsuario other = (EstadoUsuario) object;
+        if ((this.idestadoUsuario == null && other.idestadoUsuario != null) || (this.idestadoUsuario != null && !this.idestadoUsuario.equals(other.idestadoUsuario))) {
             return false;
         }
         return true;
@@ -139,7 +126,7 @@ public class Ciudad implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Ciudad[ idciudad=" + idciudad + " ]";
+        return "entidades.EstadoUsuario[ idestadoUsuario=" + idestadoUsuario + " ]";
     }
     
 }
