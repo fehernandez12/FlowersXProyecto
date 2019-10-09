@@ -30,15 +30,12 @@
                                 .ui-datatable .ui-datatable-header {
                                     text-align: right !important;
                                 }
-
                                 .ui-button-text-only .ui-button-text {
                                     padding: 0.3em 0.4em;
                                 }
-
                                 .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
                                     visibility: hidden;
                                 }
-
                                 .ui-filter-column .ui-column-customfilter .custom-filter {
                                     width: 100%;
                                     box-sizing: border-box;
@@ -48,9 +45,7 @@
                                 <div class="col-6">
                                     <h1><h:outputText value="#{msjGestionarCatalogo.catalogo}"/></h1>
                                 </div>
-                                <div class="col-2 text-right" style="padding-top: 1em">
-                                    <p:commandButton value="#{msjGestionarCatalogo.generarReporte}" action="#{controladorFechas.reporteProductos()}"></p:commandButton>
-                                </div>
+                               
                                 <div class="col-2 text-right" style="padding-top: 1em">
                                     <a align="right" href="ver-existencias.xhtml">
                                         <p:commandButton type="button" action="${graficosControlador.init()}" value="#{msjGestionarCatalogo.botonExistencias}" />
@@ -104,7 +99,7 @@
                                             <i class="fas fa-pen"></i>
                                             <p:confirm header="¡Alerta!" message="¿Estás seguro de que quieres editar este producto?" icon="fas fa-exclamation-triangle" />
                                         </p:commandLink>
-                                        <h:commandLink class="opciones-tabla" onclick="return confirm('¿Estás seguro?')" action="#{productoControlador.eliminarProducto(producto)}">
+                                        <h:commandLink class="opciones-tabla" onclick="return confirm('¿Estás seguro?')" action="#{controladorFechas.reporteProductos()}">
                                             <i class="fas fa-trash-alt"></i>
                                         </h:commandLink>
                                     </p:column>
@@ -131,4 +126,3 @@
         <script src="../../js/main.js"></script>
     </h:body>
 </html>
-

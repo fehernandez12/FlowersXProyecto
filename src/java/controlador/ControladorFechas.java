@@ -80,7 +80,7 @@ public class ControladorFechas implements Serializable {
         reporteR.DescargarPedidoFecha(ruta,this.fechaI,this.fechaF);
         FacesContext.getCurrentInstance().getResponseComplete();
     }
-    public void reporteProductos() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public String reporteProductos() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
         ReporteFecha reporteR = new ReporteFecha();
 
@@ -89,6 +89,7 @@ public class ControladorFechas implements Serializable {
         String ruta = servletContext.getRealPath("//Admin//reportes//Reporte-Producto.jasper");
         reporteR.DescargarPedido(ruta,this.getRolC());
         FacesContext.getCurrentInstance().getResponseComplete();
+        return "";
     }
     
     public void descargarNovedad() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
