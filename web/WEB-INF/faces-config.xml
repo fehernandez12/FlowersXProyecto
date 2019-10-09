@@ -81,5 +81,9 @@
             <base-name>idiomas.RegistrarPago</base-name>
             <var>msjRegistrarPago</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.Formularios</base-name>
+            <var>msjFormularios</var>
+        </resource-bundle>
     </application>
 </faces-config>

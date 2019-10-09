@@ -35,36 +35,40 @@
                             <f:view>
                                 <h:form class="formulario" enctype="multipart/form-data">
                                     <div class="form-row">
-                                        <div class="col-md-5 mb-5">
+                                        <div class="col-md-4 mb-4">
                                             <p:outputLabel value="Nombre del Producto:" for="nombreProducto" />
-                                            <p:inputText class="form-control" id="nombreProducto" value="#{productoControlador.producto.nombreProducto}" pt:placeholder="Nombre" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
+                                            <p:inputText class="form-control" id="nombreProducto" value="#{productoControlador.producto.nombreProducto}" pt:placeholder="Nombre" title="NombreProducto" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
-                                        <div class="col-md-5 mb-5">
+                                        <div class="col-md-4 mb-4">
+                                            <p:outputLabel value="Nombre en inglés:" for="nombreIngles" />
+                                            <p:inputText class="form-control" id="nombreIngles" value="#{productoControlador.producto.nombreIngles}" pt:placeholder="Name" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
                                             <p:outputLabel value="Foto:" for="foto"/>
-                                            <h:inputFile class="form-control-file" id="foto" value="#{productoControlador.file}" title="Foto" required="true" requiredMessage="The Foto field is required."/>
+                                            <h:inputFile class="form-control-file" id="foto" value="#{productoControlador.file}" title="Foto" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col">
                                             <p:outputLabel value="Descripción:" for="descripcion" />
-                                            <p:inputTextarea class="form-control" pt:placeholder="Descripción..." rows="4" cols="30" id="descripcion" value="#{productoControlador.producto.descripcion}" title="Foto" required="true" requiredMessage="The Foto field is required."/>
+                                            <p:inputTextarea class="form-control" pt:placeholder="Descripción..." rows="4" cols="30" id="descripcion" value="#{productoControlador.producto.descripcion}" title="Foto" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-4 mb-4">
                                             <p:outputLabel value="TiempoDeCultivo:" for="tiempoDeCultivo" />
-                                            <p:inputText class="form-control" pt:placeholder="Tiempo" id="tiempoDeCultivo" value="#{productoControlador.producto.tiempoDeCultivo}" title="TiempoDeCultivo" required="true" requiredMessage="The TiempoDeCultivo field is required."/>
+                                            <p:inputText class="form-control" pt:placeholder="Tiempo" id="tiempoDeCultivo" value="#{productoControlador.producto.tiempoDeCultivo}" title="TiempoDeCultivo" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
                                         <div class="col-md-4 mb-4">
                                             <p:outputLabel value="Existencias:" for="existencias" />
-                                            <p:inputText class="form-control" pt:placeholder="Existencias" id="existencias" value="#{productoControlador.producto.existencias}" title="Existencias" required="true" requiredMessage="The Existencias field is required."/>
+                                            <p:inputText class="form-control" pt:placeholder="Existencias" id="existencias" value="#{productoControlador.producto.existencias}" title="Existencias" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
                                         <div class="col-md-4 mb-4">
                                             <p:outputLabel value="Precio:" for="precio" />
-                                            <p:inputText class="form-control" pt:placeholder="Precio" id="precio" value="#{productoControlador.producto.precio}" title="Precio" required="true" requiredMessage="The Precio field is required."/>
+                                            <p:inputText class="form-control" pt:placeholder="Precio" id="precio" value="#{productoControlador.producto.precio}" title="Precio" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
                                     </div>
-                                    <p:commandButton action="#{productoControlador.crearProducto()}" type="submit" value="Registrar producto"></p:commandButton>
+                                    <p:commandButton action="#{productoControlador.crearProducto()}" type="submit" process="@this" immediate="true" value="Registrar producto"></p:commandButton>
                                 </h:form>
                             </f:view>
                         </div>
