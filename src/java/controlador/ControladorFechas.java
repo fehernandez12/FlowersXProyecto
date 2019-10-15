@@ -92,7 +92,7 @@ public class ControladorFechas implements Serializable {
         return "";
     }
     
-    public void descargarNovedad() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+  public void descargarNovedad() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
         ReporteFecha reporteR = new ReporteFecha();
 
@@ -102,5 +102,6 @@ public class ControladorFechas implements Serializable {
         reporteR.DescargarPedidoFecha(ruta,this.fechaI,this.fechaF);
         FacesContext.getCurrentInstance().getResponseComplete();
     }
+
     
 }

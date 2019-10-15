@@ -64,6 +64,13 @@
                                             <p:inputText pt:placeholder="Av 123, New York, NY" value="#{pagoControlador.pago.direccion}" required="true" />
                                         </div>
                                     </div>
+                                    <div class="col-3 md-3 mb-3">
+                                        <p:outputLabel value="#{msjCrearSolicitud.pedidoId}" for="pedidoidPedido" />
+                                        <p:selectOneMenu class="form-control" pt:placeholder="Id de Pedido" id="pedidoidPedido" value="#{pagoControlador.pedido.idPedido}" style="width: 11em" required="true" requiredMessage="The PedidoidPedido field is required.">
+                                            <!-- TODO: update below reference to list of available items-->
+                                            <f:selectItems class="dropdown-item" value="#{pedidoControlador.listar()}" var="pedido" itemValue="#{pedido.idPedido}" itemLabel="#{pedido.idPedido}"/>
+                                        </p:selectOneMenu>
+                                    </div>
                                     <br/>
                                     <p:commandButton action="#{pagoControlador.crearPago()}" type="submit" value="#{msjRegistrarPago.botonEnviar}"></p:commandButton>
                                 </h:form>

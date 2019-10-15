@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e4e2faa6-c328-48c8-88d2-731588923e26">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="3"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fechaI" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -46,51 +46,62 @@ WHERE  novedad.`fecha`   between $P{fechaI} and $P{fechaF}]]>
 	<pageHeader>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="223" y="35" width="146" height="20" uuid="7cc01478-15d9-4479-9404-6f9effd09df8"/>
-				<text><![CDATA[Novedades de producción]]></text>
+				<reportElement x="244" y="31" width="86" height="22" uuid="7cc01478-15d9-4479-9404-6f9effd09df8"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Novedades ]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="31" splitType="Stretch">
 			<staticText>
-				<reportElement x="43" y="0" width="100" height="20" uuid="b06a0446-efb5-4459-8c74-65ce6734a983"/>
-				<text><![CDATA[rol_nombre]]></text>
+				<reportElement x="289" y="0" width="100" height="20" uuid="c6d09534-4dc8-4cb2-b03a-f54fad588982"/>
+				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="177" y="0" width="100" height="20" uuid="c6d09534-4dc8-4cb2-b03a-f54fad588982"/>
-				<text><![CDATA[novedad_fecha]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="335" y="0" width="100" height="20" uuid="13d72880-6458-4b8e-a883-4e76a2614bb5"/>
+				<reportElement x="435" y="0" width="100" height="20" uuid="13d72880-6458-4b8e-a883-4e76a2614bb5"/>
 				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="0" width="100" height="20" uuid="25b8ff5b-376a-4ba9-af88-bed144e40176"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="0" width="100" height="20" uuid="9d16059c-849b-463e-8e78-baf551d612c4"/>
+				<text><![CDATA[Apellido]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="301" splitType="Stretch">
 			<rectangle>
-				<reportElement x="10" y="106" width="533" height="183" uuid="30aa692e-d74e-4218-9f88-d08a50e7c019"/>
+				<reportElement x="33" y="106" width="510" height="183" uuid="30aa692e-d74e-4218-9f88-d08a50e7c019"/>
 			</rectangle>
 			<textField>
-				<reportElement x="21" y="119" width="509" height="159" uuid="e27a52e1-b8ce-4e33-a0c4-9651a7730ff8"/>
+				<reportElement x="44" y="119" width="486" height="159" uuid="e27a52e1-b8ce-4e33-a0c4-9651a7730ff8"/>
 				<textFieldExpression><![CDATA[$F{novedad_descripcion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="254" y="71" width="100" height="20" uuid="5db3b137-4a31-4f02-ba5b-906542e914d0"/>
+				<reportElement x="54" y="86" width="100" height="20" uuid="5db3b137-4a31-4f02-ba5b-906542e914d0"/>
 				<text><![CDATA[Descripcion]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="43" y="14" width="100" height="20" uuid="3f134feb-4a98-4acc-b211-261dc36a7f61"/>
-				<textFieldExpression><![CDATA[$F{rol_nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="177" y="14" width="100" height="20" uuid="01d20905-0560-4a56-9b3d-65b0aa24a112"/>
+				<reportElement x="289" y="0" width="100" height="20" uuid="01d20905-0560-4a56-9b3d-65b0aa24a112"/>
 				<textFieldExpression><![CDATA[$F{novedad_fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="335" y="14" width="100" height="20" forecolor="#000099" uuid="154fcdf2-9c5e-4d04-a21d-a947e25c8116"/>
+				<reportElement x="435" y="0" width="100" height="20" forecolor="#000099" uuid="154fcdf2-9c5e-4d04-a21d-a947e25c8116"/>
 				<textFieldExpression><![CDATA[$F{usuario_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="0" width="100" height="20" uuid="f3b84188-7395-425f-bc4a-f385c3626940"/>
+				<textFieldExpression><![CDATA[$F{usuario_nombre_titular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="100" height="20" uuid="a6c74883-c556-4d7f-b5e8-f63c9f15b6e0"/>
+				<textFieldExpression><![CDATA[$F{usuario_apellido_titular}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

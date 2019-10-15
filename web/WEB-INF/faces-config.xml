@@ -85,5 +85,9 @@
             <base-name>idiomas.Formularios</base-name>
             <var>msjFormularios</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>idiomas.ListaNovedad</base-name>
+            <var>msjListaNovedad</var>
+        </resource-bundle>
     </application>
 </faces-config>
