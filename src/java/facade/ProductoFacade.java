@@ -6,6 +6,7 @@
 package facade;
 
 import entidades.Producto;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,11 +31,17 @@ public class ProductoFacade extends AbstractFacade<Producto> {
     public ProductoFacade() {
         super(Producto.class);
     }
-    
-      public List<Producto> listar () {
-       Query q = em.createNativeQuery("SELECT idProducto,nombreProducto,nombreIngles,existencias FROM producto",Producto.class);
-       List<Producto> lst=q.getResultList();
-       return lst;
+
+    public List<Producto> listar() {
+        Query q = em.createNativeQuery("SELECT idProducto,nombreProducto,nombreIngles,existencias FROM producto", Producto.class);
+        List<Producto> lst = q.getResultList();
+        return lst;
     }
     
+    public List<Object[]> masVendidos() {
+        Query q = em.createNativeQuery("select producto.idProducto as IdProducto, producto.nombreProducto as NombreProducto, COUNT(*) as Cantidad, producto.existencias as Existencias, producto_has_pedido.producto_idProducto as ProductoIdProducto FROM producto INNER JOIN producto_has_pedido ON producto.idProducto = producto_has_pedido.producto_idProducto GROUP BY producto_has_pedido.producto_idProducto ORDER BY cantidad DESC, NombreProducto ASC LIMIT 5");
+        List<Object[]> listaObjetos = q.getResultList();
+        return listaObjetos;
+    }
+
 }
