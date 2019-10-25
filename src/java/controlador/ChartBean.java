@@ -1,70 +1,93 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
+
+import entidades.Producto;
+import facade.ProductoFacade;
+import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.inject.Named;
+import javax.faces.view.ViewScoped;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.BarChartSeries;
+import org.primefaces.model.chart.ChartSeries;
 
 /**
  *
  * @author ACER
  */
-import entidades.Producto;
-import facade.ProductoFacade;
-import java.io.Serializable;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import org.primefaces.model.chart.CartesianChartModel;
-import org.primefaces.model.chart.ChartSeries;
-
-@ManagedBean
-@RequestScoped
+@Named(value = "chartBean")
+@ViewScoped
 public class ChartBean implements Serializable {
 
     @EJB
-    ProductoFacade productoFacade;
-    private Producto producto = new Producto();
-    
-    private CartesianChartModel categoryModel;
-    
-    
-    
+    private ProductoFacade productoFacade;
+    private List<Producto> listaProducto;
+    private BarChartModel barra;
+
     public ChartBean() {
-        createCategoryModel();
     }
 
-    public CartesianChartModel getCategoryModel() {
-        return categoryModel;
+    public void Listar() {
+        listaProducto = productoFacade.findAll();
+        /*Poder hacer el grafico*/
+        graficar();
     }
 
-    private void createCategoryModel() {
-        categoryModel = new CartesianChartModel();
-        producto = new Producto();
+    public void graficar() {
+
+        barra = new BarChartModel();
+        /*Conecion a Base de datos */
         
-        ChartSeries boys = new ChartSeries();
+        for (int i = 0; i < productoFacade.listar().size(); i++) {
+            ChartSeries serie = new BarChartSeries();
+            serie.setLabel(productoFacade.listar().get(i).getNombreProducto());
+            serie.set(productoFacade.listar().get(i).getNombreProducto(), productoFacade.listar().get(i).getExistencias());
+            barra.addSeries(serie);
+        }
         
-        boys.setLabel("Boys");
-        boys.set("2018", 4000);
-        boys.set("2019", 4000);
-        boys.set("2014", 4000);
+ /*
+        for (Producto producto : listaProducto) {
+            ChartSeries serie = new ChartSeries();
+            if (producto.getExistencias() > 0) {
+                serie.setLabel(producto.getNombreProducto());
+                serie.set(producto.getNombreProducto(), producto.getExistencias());
+                barra.addSeries(serie);
+            }
+        }
+*/
+        barra.setTitle("Existencias");
+        barra.setLegendPosition("ne");
+        barra.setAnimate(true);
         
-        ChartSeries girls = new ChartSeries();
-        
-        girls.setLabel("Red");
-        girls.set("2017", 5000);
-        girls.set("2012", 4000);
-        girls.set("2013", 4000);
-        
-        categoryModel.addSeries(boys);
-        categoryModel.addSeries(girls);
+
+        /*Eje x se nombres de los ejes*/
+        Axis xAxis = barra.getAxis(AxisType.X);
+        xAxis.setLabel("Productos");
+
+        Axis yAxis = barra.getAxis(AxisType.Y);
+        yAxis.setLabel("Cantidad de existencias");
+        yAxis.setMin(0);
+        yAxis.setMax(90000);
     }
 
-    public Producto getProducto() {
-        return producto;
+    public List<Producto> getListaProducto() {
+        return listaProducto;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setListaProducto(List<Producto> listaProducto) {
+        this.listaProducto = listaProducto;
     }
+
+    
+
+    public BarChartModel getBarra() {
+        return barra;
+    }
+
+    public void setBarra(BarChartModel barra) {
+        this.barra = barra;
+    }
+
 }

@@ -1,50 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <f:view>
+        <h:form>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script type="text/javascript">
                 google.charts.load('current', {'packages': ['corechart']});
                 google.charts.setOnLoadCallback(drawVisualization);
-
-                function drawVisualization() {
-                    // Some raw data (not necessarily accurate)
-                    var data = flowersx.visualization.arrayToDataTable([
-                        [],
-                        ['2004/05', 165, 938, 522, 998, 450, 614.6],
-                        ['2005/06', 135, 1120, 599, 1268, 288, 682],
-                        ['2006/07', 157, 1167, 587, 807, 397, 623],
-                        ['2007/08', 139, 1110, 615, 968, 215, 609.4],
-                        ['2008/09', 136, 691, 629, 1026, 366, 569.6]
-                    ]);
-
-                    var options = {
-                        title: 'Monthly Coffee Production by Country',
-                        vAxis: {title: 'Cups'},
-                        hAxis: {title: 'Month'},
-                        seriesType: 'bars',
-                        series: {5: {type: 'line'}}};
-
-                    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-                    chart.draw(data, options);
-                }
+                var chart = new google.visualization.ComboChart(document.getElementById('bar'));
+                chart.draw(data, options);
             </script>
-            <p:barChart id="chart_div" value="#{chartBean.categoryModel}" legendPosition="ne" 
-                        title="PRODUCTOS" style="width: 900px; height: 500px" xaxisLabel="Producto" yaxisLabel="EXISTENCIAS" >
-            </p:barChart>
-        </f:view>
+
+            <p:commandButton value="Graficar" id="graficar" update="hpgGrafico"  actionListener="#{chartBean.graficar()}"/>    
+            <h:panelGroup id="hpgGrafico" layout="blocked">
+                <p:chart type="bar" id="bar" model="#{chartBean.barra}" style="white:290px; height: 290px " rendered="#{chartBean.barra !=null}"/>
+            </h:panelGroup>
+        </h:form>
     </h:body>
 </html>
+

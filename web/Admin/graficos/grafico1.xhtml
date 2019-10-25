@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:commandButton value="Ver gráfico" action="#{graficosControlador.graficarBarra()}" update="grafico" />
+            <p:commandButton value="Ver gráfico" update="grafico"  action="#{graficosControlador.graficarBarra()}"/>
             <h:panelGroup id="grafico" layout="blocked">
                 <p:chart type="bar" model="#{graficosControlador.graficoBarra}" rendered="#{graficosControlador.graficoBarra != null}" />
             </h:panelGroup>

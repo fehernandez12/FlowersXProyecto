@@ -33,7 +33,7 @@
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
                             <h:form>
-                                <p:commandButton value="Ver existencias" style="padding-left: 0" action="#{graficosControlador.createBarModel()}" update="grafico" />
+                                <p:commandButton value="Ver existencias" update="grafico" style="padding-left: 0" action="#{graficosControlador.createBarModel()}" />
                                 <h:panelGroup id="grafico" layout="blocked">
                                     <p:chart type="bar" model="#{graficosControlador.graficoBarra}" style="height:300px" rendered="#{graficosControlador.graficoBarra != null}"/>
                                 </h:panelGroup>
