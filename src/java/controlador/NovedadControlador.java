@@ -2,9 +2,11 @@ package controlador;
 
 import entidades.Novedad;
 import entidades.Pedido;
+import entidades.TipoNovedad;
 import entidades.Usuario;
 import facade.NovedadFacade;
 import facade.PedidoFacade;
+import facade.TipoNovedadFacade;
 import facade.UsuarioFacade;
 import java.io.Serializable;
 import java.util.List;
@@ -28,7 +30,9 @@ public class NovedadControlador implements Serializable {
     @EJB
     UsuarioFacade usuarioFacade;
     Usuario usuario = new Usuario();
-
+    @EJB
+    TipoNovedadFacade tipoNovedadFacade;
+    TipoNovedad tipoNovedad = new TipoNovedad();
     public Novedad getNovedad() {
         return novedad;
     }
@@ -37,6 +41,13 @@ public class NovedadControlador implements Serializable {
         this.novedad = novedad;
     }
 
+    public TipoNovedadFacade getTipoNovedadFacade() {
+        return tipoNovedadFacade;
+    }
+
+    public void setTipoNovedadFacade(TipoNovedadFacade tipoNovedadFacade) {
+        this.tipoNovedadFacade = tipoNovedadFacade;
+    }
     public Pedido getPedido() {
         return pedido;
     }
@@ -61,6 +72,7 @@ public class NovedadControlador implements Serializable {
         novedad.setIdNovedad(1);
         novedad.setPedido(pedidoFacade.find(pedido.getIdPedido()));
         novedad.setUsuarioid(usuarioFacade.find(usuario.getId()));
+        novedad.setTipoNovedad(tipoNovedadFacade.find(1));
         novedadFacade.create(novedad);
         novedad = new Novedad();
         return "gestionar-novedad";

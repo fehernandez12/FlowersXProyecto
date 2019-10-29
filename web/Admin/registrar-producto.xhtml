@@ -35,7 +35,7 @@
                             <f:view>
                                 <h:form class="formulario" enctype="multipart/form-data">
                                     <div class="form-row">
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-3 mb-3">
                                             <p:outputLabel value="Nombre del Producto:" for="nombreProducto" />
                                             <p:inputText class="form-control" id="nombreProducto" value="#{productoControlador.producto.nombreProducto}" pt:placeholder="Nombre" title="NombreProducto" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
@@ -43,9 +43,9 @@
                                             <p:outputLabel value="Nombre en inglés:" for="nombreIngles" />
                                             <p:inputText class="form-control" id="nombreIngles" value="#{productoControlador.producto.nombreIngles}" pt:placeholder="Name" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-5 mb-5">
                                             <p:outputLabel value="Foto:" for="foto"/>
-                                            <h:inputFile class="form-control-file" id="foto" value="#{productoControlador.file}" title="Foto" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
+                                            <p:fileUpload class="" id="foto" value="#{productoControlador.file}" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -68,7 +68,7 @@
                                             <p:inputText class="form-control" pt:placeholder="Precio" id="precio" value="#{productoControlador.producto.precio}" title="Precio" required="true" requiredMessage="#{msjFormularios.obligatorio}"/>
                                         </div>
                                     </div>
-                                    <p:commandButton action="#{productoControlador.crearProducto()}" type="submit" value="Registrar producto"></p:commandButton>
+                                    <h:commandButton class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" style="padding: 0.429em 1em; margin-left: 0.5em" action="#{productoControlador.crearProducto()}" type="submit" immediate="true" value="Registrar producto" />
                                 </h:form>
                             </f:view>
                         </div>

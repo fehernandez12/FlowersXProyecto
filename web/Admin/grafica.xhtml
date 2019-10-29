@@ -31,14 +31,15 @@
                 <div class="col">
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
-                            <!-- <h:form>
-                                <p:commandButton value="Mostrar" id="graficar" update="hpgGrafico"  actionListener="{chartBean.graficar()}"/>    
+                            <h:form>
+                                <p:commandButton value="Mostrar" id="graficar" update="hpgGrafico"  actionListener="#{chartBean.graficar()}"/>    
                                 <h:panelGroup id="hpgGrafico" layout="blocked">
-                                    <p:chart type="bar" id="bar" model="{chartBean.barra}" style="width: 40em; height: 30em " rendered="{chartBean.barra !=null}"/>
-                                    <p:chart type="pie" id="pastel" model="{chartBean.pastel}" style="width: 40em; height: 30em " rendered="{chartBean.pastel !=null}"/>
+                                    <p:chart type="bar" id="bar" model="#{chartBean.barra}" style="width: 40em; height: 30em " rendered="#{chartBean.barra !=null}"/>
+                                    <p:chart type="pie" id="pastel" model="#{chartBean.pastel}" style="width: 40em; height: 30em " rendered="#{chartBean.pastel !=null}"/>
                                 </h:panelGroup>
-                            </h:form> -->
-                            <input type="hidden" id="nombreProducto1">#{chartBean.masVendidos().get(0)[1]}</input>  
+                            </h:form>
+                            
+                            <!-- <input type="hidden" id="nombreProducto1">#{chartBean.masVendidos().get(0)[1]}</input>  
                             <input type="hidden" id="ventasProducto1">#{chartBean.masVendidos().get(0)[2]}</input>  
                             <input type="hidden" id="nombreProducto2">#{chartBean.masVendidos().get(1)[1]}</input>  
                             <input type="hidden" id="ventasProducto2">#{chartBean.masVendidos().get(1)[2]}</input>  
@@ -71,7 +72,7 @@
                                         options: {}
                                     });
                                 </script>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

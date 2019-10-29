@@ -42,7 +42,6 @@ public class ChartBean implements Serializable {
     public void graficar() {
 
         barra = new BarChartModel();
-        /*Conecion a Base de datos */
 
         for (int i = 0; i < productoFacade.listar().size(); i++) {
             ChartSeries serie = new BarChartSeries();

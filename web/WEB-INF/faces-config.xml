@@ -89,5 +89,12 @@
             <base-name>idiomas.ListaNovedad</base-name>
             <var>msjListaNovedad</var>
         </resource-bundle>
+        <render-kit>
+            <renderer>
+                <component-family>org.primefaces.component</component-family>
+                <renderer-type>org.primefaces.component.FileUploadRenderer</renderer-type>
+                <renderer-class>controlador.FileUploadRenderer</renderer-class>
+            </renderer>
+        </render-kit>
     </application>
 </faces-config>

@@ -8,6 +8,7 @@ package controlador;
 import entidades.Pedido;
 import entidades.Producto;
 import entidades.Usuario;
+import facade.EstadoPedidoFacade;
 import facade.PedidoFacade;
 import facade.ProductoFacade;
 import facade.UsuarioFacade;
@@ -45,6 +46,8 @@ public class PedidoControlador implements Serializable {
     ProductoFacade productoFacade;
     Producto producto = new Producto();
     List<Producto> listaProductos;
+    @EJB
+    EstadoPedidoFacade estadoPedidoFacade;
     private double impuestos = 0;
 
     public List<Pedido> getListaPedidos() {
@@ -103,6 +106,16 @@ public class PedidoControlador implements Serializable {
         this.productoFacade = productoFacade;
     }
 
+    public EstadoPedidoFacade getEstadoPedidoFacade() {
+        return estadoPedidoFacade;
+    }
+
+    public void setEstadoPedidoFacade(EstadoPedidoFacade estadoPedidoFacade) {
+        this.estadoPedidoFacade = estadoPedidoFacade;
+    }
+    
+    
+
     public Producto getProducto() {
         return producto;
     }
@@ -155,6 +168,7 @@ public class PedidoControlador implements Serializable {
         pedido.setFechaDeCreacion(fechaEnvio);
         fechaEnvio.setMonth((fechaEnvio.getMonth() - 1 + max) % 12 + 1);
         pedido.setFechaDeEntrega(fechaEnvio);
+        pedido.setEstadoPedido(estadoPedidoFacade.find(1));
         for (Producto producto2 : carrito) {
             subTotal = subTotal + producto2.getPrecio();
         }
@@ -163,7 +177,7 @@ public class PedidoControlador implements Serializable {
         pedido.setTotal(total);
         pedidoFacade.create(pedido);
         pedidoFacade.agregarProductosAlPedido(carrito, pedido);
-        return "registrar-pago";
+        return "crear-pago";
     }
 
     public String preEditarPedido(Pedido pedido) {
