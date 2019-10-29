@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 @Named(value = "novedadControlador")
@@ -33,12 +34,21 @@ public class NovedadControlador implements Serializable {
     @EJB
     TipoNovedadFacade tipoNovedadFacade;
     TipoNovedad tipoNovedad = new TipoNovedad();
+    
     public Novedad getNovedad() {
         return novedad;
     }
 
     public void setNovedad(Novedad novedad) {
         this.novedad = novedad;
+    }
+
+    public TipoNovedad getTipoNovedad() {
+        return tipoNovedad;
+    }
+
+    public void setTipoNovedad(TipoNovedad tipoNovedad) {
+        this.tipoNovedad = tipoNovedad;
     }
 
     public TipoNovedadFacade getTipoNovedadFacade() {
@@ -68,8 +78,9 @@ public class NovedadControlador implements Serializable {
         return novedadFacade.findAll();
     }
 
-    public String crearNovedad() {
-        novedad.setIdNovedad(1);
+    public String crearNovedadProduccion() {
+        usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sesionLogin");
+        novedad.setIdNovedad(null);
         novedad.setPedido(pedidoFacade.find(pedido.getIdPedido()));
         novedad.setUsuarioid(usuarioFacade.find(usuario.getId()));
         novedad.setTipoNovedad(tipoNovedadFacade.find(1));

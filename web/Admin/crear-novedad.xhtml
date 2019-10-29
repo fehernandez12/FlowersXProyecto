@@ -89,7 +89,7 @@
                             <div class="container">
                                 <h:form class="formulario needs-validation" id="crearUsuario">
                                     <div class="form-row">
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-4 mb-4">
                                             <p:outputLabel value="#{msjCrearNovedad.fecha}" /><br/>
                                             <p:calendar id="restricted" value="#{novedadControlador.novedad.fecha}" widgetVar="calendario" locale="es" pt:placeholder="AAAA-MM-DD" pattern="yyyy-MM-dd" mindate="calendario.today()" maxdate="calendario.today()" />
                                         </div>
@@ -100,7 +100,7 @@
                                                 <f:selectItems class="dropdown-item" value="#{pedidoControlador.listar()}" var="pedido" itemValue="#{pedido.idPedido}" itemLabel="#{pedido.idPedido}"/>
                                             </p:selectOneMenu>
                                         </div>
-                                        <div class="col-md-5 mb-5">
+                                        <div class="col-md-4 mb-4">
                                             <p:outputLabel value="#{msjCrearNovedad.idUsuario}" for="usuarioid" />
                                             <p:inputText class="form-control" id="usuarioid" value="#{usuarioControlador.usuarioLogueado.id}" title="Usuarioid" readonly="true" />
                                         </div>
@@ -112,7 +112,7 @@
                                         </div>                                    
                                     </div>
                                     <br/>
-                                    <h:commandButton action="#{novedadControlador.crearNovedad()}" type="submit" value="#{msjCrearNovedad.botonCrearNovedad}"></h:commandButton>
+                                    <h:commandButton class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" style="padding: 0.429em 1em; margin-left: 0.5em" action="#{novedadControlador.crearNovedadProduccion()}" type="submit" value="#{msjCrearNovedad.botonCrearNovedad}"></h:commandButton>
                                 </h:form>
                             </div>
                         </div>
