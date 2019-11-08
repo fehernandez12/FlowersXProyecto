@@ -86,7 +86,7 @@ public class NovedadControlador implements Serializable {
         novedad.setTipoNovedad(tipoNovedadFacade.find(1));
         novedadFacade.create(novedad);
         novedad = new Novedad();
-        return "gestionar-novedad";
+        return "gestionar-novedades";
     }
 
     public String preEditarNovedad(Novedad novedad) {

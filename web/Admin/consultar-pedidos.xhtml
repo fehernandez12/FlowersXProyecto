@@ -97,10 +97,10 @@
                                         <f:facet name="filter">
                                             <p:selectOneMenu onchange="PF('tablaPedidos').filter()" styleClass="custom-filter">
                                                 <f:selectItem itemLabel="Seleccione uno..." itemValue="#{null}" noSelectionOption="true" />
-                                                <f:selectItems value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.titular}" />
+                                                <f:selectItems value="#{usuarioControlador.consultarUsuario()}" var="usuario" itemValue="#{usuario.id}" itemLabel="#{usuario.nombreTitular} #{usuario.apellidoTitular}" />
                                             </p:selectOneMenu>
                                         </f:facet>
-                                        <h:outputText value="#{pedido.usuarioid.titular}" />
+                                        <h:outputText value="#{pedido.usuarioid.nombreTitular} #{pedido.usuarioid.apellidoTitular}" />
                                     </p:column>
                                 </p:dataTable>
 
