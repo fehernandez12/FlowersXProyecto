@@ -125,7 +125,7 @@
                                                 <p:outputLabel value="#{msjCrearSolicitud.usuarioId}" for="usuarioid" />
                                                 <p:inputText class="form-control" id="usuarioid" value="#{usuarioControlador.usuarioLogueado.id}" title="Usuarioid" readonly="true" />
                                             </div>
-                                            <p:commandButton action="#{solicitudControlador.crearSolicitud()}" type="submit" value="#{msjCrearSolicitud.botonCrearSolicitud}"></p:commandButton>
+                                            <h:commandButton action="#{solicitudControlador.crearSolicitud()}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" style="padding: 0.429em 1em; margin-left: 0.5em" type="submit" value="#{msjCrearSolicitud.botonCrearSolicitud}"></h:commandButton>
                                         </div>
                                     </h:form>
                                 </f:view>

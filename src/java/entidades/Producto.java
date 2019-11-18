@@ -18,7 +18,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.metamodel.SingularAttribute;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -200,10 +199,6 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
         return "entidades.Producto[ idProducto=" + idProducto + " ]";
-    }
-
-    public Object setNombreProducto(SingularAttribute<Producto, String> nombreProducto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

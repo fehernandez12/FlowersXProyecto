@@ -28,69 +28,69 @@ public class PagoControlador implements Serializable {
     /**
      * Creates a new instance of PagoControlador
      */
-   @EJB
+    @EJB
     PagoFacade pagoFacade;
     Pago pago = new Pago();
     @EJB
     PedidoFacade pedidoFacade;
     Pedido pedido = new Pedido();
-    PedidoControlador pedidoControlador = new PedidoControlador();
     @EJB
     NovedadFacade novedadFacade;
     Novedad novedad = new Novedad();
+
     public PagoControlador() {
     }
-     public Pago getPago(){
+
+    public Pago getPago() {
         return pago;
     }
     
-    public void setpago(Pago pago){
-        this.pedido = pedido;
+    public void setPago() {
+        this.pago = pago;
     }
-    public Novedad getNovedad(){
+
+    public Novedad getNovedad() {
         return novedad;
     }
-    
-    public void setNovedad(Novedad novedad){
+
+    public void setNovedad(Novedad novedad) {
         this.novedad = novedad;
     }
-    public Pedido getPedido(){
+
+    public Pedido getPedido() {
         return pedido;
     }
-    
-    public void setPedido(Pedido pedido){
+
+    public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-    
+
     public List<Pago> consultarPago() {
         return pagoFacade.findAll();
     }
-    
+
     public String crearPago() {
-        pago.setIdPago(1);
-        pago.setPedido(pedidoControlador.getPedido());
-        pagoFacade.create(pago);
+        pago.setIdPago(null);
+        pago.setPedido(pedidoFacade.find(1));
+        pagoFacade.crearPago(pago);
         pago = new Pago();
-        pedidoControlador.setPedido(new Pedido());
         return "orden-realizada";
     }
-    
-     public String preEditarPago(Pago pago) {
+
+    public String preEditarPago(Pago pago) {
         this.pago = pago;
         return "editar-pago";
     }
 
     public String editarPago() {
         pago.setPedido(pedidoFacade.find(pedido.getIdPedido()));
-       
         pagoFacade.edit(pago);
         pago = new Pago();
         return "gestionar-pago";
     }
 
-   public void eliminarPago(Pago pago) {
+    public void eliminarPago(Pago pago) {
         pagoFacade.remove(pago);
         //return "Lista";
     }
 }
-

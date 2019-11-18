@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import entidades.Pago;
 import entidades.Pedido;
 import entidades.Producto;
 import entidades.Usuario;
@@ -20,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -49,6 +51,7 @@ public class PedidoControlador implements Serializable {
     @EJB
     EstadoPedidoFacade estadoPedidoFacade;
     private double impuestos = 0;
+    PagoControlador pago = new PagoControlador();
 
     public List<Pedido> getListaPedidos() {
         return listaPedidos;
@@ -80,6 +83,14 @@ public class PedidoControlador implements Serializable {
 
     public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
         this.usuarioFacade = usuarioFacade;
+    }
+
+    public PagoControlador getPago() {
+        return pago;
+    }
+
+    public void setPago(PagoControlador pago) {
+        this.pago = pago;
     }
 
     public Usuario getUsuario() {
@@ -177,6 +188,8 @@ public class PedidoControlador implements Serializable {
         pedido.setTotal(total);
         pedidoFacade.create(pedido);
         pedidoFacade.agregarProductosAlPedido(carrito, pedido);
+        pago.setPedido(pedido);
+        pedido = new Pedido();
         return "crear-pago";
     }
 

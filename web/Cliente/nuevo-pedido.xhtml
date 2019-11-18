@@ -55,6 +55,7 @@
                                     }
                                 </style>
                                 <h:form>
+                                    <f:passThroughAttribute name="autocomplete" value="off"/>
                                     <div class="form-row">
                                         <script type="text/javascript">
                                             PrimeFaces.locales['es'] = {
@@ -95,21 +96,21 @@
                                         </div>
                                         <h:commandButton class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c boton-pago" action="#{pedidoControlador.crearPedido(productoControlador.carrito)}" type="submit" style="height: 2.5em; margin-left: 2em; margin-top: 2.17em; padding-left: 1em; padding-right: 1em" value="#{msjCrearPedido.botonPago}" />
                                         <!-- <p:overlayPanel id="carritoPanel" for="verCarrito" hideEffect="fade"> -->
-                                            <h:form id="form">
-                                                <p:dataTable id="tablaCarrito" var="producto" value="#{productoControlador.getCarrito()}">
-                                                    <f:facet name="header">
-                                                        #{msjCrearPedido.contenidoCarrito}
-                                                    </f:facet>
-                                                    <p:column headerText="#{msjCrearPedido.nombreProducto}">
-                                                        <h:outputText value="#{producto.nombreProducto}" />
-                                                    </p:column>
-                                                    <p:column>
-                                                        <p:commandLink class="opciones-tabla" immediate="true" process="@this" action="#{productoControlador.removerDelCarrito(producto)}" update="tablaCarrito">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </p:commandLink>
-                                                    </p:column>
-                                                </p:dataTable>
-                                            </h:form>
+                                        <h:form id="form">
+                                            <p:dataTable id="tablaCarrito" var="producto" value="#{productoControlador.getCarrito()}">
+                                                <f:facet name="header">
+                                                    #{msjCrearPedido.contenidoCarrito}
+                                                </f:facet>
+                                                <p:column headerText="#{msjCrearPedido.nombreProducto}">
+                                                    <h:outputText value="#{producto.nombreProducto}" />
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandLink class="opciones-tabla" immediate="true" process="@this" action="#{productoControlador.removerDelCarrito(producto)}" update="tablaCarrito">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </p:commandLink>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:form>
                                         <!-- </p:overlayPanel> -->
                                     </div>
                                     <br/>
