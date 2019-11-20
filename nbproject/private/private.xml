@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/web/Cliente/crear-pago.xhtml</file>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/src/java/facade/PagoFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/src/java/entidades/Pedido.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/src/java/controlador/PagoControlador.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/src/java/facade/PedidoFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/src/java/controlador/PedidoControlador.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/src/java/entidades/Producto.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/src/java/facade/AbstractFacade.java</file>
-            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/web/Cliente/nuevo-pedido.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/src/java/controlador/ChartBean.java</file>
+            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/web/Admin/graficos/grafico.xhtml</file>
+            <file>file:/C:/Users/Aprendiz/Documents/NetBeansProjects/FlowersXProyecto/web/Admin/grafica.xhtml</file>
         </group>
     </open-files>
 </project-private>

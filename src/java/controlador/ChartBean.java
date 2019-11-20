@@ -42,15 +42,17 @@ public class ChartBean implements Serializable {
     public void graficar() {
 
         barra = new BarChartModel();
+        List<Producto> listaMasvendidos = productoFacade.listar();
+        ChartSeries serie = new BarChartSeries();
+        for (int i = 0; i < listaMasvendidos.size(); i++) {
 
-        for (int i = 0; i < productoFacade.listar().size(); i++) {
-            ChartSeries serie = new BarChartSeries();
-            if (productoFacade.listar().get(i).getExistencias() != 0) {
-                serie.setLabel(productoFacade.listar().get(i).getNombreProducto());
-                serie.set(productoFacade.listar().get(i).getNombreProducto(), productoFacade.listar().get(i).getExistencias());
-                barra.addSeries(serie);
+            if (listaMasvendidos.get(i).getExistencias() != 0) {
+                //serie.setLabel(listaMasvendidos.get(i).getNombreProducto());
+                serie.set(listaMasvendidos.get(i).getNombreProducto(), listaMasvendidos.get(i).getExistencias());
+
             }
         }
+        barra.addSeries(serie);
 
         /*
         for (Producto producto : listaProducto) {
@@ -63,7 +65,7 @@ public class ChartBean implements Serializable {
         }
          */
         barra.setTitle("Existencias de producto");
-        barra.setLegendPosition("ne");
+        //barra.setLegendPosition("ne");
         barra.setShowPointLabels(false);
         barra.setAnimate(true);
 
@@ -76,12 +78,10 @@ public class ChartBean implements Serializable {
         yAxis.setLabel("Cantidad de existencias");
         yAxis.setMin(0);
         yAxis.setMax(100000);
-        
+
     }
-    
-    public List<Object[]> masVendidos() {
-        return productoFacade.masVendidos();
-    }
+
+   
 
     public List<Producto> getListaProductos() {
         return listaProductos;
